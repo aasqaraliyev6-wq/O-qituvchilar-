@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kichkintoylar O'quv Markazi</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- NAVIGATSIYA -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <h1 class="logo">🎒 Kichkintoylar</h1>
+      <div class="nav-links">
+        <a href="#bosh-sahifa">Bosh Sahifa</a>
+        <a href="#matematika">Matematika</a>
+        <a href="#ona-tili">Ona Tili</a>
+        <a href="#oqish">O'qish</a>
+        <a href="#progress">Progress</a>
+        <a href="#oqituvchi">O'qituvchi</a>
+      </div>
+    </div>
+  </nav>
+  <!-- BOSH SAHIFA -->
+  <section id="bosh-sahifa" class="hero">
+    <div class="hero-content">
+      <h2>Boshlang'ich Ta'lim Platformasi</h2>
+      <p>Matematika, Ona tili, O'qish fanlarini qiziqarli usulda o'rganing!</p>
+      <button class="cta-button" onclick="startLearning()">O'rganishni Boshlash</button>
+    </div>
+    <div class="hero-features">
+      <div class="feature">
+        <span>🔢</span>
+        <h3>Matematika</h3>
+        <p>Sonlar, amallar, geometriya</p>
+      </div>
+      <div class="feature">
+        <span>📚</span>
+        <h3>Ona Tili</h3>
+        <p>Alifbo, so'z, gap, imlo</p>
+      </div>
+      <div class="feature">
+        <span>📖</span>
+        <h3>O'qish</h3>
+        <p>Hikoyalar, she'rlar, tez o'qish</p>
+      </div>
+    </div>
+  </section>
+  <!-- MATEMATIKA BO'LIMI -->
+  <section id="matematika" class="subject-section">
+    <h2 class="section-title">🔢 Matematika</h2>
+    <div class="games-grid">
+      <!-- 1. SONLARNI SOLISHTIRISH -->
+      <div class="game-card">
+        <h3>Sonlarni Solishtirish</h3>
+        <div class="game-area">
+          <div class="numbers-comparison">
+            <span class="number-box" id="compNum1">5</span>
+            <span class="comparison-symbol">?</span>
+            <span class="number-box" id="compNum2">3</span>
+          </div>
+          <div class="comparison-controls">
+            <button class="comp-btn" onclick="checkComparison('>')">></button>
+            <button class="comp-btn" onclick="checkComparison('<')">
+              << /button>
+                <button class="comp-btn" onclick="checkComparison('=')">=</button>
+          </div>
+          <div id="compResult" class="result-message"></div>
+          <div class="score-display">Ball: <span id="mathScore1">0</span></div>
+        </div>
+      </div>
+      <!-- 2. QO'SHISH AYIRISH -->
+      <div class="game-card">
+        <h3>Qo'shish va Ayirish</h3>
+        <div class="game-area">
+          <div class="math-problem">
+            <span id="mathNum1">7</span>
+            <span id="mathOperator">+</span>
+            <span id="mathNum2">3</span>
+            <span>= ?</span>
+          </div>
+          <input type="number" id="mathAnswer" class="answer-input" placeholder="Javobingiz">
+          <button class="check-btn" onclick="checkMathProblem()">Tekshirish</button>
+          <div id="mathResult" class="result-message"></div>
+          <div class="score-display">Ball: <span id="mathScore2">0</span></div>
+        </div>
+      </div>
+      <!-- 3. GEOMETRIK SHAKLLAR -->
+      <div class="game-card">
+        <h3>Shakllarni Tanlash</h3>
+        <div class="game-area">
+          <div class="shape-question" id="shapeQuestion">Aylana shaklini tanlang</div>
+          <div class="shapes-container">
+            <div class="shape-option" onclick="checkShape('circle')">
+              <div class="shape-circle">●</div>
+              <span>Aylana</span>
+            </div>
+            <div class="shape-option" onclick="checkShape('square')">
+              <div class="shape-square">■</div>
+              <span>Kvadrat</span>
+            </div>
+            <div class="shape-option" onclick="checkShape('triangle')">
+              <div class="shape-triangle">▲</div>
+              <span>Uchburchak</span>
+            </div>
+          </div>
+          <div id="shapeResult" class="result-message"></div>
+          <div class="score-display">Ball: <span id="mathScore3">0</span></div>
+        </div>
+      </div>
+      <!-- 4. RAQAMLARNI YOZISH -->
+      <div class="game-card">
+        <h3>Raqamlarni Yozish</h3>
+        <div class="game-area">
+          <div class="number-display" id="numberWord">besh</div>
+          <input type="number" id="numberInput" class="answer-input" placeholder="Raqamni kiriting">
+          <button class="check-btn" onclick="checkNumber()">Tekshirish</button>
+          <div id="numberResult" class="result-message"></div>
+          <div class="score-display">Ball: <span id="mathScore4">0</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ONA TILI BO'LIMI -->
+  <section id="ona-tili" class="subject-section">
+    <h2 class="section-title">📚 Ona Tili</h2>
+    <div class="games-grid">
+      <!-- 1. ALIFBO O'YINI -->
+      <div class="game-card">
+        <h3>Alifbo O'yini</h3>
+        <div class="game-area">
+          <div class="letter-display">
+            <span id="currentLetter">A</span>
+          </div>
+          <input type="text" id="letterInput" class="answer-input" placeholder="Harfni kiriting" maxlength="1">
+          <button class="check-btn" onclick="checkLetter()">Tekshirish</button>
+          <div id="letterResult" class="result-message"></div>
+          <div class="score-display">Ball: <span id="langScore1">0</span></div>
+        </div>
+      </div>
+      <!-- 2. SO'Z YASASH -->
+      <div class="game-card">
+        <h3>So'z Yasash</h3>
+        <div class="game-area">
+          <div class="word-builder">
+            <div class="available-letters">
+              <span class="letter-btn" onclick="addLetter('A')">A</span>
+              <span class="letter-btn" onclick="addLetter('L')">L</span>
+              <span class="letter-btn" onclick="addLetter('I')">I</span>
+              <span class="letter-btn" onclick="addLetter('M')">M</span>
+              <span class="letter-btn" onclick="addLetter('O')">O</span>
+            </div>
+            <div class="word-area">
+              <span id="builtWord"></span>
+            </div>
+            <div class="word-controls">
+              <button class="clear-btn" onclick="clearWord()">Tozalash</button>
+              <button class="check-btn" onclick="checkWord()">Tekshirish</button>
+            </div>
+          </div>
+          <div id="wordResult" class="result-message"></div>
+          <div class="score-display">Ball: <span id="langScore2">0</span></div>
+        </div>
+      </div>
+      <!-- 3. GAP TUZISH -->
+      <div class="game-card">
+        <h3>Gap Tuzish</h3>
+        <div class="game-area">
+          <div class="sentence-builder">
+            <div class="word-bank">
+              <span class="word-btn" onclick="addToSentence('Men')">Men</span>
+              <span class="word-btn" onclick="addToSentence('maktabga')">maktabga</span>
+              <span class="word-btn" onclick="addToSentence('boraman')">boraman</span>
+              <span class="word-btn" onclick="addToSentence('kitob')">kitob</span>
+              <span class="word-btn" onclick="addToSentence('o\'qiyman')">o'qiyman</span>
+            </div>
+            <div class="sentence-area">
+              <span id="builtSentence"></span>
+            </div>
+            <div class="sentence-controls">
+              <button class="clear-btn" onclick="clearSentence()">Tozalash</button>
+              <button class="check-btn" onclick="checkSentence()">Tekshirish</button>
+            </div>
+          </div>
+          <div id="sentenceResult" class="result-message"></div>
+          <div class="score-display">Ball: <span id="langScore3">0</span></div>
+        </div>
+      </div>
+      <!-- 4. IMLO O'YINI -->
+      <div class="game-card">
+        <h3>Imlo Tekshirish</h3>
+        <div class="game-area">
+          <div class="spelling-word" id="spellingWord">kitob</div>
+          <input type="text" id="spellingInput" class="answer-input" placeholder="So'zni to'g'ri yozing">
+          <button class="check-btn" onclick="checkSpelling()">Tekshirish</button>
+          <div id="spellingResult" class="result-message"></div>
+          <div class="score-display">Ball: <span id="langScore4">0</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- O'QISH BO'LIMI -->
+  <section id="oqish" class="subject-section">
+    <h2 class="section-title">📖 O'qish</h2>
+    <div class="reading-content">
+      <!-- 1. HIKOYALAR -->
+      <div class="story-section">
+        <h3>Hikoyalar</h3>
+        <div class="story-selector">
+          <button class="story-btn active" onclick="showStory(1)">Bola va Olma</button>
+          <button class="story-btn" onclick="showStory(2)">Chumoli va Kapalak</button>
+          <button class="story-btn" onclick="showStory(3)">Mening Oilam</button>
+        </div>
+        <div class="story-container">
+          <div class="story-text" id="storyText">
+            <h4>Bola va Olma</h4>
+            <p>Bir bor ekan, bir yoq ekan. Bir bola bor ekan. Uning ismi Ali ekan.</p>
+            <p>Ali bog'ga borib, qizil olma ko'ribdi. Olma juda chiroyli edi.</p>
+            <p>Ali olmani terib, onasiga olib bordi. Onasi olmani yuvib, Aliga berdi.</p>
+            <p>Ali olmani yeb, juda xursand bo'ldi.</p>
+          </div>
+          <div class="comprehension-questions">
+            <h4>Savollar:</h4>
+            <div class="question">
+              <p>1. Bola ismi nima edi?</p>
+              <input type="text" id="q1" class="question-input">
+            </div>
+            <div class="question">
+              <p>2. Ali nima ko'ribdi?</p>
+              <input type="text" id="q2" class="question-input">
+            </div>
+            <div class="question">
+              <p>3. Olma qanday rang edi?</p>
+              <input type="text" id="q3" class="question-input">
+            </div>
+            <div class="question">
+              <p>4. Ali olmani kimga olib bordi?</p>
+              <input type="text" id="q4" class="question-input">
+            </div>
+            <button class="check-btn" onclick="checkComprehension()">Javoblarni tekshirish</button>
+            <div id="comprehensionResult" class="result-message"></div>
+            <div class="score-display">Ball: <span id="readingScore1">0</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- 2. SHE'RLAR -->
+      <div class="poetry-section">
+        <h3>She'rlar</h3>
+        <div class="poem-container">
+          <div class="poem" id="currentPoem">
+            <h4>Bahor</h4>
+            <p>Bahor keldi, gullar ochdi,</p>
+            <p>Qushlar sayradi shodlik bilan.</p>
+            <p>Yam-yashil bo'ldi dalalar,</p>
+            <p>Tabiat kiyindi yangi libos.</p>
+          </div>
+          <div class="poem-questions">
+            <div class="question">
+              <p>Qaysi fasl haqida she'r?</p>
+              <input type="text" id="poemQ1" class="question-input">
+            </div>
+            <div class="question">
+              <p>Nimalar ochdi?</p>
+              <input type="text" id="poemQ2" class="question-input">
+            </div>
+            <button class="check-btn" onclick="checkPoemQuestions()">Tekshirish</button>
+            <div id="poemResult" class="result-message"></div>
+            <div class="score-display">Ball: <span id="readingScore2">0</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- 3. TEZ O'QISH -->
+      <div class="speed-reading-section">
+        <h3>Tez O'qish Mashqlari</h3>
+        <div class="speed-reading-game">
+          <div class="reading-timer">
+            <span id="timer">60</span> soniya qoldi
+          </div>
+          <div class="reading-text" id="speedReadingText">
+            Bir kuni bolalar bog'ga o'ynashga ketishdi. Ularda Ali, Vali va Guli ismli do'stlar bor edi. Ular bog'da katta daraxt ostida o'ynashdi. Daraxtda qushlar uya qilgan edi. Bolalar qushlarning sayrashini tinglab, xursand bo'lishdi.
+          </div>
+          <button class="start-btn" onclick="startSpeedReading()">Boshlash</button>
+          <div class="comprehension-test" style="display:none" id="comprehensionTest">
+            <h4>O'qib chiqqaningizni tekshiring:</h4>
+            <div class="question">
+              <p>Bolalar qayerga ketishdi?</p>
+              <input type="text" id="speedQ1" class="question-input">
+            </div>
+            <div class="question">
+              <p>Ular qayerda o'ynashdi?</p>
+              <input type="text" id="speedQ2" class="question-input">
+            </div>
+            <div class="question">
+              <p>Daraxtda nima bor edi?</p>
+              <input type="text" id="speedQ3" class="question-input">
+            </div>
+            <button class="check-btn" onclick="checkSpeedReading()">Tekshirish</button>
+            <div id="speedResult" class="result-message"></div>
+            <div class="score-display">Ball: <span id="readingScore3">0</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- PROGRESS BO'LIMI -->
+  <section id="progress" class="progress-section">
+    <h2 class="section-title">🏆 Sening Natijalaring</h2>
+    <div class="progress-container">
+      <div class="overall-stats">
+        <div class="stat-card">
+          <h3>Umumiy Ball</h3>
+          <div class="stat-number" id="totalScore">0</div>
+        </div>
+        <div class="stat-card">
+          <h3>O'tgan Darslar</h3>
+          <div class="stat-number" id="completedLessons">0</div>
+        </div>
+        <div class="stat-card">
+          <h3>Olingan Mukofotlar</h3>
+          <div class="stat-number" id="achievementsCount">0</div>
+        </div>
+      </div>
+      <div class="subject-progress">
+        <h3>Fanlar bo'yicha progress</h3>
+        <div class="progress-bars">
+          <div class="progress-item">
+            <span>Matematika</span>
+            <div class="progress-bar">
+              <div class="progress-fill" id="mathProgress" style="width: 0%"></div>
+            </div>
+            <span id="mathPercent">0%</span>
+          </div>
+          <div class="progress-item">
+            <span>Ona Tili</span>
+            <div class="progress-bar">
+              <div class="progress-fill" id="langProgress" style="width: 0%"></div>
+            </div>
+            <span id="langPercent">0%</span>
+          </div>
+          <div class="progress-item">
+            <span>O'qish</span>
+            <div class="progress-bar">
+              <div class="progress-fill" id="readingProgress" style="width: 0%"></div>
+            </div>
+            <span id="readingPercent">0%</span>
+          </div>
+        </div>
+      </div>
+      <div class="achievements-section">
+        <h3>Mukofotlar</h3>
+        <div class="achievements-grid">
+          <div class="achievement-card locked" id="mathMaster">
+            <div class="achievement-icon">🔢</div>
+            <h4>Matematika Ustasi</h4>
+            <p>100 ball to'plang</p>
+          </div>
+          <div class="achievement-card locked" id="languageMaster">
+            <div class="achievement-icon">📚</div>
+            <h4>Til Shu'rlasi</h4>
+            <p>150 ball to'plang</p>
+          </div>
+          <div class="achievement-card locked" id="readingMaster">
+            <div class="achievement-icon">📖</div>
+            <h4>O'qish Chempioni</h4>
+            <p>120 ball to'plang</p>
+          </div>
+          <div class="achievement-card locked" id="superStudent">
+            <div class="achievement-icon">⭐</div>
+            <h4>A'lo O'quvchi</h4>
+            <p>Barcha mukofotlarni oling</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- O'QITUVCHI BO'LIMI -->
+  <section id="oqituvchi" class="subject-section">
+    <h2 class="section-title">👩‍🏫 O'qituvchi Paneli</h2>
+    <div class="teacher-panel">
+      <h3>Yangi Topshiriq Qo'shish</h3>
+      <form id="teacherForm">
+        <label>Fan tanlang:</label>
+        <select id="subjectSelect">
+          <option value="matematika">Matematika</option>
+          <option value="onaTili">Ona Tili</option>
+          <option value="oqish">O'qish</option>
+        </select>
+        <label>Topshiriq Turi (masalan, savol yoki o'yin nomi):</label>
+        <input type="text" id="taskType" placeholder="Masalan: Yangi son solishtirish">
+        <label>Savol/Matni kiriting:</label>
+        <textarea id="taskContent" placeholder="Savol matni yoki o'yin tavsifi"></textarea>
+        <label>To'g'ri Javob (agar kerak bo'lsa):</label>
+        <input type="text" id="correctAnswer" placeholder="To'g'ri javob">
+        <label>Ball miqdori:</label>
+        <input type="number" id="taskPoints" value="10" min="1">
+        <button type="submit" class="check-btn">Qo'shish va Saqlash</button>
+      </form>
+      <div id="teacherResult" class="result-message"></div>
+      <div id="addedTasks" class="added-tasks-list"></div>
+    </div>
+  </section>
+  <footer class="footer">
+    <p>© 2024 Kichkintoylar O'quv Platformasi - Barcha huquqlar himoyalangan</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+
+</html>
