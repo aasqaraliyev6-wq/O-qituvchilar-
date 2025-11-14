@@ -1,7 +1,4 @@
-/* Oldingi CSS + yangilar */
-* { /* Oldingi */ }
-:root { /* Oldingi */ }
-/* ... (oldingi barcha stillar) */
+/* Oldingi barcha stillar... ( * {}, :root {}, body {}, .navbar va h.k.) */
 
 /* YANGI: Sinflar kartalari */
 .classes-grid {
@@ -45,29 +42,26 @@
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-/* YANGI: Tugmalar animatsiyasi (So'z/Gap uchun) */
+/* Tugmalar animatsiyasi (So'z/Gap uchun) */
 .letter-btn, .word-btn {
-  animation: bounce 0.5s ease infinite alternate; /* Qiziqarli bounce */
+  animation: bounce 0.6s ease infinite alternate;
 }
 @keyframes bounce {
   from { transform: translateY(0); }
-  to { transform: translateY(-5px); }
+  to { transform: translateY(-3px); }
 }
 
-/* Added tasks yaxshilandi */
+/* Added tasks */
 .added-task-item {
   animation: slideIn 0.3s ease;
   border: 1px solid #ddd;
   margin-bottom: 1rem;
   padding: 1rem;
+  border-radius: 5px;
 }
 @keyframes slideIn {
   from { opacity: 0; transform: translateX(-20px); }
   to { opacity: 1; transform: translateX(0); }
 }
 
-/* Responsivlik yaxshilandi */
-@media (max-width: 768px) {
-  .classes-grid { grid-template-columns: 1fr; }
-  .video-container iframe { height: 200px; }
-}
+/* Oldingi barcha stillar davomi... ( .hero, .games-grid va h.k.) */
