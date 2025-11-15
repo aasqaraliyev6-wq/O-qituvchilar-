@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kichkintoylar - Zamonaviy O'quv Platformasi</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS kodlari oldingi kabi */
         * {
             margin: 0;
             padding: 0;
@@ -36,12 +36,722 @@
             overflow-x: hidden;
         }
 
-        /* Barcha CSS kodlari oldingi kabi */
-        /* ... */
-        
+        /* Login Screen Styles */
+        .login-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s ease;
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-element {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .floating-element:nth-child(2) { top: 60%; left: 80%; animation-delay: 1s; }
+        .floating-element:nth-child(3) { top: 40%; left: 85%; animation-delay: 2s; }
+        .floating-element:nth-child(4) { top: 80%; left: 15%; animation-delay: 3s; }
+        .floating-element:nth-child(5) { top: 30%; left: 70%; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        .login-box {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            backdrop-filter: blur(10px);
+            animation: slideUp 0.8s ease;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-logo {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        .login-box h2 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .login-box p {
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+            transform: scale(1.02);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Main App Styles */
+        .app-container {
+            display: none;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .navbar {
+            background: var(--card-bg);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .points {
+            background: linear-gradient(135deg, var(--accent), #fbbf24);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .logout-btn {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(10px);
+            margin: 2rem;
+            border-radius: 20px;
+            animation: slideInFromTop 1s ease;
+        }
+
+        @keyframes slideInFromTop {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--accent), #f59e0b);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(245, 158, 11, 0.4);
+        }
+
+        /* Subjects Section */
+        .subjects {
+            padding: 4rem 2rem;
+            animation: slideInFromBottom 1s ease;
+        }
+
+        @keyframes slideInFromBottom {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .subject-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .subject-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .subject-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .subject-card.math { border-top: 5px solid var(--math); }
+        .subject-card.lang { border-top: 5px solid var(--lang); }
+        .subject-card.russian { border-top: 5px solid var(--russian); }
+        .subject-card.science { border-top: 5px solid var(--science); }
+
+        .subject-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .subject-card:hover .subject-icon {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .math { background: var(--math); }
+        .lang { background: var(--lang); }
+        .russian { background: var(--russian); }
+        .science { background: var(--science); }
+
+        .subject-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .subject-card p {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .subject-stats {
+            display: flex;
+            gap: 2rem;
+            justify-content: space-between;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        /* Games Section */
+        .games {
+            padding: 4rem 2rem;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            margin: 2rem;
+            border-radius: 20px;
+            animation: zoomIn 1s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .game-container {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .game-title {
+            font-size: 1.8rem;
+            color: var(--dark);
+        }
+
+        .game-score {
+            background: var(--success);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            color: #64748b;
+        }
+
+        .progress-bar {
+            background: #e2e8f0;
+            height: 10px;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--success), #34d399);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .game-content {
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Progress Section */
+        .progress-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--dark), #374151);
+            color: white;
+            animation: slideInFromLeft 1s ease;
+        }
+
+        @keyframes slideInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .progress-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .progress-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .progress-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .progress-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .progress-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Question Styles */
+        .question-container {
+            width: 100%;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .option-btn {
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .option-btn.correct {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+
+        .option-btn.incorrect {
+            background: var(--danger);
+            color: white;
+            border-color: var(--danger);
+        }
+
+        .video-container {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .subjects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .game-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+
+        /* Particle Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: float-particle 20s infinite linear;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Particle Background -->
+    <div class="particles" id="particles"></div>
+
     <!-- Login Screen -->
     <div class="login-container" id="loginContainer">
         <div class="floating-elements">
@@ -108,7 +818,7 @@
         <section class="subjects" id="fanlar">
             <h2 class="section-title">O'quv Fanlari</h2>
             <div class="subjects-grid">
-                <div class="subject-card" onclick="openGame('matematika')">
+                <div class="subject-card math" onclick="openGame('matematika')">
                     <div class="subject-icon math">
                         <i class="fas fa-calculator"></i>
                     </div>
@@ -125,7 +835,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="subject-card" onclick="openGame('ona-tili')">
+                <div class="subject-card lang" onclick="openGame('ona-tili')">
                     <div class="subject-icon lang">
                         <i class="fas fa-book-open"></i>
                     </div>
@@ -142,7 +852,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="subject-card" onclick="openGame('rus-tili')">
+                <div class="subject-card russian" onclick="openGame('rus-tili')">
                     <div class="subject-icon russian">
                         <i class="fas fa-language"></i>
                     </div>
@@ -159,7 +869,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="subject-card" onclick="openGame('kimyo')">
+                <div class="subject-card science" onclick="openGame('kimyo')">
                     <div class="subject-icon science">
                         <i class="fas fa-flask"></i>
                     </div>
@@ -176,7 +886,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="subject-card" onclick="openGame('biologiya')">
+                <div class="subject-card science" onclick="openGame('biologiya')">
                     <div class="subject-icon science">
                         <i class="fas fa-leaf"></i>
                     </div>
@@ -244,7 +954,32 @@
     </div>
 
     <script>
-        // Yangilangan o'quv ma'lumotlari - HAR BIR FAN JAVOBLARI HAR XIL
+        // Particle Background
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random properties
+                const size = Math.random() * 10 + 5;
+                const left = Math.random() * 100;
+                const animationDuration = Math.random() * 20 + 10;
+                const animationDelay = Math.random() * 20;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${left}vw`;
+                particle.style.animationDuration = `${animationDuration}s`;
+                particle.style.animationDelay = `${animationDelay}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // O'quv ma'lumotlari
         const gameData = {
             matematika: {
                 title: "Matematika",
@@ -439,9 +1174,224 @@
             }
         };
 
-        // Qolgan JavaScript kodlari oldingi kabi
-        // ...
+        // Global variables
+        let currentUser = null;
+        let currentGame = null;
+        let currentQuestion = 0;
+        let userScore = 0;
+        let totalScore = 0;
+        let completedLessons = 0;
+        let completedSubjects = 0;
 
+        // Initialize the app
+        function init() {
+            createParticles();
+            updateProgress();
+        }
+
+        // Login function
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const loginError = document.getElementById('loginError');
+
+            // Simple validation
+            if (username && password) {
+                currentUser = username;
+                document.getElementById('loginContainer').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loginContainer').style.display = 'none';
+                    document.getElementById('appContainer').style.display = 'block';
+                    updateProgress();
+                }, 500);
+            } else {
+                loginError.style.display = 'block';
+                setTimeout(() => {
+                    loginError.style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        // Logout function
+        function logout() {
+            document.getElementById('appContainer').style.display = 'none';
+            document.getElementById('loginContainer').style.display = 'flex';
+            setTimeout(() => {
+                document.getElementById('loginContainer').style.opacity = '1';
+            }, 100);
+            
+            // Reset form
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            currentUser = null;
+        }
+
+        // Scroll to section
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+
+        // Open game function
+        function openGame(gameType) {
+            currentGame = gameType;
+            currentQuestion = 0;
+            userScore = 0;
+            
+            const game = gameData[gameType];
+            document.getElementById('gameTitle').textContent = game.title;
+            document.getElementById('gameScore').textContent = `Ball: ${userScore}`;
+            document.getElementById('progressText').textContent = `0/${game.questions.length}`;
+            document.getElementById('progressFill').style.width = '0%';
+            
+            showVideo(game.videos[0]);
+        }
+
+        // Show video
+        function showVideo(videoUrl) {
+            const gameContent = document.getElementById('gameContent');
+            gameContent.innerHTML = `
+                <div class="video-container">
+                    <iframe src="${videoUrl}" allowfullscreen></iframe>
+                </div>
+                <button class="cta-button" onclick="startQuiz()" style="margin-top: 2rem;">
+                    <i class="fas fa-play"></i> Testni Boshlash
+                </button>
+            `;
+        }
+
+        // Start quiz
+        function startQuiz() {
+            const game = gameData[currentGame];
+            showQuestion();
+        }
+
+        // Show question
+        function showQuestion() {
+            const game = gameData[currentGame];
+            const question = game.questions[currentQuestion];
+            
+            const optionsHTML = question.options.map((option, index) => `
+                <button class="option-btn" onclick="checkAnswer(${index})">
+                    ${option}
+                </button>
+            `).join('');
+            
+            document.getElementById('gameContent').innerHTML = `
+                <div class="question-container">
+                    <div class="question-text">${question.question}</div>
+                    <div class="options-grid">
+                        ${optionsHTML}
+                    </div>
+                </div>
+            `;
+            
+            // Update progress
+            const progress = ((currentQuestion) / game.questions.length) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+            document.getElementById('progressText').textContent = `${currentQuestion}/${game.questions.length}`;
+        }
+
+        // Check answer
+        function checkAnswer(selectedIndex) {
+            const game = gameData[currentGame];
+            const question = game.questions[currentQuestion];
+            const optionButtons = document.querySelectorAll('.option-btn');
+            
+            // Disable all buttons
+            optionButtons.forEach(btn => {
+                btn.style.pointerEvents = 'none';
+            });
+            
+            // Mark correct/incorrect
+            optionButtons.forEach((btn, index) => {
+                if (index === question.correct) {
+                    btn.classList.add('correct');
+                } else if (index === selectedIndex && index !== question.correct) {
+                    btn.classList.add('incorrect');
+                }
+            });
+            
+            // Update score if correct
+            if (selectedIndex === question.correct) {
+                userScore += 10;
+                document.getElementById('gameScore').textContent = `Ball: ${userScore}`;
+            }
+            
+            // Move to next question after delay
+            setTimeout(() => {
+                currentQuestion++;
+                if (currentQuestion < game.questions.length) {
+                    showQuestion();
+                } else {
+                    finishGame();
+                }
+            }, 2000);
+        }
+
+        // Finish game
+        function finishGame() {
+            totalScore += userScore;
+            completedLessons++;
+            
+            const game = gameData[currentGame];
+            document.getElementById('gameContent').innerHTML = `
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; color: var(--success); margin-bottom: 1rem;">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3 style="color: var(--success); margin-bottom: 1rem;">Tabriklaymiz!</h3>
+                    <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+                        Siz ${game.title} fanidan ${userScore} ball to'pladingiz!
+                    </p>
+                    <button class="cta-button" onclick="openGame('${currentGame}')">
+                        <i class="fas fa-redo"></i> Qaytadan Boshlash
+                    </button>
+                </div>
+            `;
+            
+            document.getElementById('progressFill').style.width = '100%';
+            document.getElementById('progressText').textContent = `${game.questions.length}/${game.questions.length}`;
+            
+            updateProgress();
+        }
+
+        // Update progress
+        function updateProgress() {
+            document.getElementById('userPoints').textContent = `${totalScore} ball`;
+            document.getElementById('totalScore').textContent = totalScore;
+            document.getElementById('completedLessons').textContent = completedLessons;
+            document.getElementById('completedSubjects').textContent = completedSubjects;
+            document.getElementById('userLevel').textContent = Math.floor(totalScore / 100) + 1;
+        }
+
+        // Navigation active state
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            init();
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>
