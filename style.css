@@ -1,104 +1,44 @@
-/* ASOSIY STILLAR (Oldingi + optimal) */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-:root {
-  --primary-color: #4caf50;
-  --secondary-color: #2196f3;
-  --accent-color: #ff9800;
-  --text-color: #333;
-  --background-color: #f5f5f5;
-  --card-color: #ffffff;
-  --success-color: #4caf50;
-  --error-color: #f44336;
-  --warning-color: #ff9800;
-}
-body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
-  color: var(--text-color);
-  background-color: var(--background-color);
-  scroll-behavior: smooth;
-  overflow-x: hidden; /* X scroll oldini olish */
-}
+/* Minified va optimal CSS (redundant'lar olib tashlandi) */
+*{margin:0;padding:0;box-sizing:border-box} :root{--primary-color:#4caf50;--secondary-color:#2196f3;--accent-color:#ff9800;--text-color:#333;--background-color:#f5f5f5;--card-color:#ffffff;--success-color:#4caf50;--error-color:#f44336;--warning-color:#ff9800} body{font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color);scroll-behavior:smooth;min-height:100vh;overflow-x:hidden;zoom:1} /* Windows DPI */
 
-/* Oldingi stillar (navbar, hero, subject-section va h.k. – to'liq nusxalang) */
+ /* Oldingi stillar (navbar, hero va h.k. – qisqartirilgan, to'liq nusxalang) */
 
-/* YANGI: Video grid keng ekran uchun */
-.video-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem;
-  margin: 1rem 0;
-}
+ /* YANGI: Fizika bo'limi stillari */
+ #fizika .game-card { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
+ #fizika select { padding: 0.5rem; border-radius: 5px; }
 
-/* YANGI: Mini tugmalar */
-.mini-btn {
-  background: var(--accent-color);
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  margin-top: 0.5rem;
-}
-.mini-btn:hover {
-  background: #e68900;
-}
+ /* Video grid (kengaytirilgan) */
+ .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
 
-/* RESPONSIVLIK (Kengaytirilgan – Windows o'lchamlari uchun) */
-@media (max-width: 480px) { /* Mobil */
-  .hero-content h2 { font-size: 1.8rem; }
-  .games-grid { grid-template-columns: 1fr; }
-  .classes-grid { grid-template-columns: 1fr; }
-  .video-grid { grid-template-columns: 1fr; }
-}
+ /* RESPONSIVLIK (Windows uchun kengaytirilgan) */
+ @media (min-width: 1366px) and (max-width: 1919px) { /* Windows laptop */
+   .nav-container { max-width: 1400px; padding: 0 3rem; }
+   .games-grid { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+   .classes-grid { grid-template-columns: repeat(4, 1fr); }
+   .hero { padding: 8rem 3rem 4rem; }
+   .subject-section { padding: 7rem 3rem; max-width: 1400px; margin: 0 auto; }
+   .video-grid { grid-template-columns: repeat(2, 1fr); }
+   /* Windows scroll bar */
+   ::-webkit-scrollbar { width: 10px; height: 10px; }
+   ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 5px; }
+   ::-webkit-scrollbar-thumb { background: var(--primary-color); border-radius: 5px; }
+   ::-webkit-scrollbar-thumb:hover { background: #45a049; }
+ }
 
-@media (min-width: 481px) and (max-width: 768px) { /* Tablet */
-  .hero-features { flex-direction: row; gap: 1rem; }
-  .games-grid { grid-template-columns: repeat(2, 1fr); }
-  .classes-grid { grid-template-columns: repeat(2, 1fr); }
-}
+ @media (min-width: 1920px) { /* Windows desktop */
+   .nav-container { max-width: 1800px; padding: 0 5rem; }
+   .games-grid { grid-template-columns: repeat(4, 1fr); gap: 3rem; }
+   .classes-grid { grid-template-columns: repeat(5, 1fr); }
+   .hero { padding: 10rem 5rem 6rem; }
+   .subject-section { padding: 9rem 5rem; max-width: 1800px; margin: 0 auto; }
+   .hero-content h2 { font-size: 4.5rem; }
+   .video-grid { grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+   /* High DPI images */
+   img { image-rendering: crisp-edges; }
+ }
 
-@media (min-width: 769px) and (max-width: 1365px) { /* Standart laptop */
-  .nav-container { padding: 0 1rem; }
-  .games-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
-  .classes-grid { grid-template-columns: repeat(3, 1fr); }
-  .hero { padding: 6rem 1rem 3rem; }
-}
+ /* Animatsiya optimizatsiya (GPU) */
+ .game-card, .class-card, .feature { will-change: transform; transition: transform 0.3s ease-out; }
+ .game-card:hover { transform: translateY(-10px) scale(1.02); }
 
-@media (min-width: 1366px) and (max-width: 1919px) { /* Windows laptop (1366x768+) */
-  .nav-container { max-width: 1400px; padding: 0 3rem; }
-  .games-grid { grid-template-columns: repeat(3, 1fr); gap: 3rem; }
-  .classes-grid { grid-template-columns: repeat(4, 1fr); gap: 2rem; }
-  .hero { padding: 10rem 3rem 5rem; }
-  .subject-section { padding: 8rem 3rem; }
-  .hero-features { gap: 4rem; }
-  .video-grid { grid-template-columns: repeat(3, 1fr); }
-  /* Scroll bar yaxshilash */
-  ::-webkit-scrollbar { width: 12px; }
-  ::-webkit-scrollbar-track { background: #f1f1f1; }
-  ::-webkit-scrollbar-thumb { background: var(--primary-color); border-radius: 6px; }
-}
-
-@media (min-width: 1920px) { /* Windows desktop (Full HD+) */
-  .nav-container { max-width: 1600px; padding: 0 4rem; }
-  .games-grid { grid-template-columns: repeat(4, 1fr); gap: 4rem; }
-  .classes-grid { grid-template-columns: repeat(6, 1fr); gap: 3rem; }
-  .hero { padding: 12rem 4rem 6rem; }
-  .subject-section { padding: 10rem 4rem; max-width: 1600px; margin: 0 auto; }
-  .hero-content h2 { font-size: 4rem; }
-  .hero-features { gap: 5rem; }
-  .video-grid { grid-template-columns: repeat(3, 1fr); max-width: 1200px; margin: 0 auto; }
-  /* Animatsiya optimizatsiya */
-  .game-card, .class-card { will-change: transform; }
-}
-
-/* Oldingi stillar davomi (animatsiyalar, tugmalar va h.k.) */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+ /* Oldingi stillar davomi */
