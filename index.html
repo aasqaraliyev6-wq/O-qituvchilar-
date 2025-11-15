@@ -4,7 +4,99 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kichkintoylar O'quv Markazi</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    /* CSS (To'liq – interfeys uchun) */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --primary-color: #4caf50; --secondary-color: #2196f3; --accent-color: #ff9800; --text-color: #333; --background-color: #f5f5f5; --card-color: #ffffff; --success-color: #4caf50; --error-color: #f44336; --warning-color: #ff9800; }
+    body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--text-color); background-color: var(--background-color); scroll-behavior: smooth; min-height: 200vh; overflow-x: hidden; overflow-y: auto; zoom: 1; }
+    .navbar { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
+    .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+    .logo { font-size: 1.8rem; font-weight: bold; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--accent-color); }
+    .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 6rem 2rem 4rem; text-align: center; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; } /* Tuzatish: Min-height qo'shildi */
+    .hero-content h2 { font-size: 3rem; margin-bottom: 1rem; animation: fadeInUp 1s ease; }
+    .hero-content p { font-size: 1.2rem; margin-bottom: 2rem; animation: fadeInUp 1s ease 0.2s both; }
+    .cta-button { background: var(--accent-color); color: white; border: none; padding: 1rem 2rem; font-size: 1.1rem; border-radius: 50px; cursor: pointer; transition: all 0.3s; animation: fadeInUp 1s ease 0.4s both; }
+    .cta-button:hover { background: #e68900; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); }
+    .hero-features { display: flex; justify-content: center; gap: 3rem; margin-top: 4rem; animation: fadeInUp 1s ease 0.6s both; flex-wrap: wrap; }
+    .feature { text-align: center; background: rgba(255, 255, 255, 0.1); padding: 2rem; border-radius: 15px; backdrop-filter: blur(10px); min-width: 200px; }
+    .feature span { font-size: 3rem; display: block; margin-bottom: 1rem; }
+    .subject-section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; min-height: 100vh; } /* Tuzatish: Har bo'lim uchun min-height */
+    .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: var(--primary-color); }
+    .games-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-top: 2rem; }
+    .game-card { background: var(--card-color); border-radius: 15px; padding: 2rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); border: 2px solid transparent; transition: all 0.3s; }
+    .game-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); border-color: var(--primary-color); }
+    .game-card h3 { color: var(--primary-color); margin-bottom: 1.5rem; text-align: center; font-size: 1.4rem; }
+    .game-area { display: flex; flex-direction: column; gap: 1.5rem; }
+    .numbers-comparison { display: flex; justify-content: center; align-items: center; gap: 1rem; font-size: 2rem; }
+    .number-box { background: var(--primary-color); color: white; padding: 1rem 2rem; border-radius: 10px; font-weight: bold; }
+    .comparison-symbol { font-size: 2.5rem; font-weight: bold; }
+    .comparison-controls { display: flex; justify-content: center; gap: 1rem; }
+    .comp-btn { background: var(--secondary-color); color: white; border: none; padding: 1rem 1.5rem; font-size: 1.5rem; border-radius: 10px; cursor: pointer; transition: all 0.3s; }
+    .comp-btn:hover { background: #1976d2; transform: scale(1.1); }
+    .math-problem { display: flex; justify-content: center; align-items: center; gap: 0.5rem; font-size: 1.8rem; font-weight: bold; }
+    .answer-input { width: 100%; padding: 1rem; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem; text-align: center; }
+    .answer-input:focus { border-color: var(--primary-color); outline: none; }
+    .check-btn { background: var(--primary-color); color: white; border: none; padding: 1rem 2rem; border-radius: 10px; cursor: pointer; font-size: 1rem; transition: all 0.3s; margin: 1rem 0; }
+    .check-btn:hover { background: #45a049; transform: translateY(-2px); }
+    .result-message { text-align: center; font-weight: bold; padding: 1rem; border-radius: 10px; margin: 1rem 0; }
+    .score-display { text-align: center; font-weight: bold; color: var(--primary-color); font-size: 1.1rem; }
+    .success { background-color: #d4edda; color: #155724; }
+    .error { background-color: #f8d7da; color: #721c24; }
+    .warning { background-color: #fff3cd; color: #856404; }
+    .shapes-container { display: flex; justify-content: center; gap: 2rem; margin: 1rem 0; }
+    .shape-option { text-align: center; cursor: pointer; transition: all 0.3s; }
+    .shape-option:hover { transform: scale(1.1); }
+    .shape-circle, .shape-square, .shape-triangle { font-size: 4rem; margin-bottom: 0.5rem; }
+    .shape-circle { color: #ff6b6b; }
+    .shape-square { color: #4ecdc4; }
+    .shape-triangle { color: #45b7d1; }
+    .letter-display { text-align: center; font-size: 4rem; font-weight: bold; color: var(--primary-color); margin: 1rem 0; }
+    .available-letters, .word-bank { display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; }
+    .letter-btn, .word-btn { background: var(--secondary-color); color: white; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; transition: all 0.3s; }
+    .letter-btn:hover, .word-btn:hover { background: #1976d2; transform: scale(1.1); }
+    .word-area, .sentence-area { min-height: 60px; border: 2px dashed #ddd; border-radius: 10px; padding: 1rem; text-align: center; font-size: 1.2rem; margin: 1rem 0; }
+    .word-controls, .sentence-controls { display: flex; gap: 1rem; justify-content: center; }
+    .clear-btn { background: var(--error-color); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; }
+    .reading-content { display: flex; flex-direction: column; gap: 3rem; }
+    .video-section { background: linear-gradient(135deg, #a8edea, #fed6e3); padding: 2rem; border-radius: 15px; }
+    .video-container { text-align: center; margin: 1rem 0; }
+    .video-container iframe { border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); max-width: 100%; }
+    .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
+    .progress-section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; min-height: 100vh; } /* Tuzatish */
+    .progress-container { display: flex; flex-direction: column; gap: 3rem; }
+    .overall-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
+    .stat-card { background: var(--card-color); padding: 2rem; border-radius: 15px; text-align: center; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); }
+    .stat-number { font-size: 3rem; font-weight: bold; color: var(--primary-color); margin-top: 1rem; }
+    .progress-bars { display: flex; flex-direction: column; gap: 1.5rem; }
+    .progress-item { display: flex; align-items: center; gap: 1rem; }
+    .progress-bar { flex: 1; height: 20px; background: #e0e0e0; border-radius: 10px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); transition: width 0.5s ease; }
+    .achievements-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+    .achievement-card { background: var(--card-color); padding: 2rem; border-radius: 15px; text-align: center; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); opacity: 0.5; transition: all 0.3s; }
+    .achievement-card:not(.locked) { opacity: 1; border: 3px solid var(--accent-color); }
+    .achievement-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .teacher-panel { max-width: 800px; margin: 0 auto; background: var(--card-color); padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); }
+    .teacher-panel form { display: flex; flex-direction: column; gap: 1rem; }
+    .teacher-panel label { font-weight: bold; color: var(--primary-color); }
+    .teacher-panel input, .teacher-panel select, .teacher-panel textarea { padding: 0.8rem; border: 2px solid #ddd; border-radius: 5px; font-size: 1rem; }
+    .teacher-panel textarea { min-height: 100px; resize: vertical; }
+    .added-tasks-list { margin-top: 2rem; padding: 1rem; background: #f9f9f9; border-radius: 10px; }
+    .added-task-item { background: white; padding: 1rem; margin-bottom: 1rem; border-radius: 5px; border-left: 4px solid var(--primary-color); }
+    .footer { background: #333; color: white; text-align: center; padding: 2rem; margin-top: 4rem; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .classes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+    .class-card { background: linear-gradient(135deg, #ff9a9e, #fecfef); padding: 1.5rem; border-radius: 15px; text-align: center; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; animation: fadeInUp 0.5s ease; min-height: 150px; display: flex; flex-direction: column; justify-content: space-between; }
+    .class-card:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+    .class-details { background: #fff; padding: 2rem; border-radius: 15px; margin-top: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.1); min-height: 200px; }
+    .mini-btn { background: var(--accent-color); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; font-size: 0.9rem; margin-top: 0.5rem; }
+    .mini-btn:hover { background: #e68900; }
+    /* Windows responsivlik (oldingi kabi, lekin min-height qo'shildi) */
+    @media (min-width: 1366px) { .games-grid { grid-template-columns: repeat(3, 1fr); } .classes-grid { grid-template-columns: repeat(4, 1fr); } .hero { padding: 5rem 3rem 3rem; } .subject-section { padding: 5rem 3rem; } }
+    @media (min-width: 1920px) { .games-grid { grid-template-columns: repeat(4, 1fr); } .classes-grid { grid-template-columns: repeat(5, 1fr); } .hero { padding: 6rem 4rem 4rem; } .subject-section { padding: 6rem 4rem; } }
+  </style>
 </head>
 <body>
   <!-- NAVIGATSIYA -->
@@ -17,7 +109,6 @@
         <a href="#matematika">Matematika</a>
         <a href="#ona-tili">Ona Tili</a>
         <a href="#oqish">O'qish</a>
-        <a href="#fizika">Fizika</a>
         <a href="#progress">Progress</a>
         <a href="#oqituvchi">O'qituvchi</a>
       </div>
@@ -35,107 +126,97 @@
       <div class="feature">
         <span>🔢</span>
         <h3>Matematika</h3>
-        <p>Sonlar, amallar, geometriya va 8 ta maxsus o'yin</p>
+        <p>Sonlar, amallar, geometriya</p>
       </div>
       <div class="feature">
         <span>📚</span>
         <h3>Ona Tili</h3>
-        <p>Alifbo, so'z, gap, imlo va 6 ta o'yin</p>
+        <p>Alifbo, so'z, gap, imlo</p>
       </div>
       <div class="feature">
         <span>📖</span>
         <h3>O'qish</h3>
-        <p>Hikoyalar, she'rlar + 4 ta video!</p>
-      </div>
-      <div class="feature">
-        <span>⚛️</span>
-        <h3>Fizika (Yangi!)</h3>
-        <p>Kuch, harakat va energiya o'yinlari (7-11 sinf)</p>
+        <p>Hikoyalar, she'rlar, tez o'qish + Videolar!</p>
       </div>
     </div>
   </section>
 
-  <!-- SINFLAR BO'LIMI (Kengaytirilgan – har sinf uchun 4 ta topshiriq) -->
+  <!-- SINFLAR BO'LIMI (Qisqa misol – to'liq qiling) -->
   <section id="sinflar" class="subject-section">
     <h2 class="section-title">📚 Sinflar va Fanlar</h2>
     <div class="classes-grid">
       <div class="class-card" onclick="selectClass(1)">
         <h3>1-sinf</h3>
-        <p>Matematika: Sonlar<br>Ona tili: Alifbo<br>O'qish: Hikoyalar<br>Fizika: N/A<br><button class="mini-btn" onclick="loadClassGames(1)">O'yinlarni yuklash</button></p>
+        <p>Matematika: Sonlar va oddiy amallar<br>Ona tili: Alifbo<br>O'qish: Oddiy hikoyalar</p>
       </div>
-      <!-- 2-6 sinflar oldingi kabi, har biriga 4 ta fan va mini-btn -->
-      <div class="class-card" onclick="selectClass(7)">
-        <h3>7-sinf</h3>
-        <p>Matematika: Algebra<br>Ona tili: Adabiyot<br>O'qish: Jurnalistika<br>Fizika: Kuch va harakat<br><button class="mini-btn" onclick="loadClassGames(7)">O'yinlarni yuklash</button></p>
+      <div class="class-card" onclick="selectClass(2)">
+        <h3>2-sinf</h3>
+        <p>Matematika: Qo'shish/ayirish<br>Ona tili: So'zlar<br>O'qish: She'rlar</p>
       </div>
-      <!-- 8-10 sinflar oldingi kabi -->
-      <div class="class-card" onclick="selectClass(11)">
-        <h3>11-sinf</h3>
-        <p>Matematika: Analiz<br>Ona tili: Tanqid<br>O'qish: Iqtisodiyot<br>Fizika: Mexanika va energiya<br><button class="mini-btn" onclick="loadClassGames(11)">O'yinlarni yuklash</button></p>
-      </div>
+      <!-- Boshqa sinflar qo'shing -->
     </div>
     <div id="classDetails" class="class-details" style="display:none;">
-      <!-- Dinamik: Har sinf uchun 4 ta topshiriq yuklanadi -->
+      <!-- Dinamik yuklanadi -->
     </div>
   </section>
 
-  <!-- MATEMATIKA BO'LIMI (8 ta o'yin – lazy load) -->
+  <!-- MATEMATIKA BO'LIMI (Misol – 1 ta o'yin) -->
   <section id="matematika" class="subject-section">
     <h2 class="section-title">🔢 Matematika</h2>
     <div class="games-grid">
-      <!-- Oldingi 4 ta + 4 ta yangi (kasrlar, algebra, statistika, funksiyalar) -->
-      <div class="game-card" id="statsGame" style="display:none;">
-        <h3>Statistika O'yini (10-sinf)</h3>
+      <div class="game-card">
+        <h3>Sonlarni Solishtirish</h3>
         <div class="game-area">
-          <p>O'rtacha sonni toping: 5, 7, 9</p>
-          <input type="number" id="statsAnswer" class="answer-input">
-          <button class="check-btn" onclick="checkStats()">Tekshirish</button>
-          <div id="statsResult" class="result-message"></div>
-          <div class="score-display">Ball: <span id="mathScore7">0</span></div>
+          <div class="numbers-comparison">
+            <span class="number-box" id="compNum1">5</span>
+            <span class="comparison-symbol">?</span>
+            <span class="number-box" id="compNum2">3</span>
+          </div>
+          <div class="comparison-controls">
+            <button class="comp-btn" onclick="checkComparison('>')">></button>
+            <button class="comp-btn" onclick="checkComparison('<')"><</button>
+            <button class="comp-btn" onclick="checkComparison('=')">=</button>
+          </div>
+          <div id="compResult" class="result-message"></div>
+          <div class="score-display">Ball: <span id="mathScore1">0</span></div>
         </div>
       </div>
-      <div class="game-card" id="functionGame" style="display:none;">
-        <h3>Funksiya Qiymati (9-sinf)</h3>
-        <div class="game-area">
-          <p>f(x) = 2x + 1, x=3 da?</p>
-          <input type="number" id="functionAnswer" class="answer-input">
-          <button class="check-btn" onclick="checkFunction()">Tekshirish</button>
-          <div id="functionResult" class="result-message"></div>
-          <div class="score-display">Ball: <span id="mathScore8">0</span></div>
-        </div>
-      </div>
-      <!-- Boshqa o'yinlar oldingi kabi -->
+      <!-- Boshqa o'yinlar qo'shing -->
     </div>
   </section>
 
-  <!-- ONA TILI (6 ta o'yin – yangi: Insho yozish va She'riyat quiz) -->
+  <!-- ONA TILI BO'LIMI (Misol) -->
   <section id="ona-tili" class="subject-section">
     <h2 class="section-title">📚 Ona Tili</h2>
     <div class="games-grid">
-      <!-- Oldingi 4 ta + 2 ta yangi -->
-      <div class="game-card" id="essayGame" style="display:none;">
-        <h3>Insho Yozish (4-sinf)</h3>
+      <div class="game-card">
+        <h3>So'z Yasash</h3>
         <div class="game-area">
-          <textarea id="essayInput" placeholder="Mening oilam haqida 3 jumla yozing"></textarea>
-          <button class="check-btn" onclick="checkEssay()">Tekshirish</button>
-          <div id="essayResult" class="result-message"></div>
-          <div class="score-display">Ball: <span id="langScore5">0</span></div>
+          <div class="word-builder">
+            <div class="available-letters">
+              <span class="letter-btn" onclick="addLetter('A')">A</span>
+              <span class="letter-btn" onclick="addLetter('L')">L</span>
+              <span class="letter-btn" onclick="addLetter('I')">I</span>
+              <span class="letter-btn" onclick="addLetter('M')">M</span>
+              <span class="letter-btn" onclick="addLetter('O')">O</span>
+            </div>
+            <div class="word-area">
+              <span id="builtWord"></span>
+            </div>
+            <div class="word-controls">
+              <button class="clear-btn" onclick="clearWord()">Tozalash</button>
+              <button class="check-btn" onclick="checkWord()">Tekshirish</button>
+            </div>
+          </div>
+          <div id="wordResult" class="result-message"></div>
+          <div class="score-display">Ball: <span id="langScore2">0</span></div>
         </div>
       </div>
-      <div class="game-card" id="poetryQuiz" style="display:none;">
-        <h3>She'riyat Quiz (6-sinf)</h3>
-        <div class="game-area">
-          <p>Bahor she'rida nima ochdi?</p>
-          <input type="text" id="poetryAnswer" class="answer-input">
-          <button class="check-btn" onclick="checkPoetry()">Tekshirish</button>
-          <div id="poetryResult" class="result-message"></div>
-          <div class="score-display">Ball: <span id="langScore6">0</span></div>
-        </div>
-      </div>
+      <!-- Boshqa o'yinlar qo'shing -->
     </div>
   </section>
 
-  <!-- O'QISH (4 ta video) -->
+  <!-- O'QISH BO'LIMI (Video bilan) -->
   <section id="oqish" class="subject-section">
     <h2 class="section-title">📖 O'qish</h2>
     <div class="reading-content">
@@ -144,74 +225,214 @@
         <div class="video-grid">
           <div class="video-container">
             <iframe width="100%" height="315" src="https://www.youtube.com/embed/BAWT4crztIY" title="1-sinf Matematika" frameborder="0" allowfullscreen></iframe>
-            <p>1-sinf: Sonlar animatsiyasi (qo'shiq bilan)</p>
+            <p>1-sinf: Sonlar animatsiyasi</p>
           </div>
-          <div class="video-container">
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/5z0w1j2q3k4" title="Ona tili she'ri" frameborder="0" allowfullscreen></iframe> <!-- O'zbek bolalar she'ri, o'zgartiring -->
-            <p>Ona tili: "Bahor" she'ri (animatsiya)</p>
-          </div>
-          <div class="video-container">
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/abc123def" title="Hikoya o'qish" frameborder="0" allowfullscreen></iframe>
-            <p>Tez o'qish: Hikoya o'qish texnikasi</p>
-          </div>
-          <div class="video-container">
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/xyz789" title="Adabiyot" frameborder="0" allowfullscreen></iframe>
-            <p>Adabiyot: O'zbek xalq ertaklari</p>
-          </div>
-        </div>
-      </div>
-      <!-- Oldingi hikoyalar, she'rlar, tez o'qish -->
-    </div>
-  </section>
-
-  <!-- YANGI: FIZIKA BO'LIMI (7-11 sinf uchun) -->
-  <section id="fizika" class="subject-section">
-    <h2 class="section-title">⚛️ Fizika</h2>
-    <div class="games-grid">
-      <div class="game-card">
-        <h3>Kuch va Harakat</h3>
-        <div class="game-area">
-          <p>Og'irlik = m * g, m=5kg, g=10m/s² = ?</p>
-          <input type="number" id="forceAnswer" class="answer-input">
-          <button class="check-btn" onclick="checkForce()">Tekshirish</button>
-          <div id="forceResult" class="result-message"></div>
-          <div class="score-display">Ball: <span id="physScore1">0</span></div>
-        </div>
-      </div>
-      <div class="game-card">
-        <h3>Energiya Quiz</h3>
-        <div class="game-area">
-          <p>Kinematik energiya formulasi nima?</p>
-          <select id="energySelect">
-            <option value="1/2 mv^2">1/2 mv^2</option>
-            <option value="mgh">mgh</option>
-          </select>
-          <button class="check-btn" onclick="checkEnergy()">Tekshirish</button>
-          <div id="energyResult" class="result-message"></div>
-          <div class="score-display">Ball: <span id="physScore2">0</span></div>
+          <!-- Boshqa videolar qo'shing -->
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PROGRESS va O'QITUVCHI (oldingi kabi) -->
+  <!-- PROGRESS BO'LIMI -->
   <section id="progress" class="progress-section">
-    <!-- Oldingi to'liq kod -->
+    <h2 class="section-title">🏆 Sening Natijalaring</h2>
+    <div class="progress-container">
+      <div class="overall-stats">
+        <div class="stat-card">
+          <h3>Umumiy Ball</h3>
+          <div class="stat-number" id="totalScore">0</div>
+        </div>
+        <div class="stat-card">
+          <h3>O'tgan Darslar</h3>
+          <div class="stat-number" id="completedLessons">0</div>
+        </div>
+        <div class="stat-card">
+          <h3>Olingan Mukofotlar</h3>
+          <div class="stat-number" id="achievementsCount">0</div>
+        </div>
+      </div>
+      <div class="subject-progress">
+        <h3>Fanlar bo'yicha progress</h3>
+        <div class="progress-bars">
+          <div class="progress-item">
+            <span>Matematika</span>
+            <div class="progress-bar">
+              <div class="progress-fill" id="mathProgress" style="width: 0%"></div>
+            </div>
+            <span id="mathPercent">0%</span>
+          </div>
+          <!-- Boshqa progress bar'lar -->
+        </div>
+      </div>
+      <div class="achievements-section">
+        <h3>Mukofotlar</h3>
+        <div class="achievements-grid">
+          <div class="achievement-card locked" id="mathMaster">
+            <div class="achievement-icon">🔢</div>
+            <h4>Matematika Ustasi</h4>
+            <p>100 ball to'plang</p>
+          </div>
+          <!-- Boshqa mukofotlar -->
+        </div>
+      </div>
+    </div>
   </section>
+
+  <!-- O'QITUVCHI BO'LIMI -->
   <section id="oqituvchi" class="subject-section">
-    <!-- Oldingi to'liq kod, lekin fanlarga "fizika" qo'shildi -->
-    <select id="subjectSelect">
-      <option value="matematika">Matematika</option>
-      <option value="onaTili">Ona Tili</option>
-      <option value="oqish">O'qish</option>
-      <option value="fizika">Fizika</option>
-    </select>
-    <!-- ... -->
+    <h2 class="section-title">👩‍🏫 O'qituvchi Paneli</h2>
+    <div class="teacher-panel">
+      <h3>Yangi Topshiriq Qo'shish</h3>
+      <form id="teacherForm">
+        <label>Fan tanlang:</label>
+        <select id="subjectSelect">
+          <option value="matematika">Matematika</option>
+          <option value="onaTili">Ona Tili</option>
+          <option value="oqish">O'qish</option>
+        </select>
+        <label>Topshiriq Turi:</label>
+        <input type="text" id="taskType" placeholder="Masalan: Yangi son solishtirish">
+        <label>Savol/Matni kiriting:</label>
+        <textarea id="taskContent" placeholder="Savol matni yoki o'yin tavsifi"></textarea>
+        <label>To'g'ri Javob:</label>
+        <input type="text" id="correctAnswer" placeholder="To'g'ri javob">
+        <label>Ball miqdori:</label>
+        <input type="number" id="taskPoints" value="10" min="1">
+        <button type="submit" class="check-btn">Qo'shish va Saqlash</button>
+      </form>
+      <div id="teacherResult" class="result-message"></div>
+      <div id="addedTasks" class="added-tasks-list"></div>
+    </div>
   </section>
 
   <footer class="footer">
     <p>© 2025 Kichkintoylar O'quv Platformasi - Barcha huquqlar himoyalangan</p>
   </footer>
-  <script src="script.js"></script>
+
+  <script>
+    // JS (To'liq – interfeys uchun)
+    let totalScore = 0;
+    let userProgress = { matematika: { score: 0, completed: 0 }, onaTili: { score: 0, completed: 0 }, oqish: { score: 0, completed: 0 } };
+    let addedTasks = { matematika: [], onaTili: [], oqish: [] };
+    let currentClass = 1;
+
+    // Sinf tanlash
+    function selectClass(sinf) {
+      currentClass = sinf;
+      const details = document.getElementById('classDetails');
+      details.innerHTML = `<h3>${sinf}-sinf Fanlari</h3><p>Matematika, Ona tili va O'qish darslari yuklandi!</p>`;
+      details.style.display = 'block';
+      details.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Matematika o'yinlari
+    let currentComparison = { num1: 5, num2: 3 };
+    function generateComparison() {
+      const num1 = Math.floor(Math.random() * 10) + 1;
+      const num2 = Math.floor(Math.random() * 10) + 1;
+      document.getElementById("compNum1").textContent = num1;
+      document.getElementById("compNum2").textContent = num2;
+      currentComparison = { num1, num2 };
+    }
+    function checkComparison(operator) {
+      const { num1, num2 } = currentComparison;
+      const resultElement = document.getElementById("compResult");
+      let correct = false;
+      if (operator === ">" && num1 > num2) correct = true;
+      else if (operator === "<" && num1 < num2) correct = true;
+      else if (operator === "=" && num1 === num2) correct = true;
+      if (correct) {
+        resultElement.textContent = "✅ To'g'ri! Ajoyib!";
+        resultElement.className = "result-message success";
+        addScore("matematika", 10, "mathScore1");
+      } else {
+        resultElement.textContent = "❌ Noto'g'ri, qayta urinib ko'ring!";
+        resultElement.className = "result-message error";
+      }
+      setTimeout(() => {
+        generateComparison();
+        resultElement.textContent = "";
+        resultElement.className = "result-message";
+      }, 2000);
+    }
+
+    // Ona tili o'yinlari
+    let currentWord = "";
+    function addLetter(letter) {
+      currentWord += letter;
+      document.getElementById("builtWord").textContent = currentWord;
+    }
+    function clearWord() {
+      currentWord = "";
+      document.getElementById("builtWord").textContent = "";
+      document.getElementById("wordResult").textContent = "";
+    }
+    function checkWord() {
+      const validWords = ["ALI", "LOLA", "OLA", "MALI", "OLMA"];
+      const resultElement = document.getElementById("wordResult");
+      if (validWords.includes(currentWord.toUpperCase())) {
+        resultElement.textContent = `✅ To'g'ri! "${currentWord}" - mavjud so'z`;
+        resultElement.className = "result-message success";
+        addScore("onaTili", 15, "langScore2");
+      } else {
+        resultElement.textContent = "❌ Bunday so'z mavjud emas";
+        resultElement.className = "result-message error";
+      }
+      setTimeout(clearWord, 3000);
+    }
+
+    // Ball tizimi
+    function addScore(subject, points, elementId) {
+      userProgress[subject].score += points;
+      userProgress[subject].completed++;
+      totalScore += points;
+      if (elementId) {
+        const element = document.getElementById(elementId);
+        if (element) element.textContent = parseInt(element.textContent) + points;
+      }
+      document.getElementById("totalScore").textContent = totalScore;
+      document.getElementById("completedLessons").textContent = Object.values(userProgress).reduce((sum, sub) => sum + sub.completed, 0);
+      // Progress bar'lar yangilash
+      const progress = (userProgress[subject].score / 200) * 100;
+      const bar = document.getElementById(subject === "matematika" ? "mathProgress" : "langProgress");
+      if (bar) bar.style.width = `${Math.min(progress, 100)}%`;
+      localStorage.setItem("userProgress", JSON.stringify(userProgress));
+    }
+
+    // O'qituvchi paneli
+    document.getElementById("teacherForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const subject = document.getElementById("subjectSelect").value;
+      const type = document.getElementById("taskType").value.trim();
+      const content = document.getElementById("taskContent").value.trim();
+      if (!type || !content) return;
+      const newTask = { type, content, date: new Date().toLocaleDateString("uz-UZ") };
+      addedTasks[subject].push(newTask);
+      localStorage.setItem("addedTasks", JSON.stringify(addedTasks));
+      const list = document.getElementById("addedTasks");
+      list.innerHTML += `<div class="added-task-item"><strong>${type}</strong>: ${content} (${newTask.date})</div>`;
+      document.getElementById("teacherResult").textContent = "✅ Topshiriq qo'shildi!";
+      document.getElementById("teacherResult").className = "result-message success";
+      this.reset();
+    });
+
+    // Boshlash tugmasi
+    function startLearning() {
+      document.getElementById("sinflar").scrollIntoView({ behavior: "smooth" });
+    }
+
+    // Yuklanish
+    window.onload = function() {
+      generateComparison();
+      // Boshqa initialize'lar
+      const savedProgress = localStorage.getItem("userProgress");
+      if (savedProgress) {
+        userProgress = JSON.parse(savedProgress);
+        totalScore = Object.values(userProgress).reduce((sum, sub) => sum + sub.score, 0);
+        document.getElementById("totalScore").textContent = totalScore;
+      }
+      selectClass(1);
+    };
+  </script>
 </body>
 </html>
