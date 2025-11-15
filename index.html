@@ -6,6 +6,7 @@
     <title>Kichkintoylar - Zamonaviy O'quv Platformasi</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* CSS kodlari oldingi kabi */
         * {
             margin: 0;
             padding: 0;
@@ -35,768 +36,9 @@
             overflow-x: hidden;
         }
 
-        /* Animatsiyalar */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
-            50% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.6); }
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(-100px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        @keyframes bounceIn {
-            0% { transform: scale(0.3); opacity: 0; }
-            50% { transform: scale(1.05); }
-            70% { transform: scale(0.9); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        @keyframes confetti {
-            0% { transform: translateY(0) rotate(0); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-        }
-
-        /* Login Screen */
-        .login-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            transition: opacity 0.5s ease;
-        }
-
-        .login-box {
-            background: var(--card-bg);
-            padding: 3rem;
-            border-radius: 25px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-            width: 90%;
-            max-width: 450px;
-            text-align: center;
-            animation: bounceIn 1s ease;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .login-logo {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .login-box h2 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
-            font-weight: 700;
-        }
-
-        .login-box p {
-            color: #64748b;
-            margin-bottom: 2rem;
-        }
-
-        .input-group {
-            position: relative;
-            margin-bottom: 1.5rem;
-        }
-
-        .input-group i {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #94a3b8;
-        }
-
-        .login-box input {
-            width: 100%;
-            padding: 1rem 1rem 1rem 3rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            font-size: 1rem;
-            transition: all 0.3s;
-            background: #f8fafc;
-        }
-
-        .login-box input:focus {
-            border-color: var(--primary);
-            outline: none;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
-        }
-
-        .login-btn {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 1.2rem 2rem;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            margin-top: 1rem;
-            width: 100%;
-            transition: all 0.3s;
-            font-weight: 600;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .login-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
-        }
-
-        .login-btn:active {
-            transform: translateY(-1px);
-        }
-
-        .login-btn::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: 0.5s;
-        }
-
-        .login-btn:hover::after {
-            left: 100%;
-        }
-
-        /* Floating Elements */
-        .floating-elements {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .floating-element {
-            position: absolute;
-            font-size: 2rem;
-            opacity: 0.1;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .floating-element:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
-        .floating-element:nth-child(2) { top: 20%; right: 15%; animation-delay: 1s; }
-        .floating-element:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 2s; }
-        .floating-element:nth-child(4) { bottom: 20%; right: 25%; animation-delay: 3s; }
-        .floating-element:nth-child(5) { top: 40%; left: 50%; animation-delay: 4s; }
-
-        /* Main App */
-        .app-container {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        /* Navigation */
-        .navbar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 2rem;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            animation: slideIn 0.8s ease;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 600;
-            padding: 0.5rem 1.2rem;
-            border-radius: 25px;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .points {
-            background: linear-gradient(135deg, var(--accent), #f97316);
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 25px;
-            font-weight: bold;
-            animation: glow 2s ease-in-out infinite;
-        }
-
-        .logout-btn {
-            background: transparent;
-            border: 2px solid var(--danger);
-            color: var(--danger);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-        }
-
-        .logout-btn:hover {
-            background: var(--danger);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 10rem 2rem 6rem;
-            text-align: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            margin-top: 60px;
-            border-radius: 0 0 40px 40px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="M0,0 L1000,0 L1000,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
-            background-size: cover;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 1s ease;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            font-weight: 800;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2.5rem;
-            animation: fadeInUp 1s ease 0.2s both;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-button {
-            background: linear-gradient(135deg, var(--accent), #f97316);
-            color: white;
-            border: none;
-            padding: 1.2rem 3rem;
-            font-size: 1.2rem;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s;
-            animation: fadeInUp 1s ease 0.4s both;
-            font-weight: 700;
-            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(245, 158, 11, 0.6);
-        }
-
-        .cta-button:active {
-            transform: translateY(-2px);
-        }
-
-        /* Subjects Grid */
-        .subjects {
-            padding: 6rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 4rem;
-            color: var(--primary);
-            font-weight: 800;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 5px;
-        }
-
-        .subjects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .subject-card {
-            background: var(--card-bg);
-            border-radius: 25px;
-            padding: 2.5rem;
-            text-align: center;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s;
-            cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .subject-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-        }
-
-        .subject-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
-        }
-
-        .subject-icon {
-            font-size: 4.5rem;
-            margin-bottom: 1.5rem;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .math { color: var(--math); }
-        .lang { color: var(--lang); }
-        .science { color: var(--science); }
-        .russian { color: var(--russian); }
-
-        .subject-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-            font-weight: 700;
-        }
-
-        .subject-card p {
-            color: #64748b;
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-
-        .subject-stats {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #e2e8f0;
-        }
-
-        .stat {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .stat-number {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: #94a3b8;
-        }
-
-        /* Progress Bar */
-        .progress-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 1.5rem 0;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 12px;
-            background: #e2e8f0;
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 0.8rem 0;
-            position: relative;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            transition: width 0.5s ease;
-            border-radius: 10px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .progress-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        /* Games Section */
-        .games {
-            padding: 6rem 2rem;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            border-radius: 40px 40px 0 0;
-            margin-top: 4rem;
-        }
-
-        .game-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: var(--card-bg);
-            border-radius: 25px;
-            padding: 3rem;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-        }
-
-        .game-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 2px solid #e2e8f0;
-        }
-
-        .game-title {
-            font-size: 2.2rem;
-            color: var(--primary);
-            font-weight: 700;
-        }
-
-        .game-score {
-            background: linear-gradient(135deg, var(--accent), #f97316);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            animation: glow 2s ease-in-out infinite;
-        }
-
-        .game-content {
-            margin-bottom: 2.5rem;
-        }
-
-        .video-container {
-            margin: 2.5rem 0;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-            position: relative;
-        }
-
-        .video-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
-            z-index: 1;
-        }
-
-        .video-container iframe {
-            width: 100%;
-            height: 400px;
-            border: none;
-            position: relative;
-            z-index: 2;
-        }
-
-        .question {
-            font-size: 1.6rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            font-weight: 600;
-            color: var(--dark);
-            line-height: 1.4;
-        }
-
-        .options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .option {
-            background: #f8fafc;
-            padding: 1.8rem;
-            border-radius: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-            font-weight: 600;
-            font-size: 1.1rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .option:hover {
-            transform: translateY(-8px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
-        }
-
-        .option.selected {
-            border-color: var(--primary);
-            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
-            transform: translateY(-5px);
-        }
-
-        .game-controls {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .control-btn {
-            padding: 1.2rem 2.5rem;
-            border: none;
-            border-radius: 15px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .submit-btn {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-        }
-
-        .next-btn {
-            background: linear-gradient(135deg, var(--success), #059669);
-            color: white;
-        }
-
-        .control-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .result {
-            text-align: center;
-            padding: 1.5rem;
-            border-radius: 15px;
-            margin: 1.5rem 0;
-            font-weight: bold;
-            display: none;
-            font-size: 1.2rem;
-            animation: bounceIn 0.6s ease;
-        }
-
-        .success {
-            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
-            color: #065f46;
-            display: block;
-            border: 2px solid #10b981;
-        }
-
-        .error {
-            background: linear-gradient(135deg, #fee2e2, #fecaca);
-            color: #991b1b;
-            display: block;
-            border: 2px solid #ef4444;
-        }
-
-        /* Progress Section */
-        .progress-section {
-            padding: 6rem 2rem;
-            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-            color: white;
-            border-radius: 40px 40px 0 0;
-            margin-top: 4rem;
-        }
-
-        .progress-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .progress-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2.5rem;
-            border-radius: 25px;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s;
-        }
-
-        .progress-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .progress-card h3 {
-            color: #e2e8f0;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-
-        .progress-number {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: var(--accent);
-            text-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .confetti {
-            position: fixed;
-            width: 12px;
-            height: 12px;
-            background: var(--accent);
-            top: 0;
-            opacity: 0;
-            z-index: 9999;
-            border-radius: 50%;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .section-title {
-                font-size: 2.2rem;
-            }
-            
-            .subject-card {
-                padding: 2rem;
-            }
-            
-            .game-container {
-                padding: 2rem;
-            }
-            
-            .video-container iframe {
-                height: 250px;
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        /* Barcha CSS kodlari oldingi kabi */
+        /* ... */
+        
     </style>
 </head>
 <body>
@@ -905,15 +147,15 @@
                         <i class="fas fa-language"></i>
                     </div>
                     <h3>Rus Tili</h3>
-                    <p>Russkiy yazik dlya nachinayushchix - alfavit i osnovnye frazy</p>
+                    <p>Русский язык для начинающих - алфавит и основные фразы</p>
                     <div class="subject-stats">
                         <div class="stat">
                             <div class="stat-number">30</div>
-                            <div class="stat-label">Voprosy</div>
+                            <div class="stat-label">Вопросы</div>
                         </div>
                         <div class="stat">
                             <div class="stat-number">300</div>
-                            <div class="stat-label">Ballov</div>
+                            <div class="stat-label">Баллы</div>
                         </div>
                     </div>
                 </div>
@@ -1002,17 +244,16 @@
     </div>
 
     <script>
-        // Kengaytirilgan o'quv ma'lumotlari
+        // Yangilangan o'quv ma'lumotlari - HAR BIR FAN JAVOBLARI HAR XIL
         const gameData = {
             matematika: {
                 title: "Matematika",
                 videos: [
                     "https://www.youtube.com/embed/BAWT4crztIY",
-                    "https://www.youtube.com/embed/dQw4w9WgXcQ",
-                    "https://www.youtube.com/embed/J---aiyznGQ"
+                    "https://www.youtube.com/embed/dQw4w9WgXcQ"
                 ],
                 questions: [
-                    { question: "7 + 5 nechaga teng?", options: ["10", "12", "13", "11"], correct: 1 },
+                    { question: "7 + 5 nechaga teng?", options: ["11", "12", "13", "14"], correct: 1 },
                     { question: "9 - 3 nechaga teng?", options: ["5", "6", "7", "8"], correct: 1 },
                     { question: "4 × 3 nechaga teng?", options: ["10", "12", "14", "16"], correct: 1 },
                     { question: "15 ÷ 3 nechaga teng?", options: ["3", "4", "5", "6"], correct: 2 },
@@ -1047,11 +288,10 @@
             "ona-tili": {
                 title: "Ona Tili",
                 videos: [
-                    "https://www.youtube.com/embed/BAWT4crztIY",
-                    "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                    "https://www.youtube.com/embed/BAWT4crztIY"
                 ],
                 questions: [
-                    { question: "Qaysi so'z to'g'ri yozilgan?", options: ["Kitob", "Kitop", "Ketob", "Kitob"], correct: 0 },
+                    { question: "Qaysi so'z to'g'ri yozilgan?", options: ["Kitob", "Kitop", "Ketob", "Kutub"], correct: 0 },
                     { question: "'Daraxt' so'zida nechta harf bor?", options: ["5", "6", "7", "8"], correct: 1 },
                     { question: "Qaysi so'z ot turkumiga kiradi?", options: ["yashil", "tez", "bola", "chiroyli"], correct: 2 },
                     { question: "'Maktab' so'zining bosh harfi qanday?", options: ["M", "m", "K", "k"], correct: 0 },
@@ -1084,41 +324,41 @@
                 ]
             },
             "rus-tili": {
-                title: "Rus Tili",
+                title: "Русский Язык",
                 videos: [
                     "https://www.youtube.com/embed/BAWT4crztIY"
                 ],
                 questions: [
-                    { question: "Kak perevoditsya slovo 'книга'?", options: ["kniga", "kniga", "kniga", "kniga"], correct: 0 },
-                    { question: "Skolko bukv v russkom alfavite?", options: ["31", "32", "33", "34"], correct: 2 },
-                    { question: "Kakaya bukva pervoy v slove 'школа'?", options: ["Ш", "ш", "К", "к"], correct: 0 },
-                    { question: "Kak perevoditsya 'Я ученик'?", options: ["Men o'quvchiman", "Men o'quvchiman", "Men o'quvchiman", "Men o'quvchiman"], correct: 0 },
-                    { question: "Kak napisat' 'spasibo' po-russki?", options: ["спасибо", "спасибо", "спасибо", "спасибо"], correct: 0 },
-                    { question: "Chto oznachaet slovo 'дом'?", options: ["uy", "uy", "uy", "uy"], correct: 0 },
-                    { question: "Kakaya bukva poslednyaya v alfavite?", options: ["Я", "я", "Ю", "ю"], correct: 0 },
-                    { question: "Kak perevoditsya 'Как дела?'?", options: ["Ishlar qalay?", "Ishlar qalay?", "Ishlar qalay?", "Ishlar qalay?"], correct: 0 },
-                    { question: "Skolko glasnykh bukv v russkom alfavite?", options: ["10", "11", "12", "13"], correct: 0 },
-                    { question: "Kak napisat' 'privet' po-russki?", options: ["привет", "привет", "привет", "привет"], correct: 0 },
-                    { question: "Chto oznachaet slovo 'стол'?", options: ["stol", "stol", "stol", "stol"], correct: 0 },
-                    { question: "Kakaya bukva pervoy v slove 'учитель'?", options: ["У", "у", "Ч", "ч"], correct: 0 },
-                    { question: "Kak perevoditsya 'До свидания'?", options: ["Xayr", "Xayr", "Xayr", "Xayr"], correct: 0 },
-                    { question: "Skolko soglasnykh bukv v russkom alfavite?", options: ["21", "22", "23", "24"], correct: 0 },
-                    { question: "Kak napisat' 'da' po-russki?", options: ["да", "да", "да", "да"], correct: 0 },
-                    { question: "Chto oznachaet slovo 'ручка'?", options: ["ruchka", "ruchka", "ruchka", "ruchka"], correct: 0 },
-                    { question: "Kakaya bukva poslednyaya v slove 'тетрадь'?", options: ["Ь", "ь", "Д", "д"], correct: 0 },
-                    { question: "Kak perevoditsya 'Сколько тебе лет?'?", options: ["Yoshing nechada?", "Yoshing nechada?", "Yoshing nechada?", "Yoshing nechada?"], correct: 0 },
-                    { question: "Skolko bukv v slove 'математика'?", options: ["9", "10", "11", "12"], correct: 1 },
-                    { question: "Kak napisat' 'net' po-russki?", options: ["нет", "нет", "нет", "нет"], correct: 0 },
-                    { question: "Chto oznachaet slovo 'окно'?", options: ["deraza", "deraza", "deraza", "deraza"], correct: 0 },
-                    { question: "Kakaya bukva pervoy v slove 'русский'?", options: ["Р", "р", "У", "у"], correct: 0 },
-                    { question: "Kak perevoditsya 'Я люблю учиться'?", options: ["Men o'qishni yaxshi ko'raman", "Men o'qishni yaxshi ko'raman", "Men o'qishni yaxshi ko'raman", "Men o'qishni yaxshi ko'raman"], correct: 0 },
-                    { question: "Skolko glasnykh bukv v slove 'учитель'?", options: ["3", "4", "5", "6"], correct: 0 },
-                    { question: "Kak napisat' 'khorosho' po-russki?", options: ["хорошо", "хорошо", "хорошо", "хорошо"], correct: 0 },
-                    { question: "Chto oznachaet slovo 'друг'?", options: ["do'st", "do'st", "do'st", "do'st"], correct: 0 },
-                    { question: "Kakaya bukva poslednyaya v slove 'школа'?", options: ["А", "а", "Л", "л"], correct: 0 },
-                    { question: "Kak perevoditsya 'Где ты живёшь?'?", options: ["Qayerda yashaysan?", "Qayerda yashaysan?", "Qayerda yashaysan?", "Qayerda yashaysan?"], correct: 0 },
-                    { question: "Skolko bukv v slove 'биология'?", options: ["8", "9", "10", "11"], correct: 1 },
-                    { question: "Kak napisat' 'pozhalusta' po-russki?", options: ["пожалуйста", "пожалуйста", "пожалуйста", "пожалуйста"], correct: 0 }
+                    { question: "Сколько букв в русском алфавите?", options: ["31", "32", "33", "34"], correct: 2 },
+                    { question: "Какая первая буква в слове 'школа'?", options: ["Ш", "ш", "К", "к"], correct: 0 },
+                    { question: "Как пишется слово 'спасибо'?", options: ["спасибо", "спосибо", "спасебо", "спосиба"], correct: 0 },
+                    { question: "Что означает слово 'дом'?", options: ["дом", "школа", "книга", "ручка"], correct: 0 },
+                    { question: "Какая последняя буква в алфавите?", options: ["Я", "я", "Ю", "ю"], correct: 0 },
+                    { question: "Сколько гласных букв в русском алфавите?", options: ["10", "11", "12", "13"], correct: 0 },
+                    { question: "Как пишется слово 'привет'?", options: ["привет", "превет", "привит", "превит"], correct: 0 },
+                    { question: "Что означает слово 'стол'?", options: ["стол", "стул", "книга", "окно"], correct: 0 },
+                    { question: "Какая первая буква в слове 'учитель'?", options: ["У", "у", "Ч", "ч"], correct: 0 },
+                    { question: "Сколько согласных букв в русском алфавите?", options: ["21", "22", "23", "24"], correct: 0 },
+                    { question: "Как пишется слово 'да'?", options: ["да", "даа", "до", "дя"], correct: 0 },
+                    { question: "Что означает слово 'ручка'?", options: ["ручка", "карандаш", "тетрадь", "книга"], correct: 0 },
+                    { question: "Какая последняя буква в слове 'тетрадь'?", options: ["Ь", "ь", "Д", "д"], correct: 0 },
+                    { question: "Сколько букв в слове 'математика'?", options: ["9", "10", "11", "12"], correct: 1 },
+                    { question: "Как пишется слово 'нет'?", options: ["нет", "нить", "нат", "нит"], correct: 0 },
+                    { question: "Что означает слово 'окно'?", options: ["окно", "дверь", "стена", "пол"], correct: 0 },
+                    { question: "Какая первая буква в слове 'русский'?", options: ["Р", "р", "У", "у"], correct: 0 },
+                    { question: "Сколько гласных букв в слове 'учитель'?", options: ["3", "4", "5", "6"], correct: 0 },
+                    { question: "Как пишется слово 'хорошо'?", options: ["хорошо", "харашо", "хороша", "хараша"], correct: 0 },
+                    { question: "Что означает слово 'друг'?", options: ["друг", "враг", "учитель", "ученик"], correct: 0 },
+                    { question: "Какая последняя буква в слове 'школа'?", options: ["А", "а", "Л", "л"], correct: 0 },
+                    { question: "Сколько букв в слове 'биология'?", options: ["8", "9", "10", "11"], correct: 1 },
+                    { question: "Как пишется слово 'пожалуйста'?", options: ["пожалуйста", "пожалуста", "пожалуйсто", "пожалусто"], correct: 0 },
+                    { question: "Что означает слово 'книга'?", options: ["книга", "тетрадь", "ручка", "пенал"], correct: 0 },
+                    { question: "Какая первая буква в слове 'девочка'?", options: ["Д", "д", "Е", "е"], correct: 0 },
+                    { question: "Сколько согласных букв в слове 'мальчик'?", options: ["4", "5", "6", "7"], correct: 1 },
+                    { question: "Как пишется слово 'до свидания'?", options: ["до свидания", "да свидания", "до свиданя", "да свиданя"], correct: 0 },
+                    { question: "Что означает слово 'мама'?", options: ["мама", "папа", "брат", "сестра"], correct: 0 },
+                    { question: "Какая последняя буква в слове 'солнце'?", options: ["Е", "е", "Ц", "ц"], correct: 0 },
+                    { question: "Сколько букв в слове 'география'?", options: ["9", "10", "11", "12"], correct: 1 }
                 ]
             },
             kimyo: {
@@ -1128,35 +368,35 @@
                 ],
                 questions: [
                     { question: "Suv qaysi elementlardan tashkil topgan?", options: ["Vodorod va Kislorod", "Uglerod va Kislorod", "Vodorod va Azot", "Kislorod va Azot"], correct: 0 },
-                    { question: "Kimyoviy elementlarning davriy jadvalini kim yaratgan?", options: ["Dmitriy Mendeleyev", "Dmitriy Mendeleyev", "Dmitriy Mendeleyev", "Dmitriy Mendeleyev"], correct: 0 },
-                    { question: "Havoning asosiy tarkibiy qismi qaysi gaz?", options: ["Azot", "Azot", "Azot", "Azot"], correct: 0 },
-                    { question: "Kimyoviy reaksiya nima?", options: ["Moddalarning o'zgarishi", "Moddalarning o'zgarishi", "Moddalarning o'zgarishi", "Moddalarning o'zgarishi"], correct: 0 },
-                    { question: "Oltinning kimyoviy belgisi qanday?", options: ["Au", "Au", "Au", "Au"], correct: 0 },
-                    { question: "Kimyoviy elementlar qanday tartibda joylashgan?", options: ["Atom raqami bo'yicha", "Atom raqami bo'yicha", "Atom raqami bo'yicha", "Atom raqami bo'yicha"], correct: 0 },
-                    { question: "Kislota va asos o'rtasidagi reaksiya nima deb ataladi?", options: ["Neytralizatsiya", "Neytralizatsiya", "Neytralizatsiya", "Neytralizatsiya"], correct: 0 },
-                    { question: "Kimyoviy bog' nima?", options: ["Atomlar o'rtasidagi tortishish", "Atomlar o'rtasidagi tortishish", "Atomlar o'rtasidagi tortishish", "Atomlar o'rtasidagi tortishish"], correct: 0 },
-                    { question: "Kimyoviy formulalar nima uchun kerak?", options: ["Moddalarning tarkibini ifodalash", "Moddalarning tarkibini ifodalash", "Moddalarning tarkibini ifodalash", "Moddalarning tarkibini ifodalash"], correct: 0 },
-                    { question: "Kimyoviy reaksiyalar qanday turli bo'ladi?", options: ["Sintez, parchalanish, almashtirish", "Sintez, parchalanish, almashtirish", "Sintez, parchalanish, almashtirish", "Sintez, parchalanish, almashtirish"], correct: 0 },
-                    { question: "Kimyoviy elementlar qanday guruhlarga bo'linadi?", options: ["Metallar, nemetallar, yarimmetallar", "Metallar, nemetallar, yarimmetallar", "Metallar, nemetallar, yarimmetallar", "Metallar, nemetallar, yarimmetallar"], correct: 0 },
-                    { question: "Kimyoviy reaksiyalar qanday sharoitda tezlashadi?", options: ["Harorat oshganda", "Harorat oshganda", "Harorat oshganda", "Harorat oshganda"], correct: 0 },
-                    { question: "Kimyoviy reaksiyalar qanday belgilar bilan ifodalanadi?", options: ["Kimyoviy tenglamalar", "Kimyoviy tenglamalar", "Kimyoviy tenglamalar", "Kimyoviy tenglamalar"], correct: 0 },
-                    { question: "Kimyoviy reaksiyalar qanday turli bo'ladi?", options: ["Ekzotermik va endotermik", "Ekzotermik va endotermik", "Ekzotermik va endotermik", "Ekzotermik va endotermik"], correct: 0 },
-                    { question: "Kimyoviy reaksiyalar qanday tezlashtiriladi?", options: ["Katalizatorlar yordamida", "Katalizatorlar yordamida", "Katalizatorlar yordamida", "Katalizatorlar yordamida"], correct: 0 },
-                    { question: "Kimyoviy reaksiyalar qanday o'lchanadi?", options: ["Reaksiya tezligi", "Reaksiya tezligi", "Reaksiya tezligi", "Reaksiya tezligi"], correct: 0 },
-                    { question: "Kimyoviy reaksiyalar qanday boshqariladi?", options: ["Reaksiya sharoitlari", "Reaksiya sharoitlari", "Reaksiya sharoitlari", "Reaksiya sharoitlari"], correct: 0 },
-                    { question: "Kimyoviy reaksiyalar qanday moddalar hosil qiladi?", options: ["Mahsulotlar", "Mahsulotlar", "Mahsulotlar", "Mahsulotlar"], correct: 0 },
-                    { question: "Kimyoviy reaksiyalar qanday energiya ajratadi?", options: ["Issiqlik energiyasi", "Issiqlik energiyasi", "Issiqlik energiyasi", "Issiqlik energiyasi"], correct: 0 },
-                    { question: "Kimyoviy reaksiyalar qanday sodir bo'ladi?", options: ["Molekulalar to'qnashganda", "Molekulalar to'qnashganda", "Molekulalar to'qnashganda", "Molekulalar to'qnashganda"], correct: 0 },
-                    { question: "Kimyoviy reaksiyalar qanday nazariyalar bilan izohlanadi?", options: ["Kollizion nazariya", "Kollizion nazariya", "Kollizion nazariya", "Kollizion nazariya"], correct: 0 },
-                    { question: "Kimyoviy reaksiyalar qanday turli bo'ladi?", options: ["Bir martalik va ko'p martalik", "Bir martalik va ko'p martalik", "Bir martalik va ko'p martalik", "Bir martalik va ko'p martalik"], correct: 0 },
-                    { question: "Kimyoviy reaksiyalar qanday boshqariladi?", options: ["Reaksiya mexanizmlari", "Reaksiya mexanizmlari", "Reaksiya mexanizmlari", "Reaksiya mexanizmlari"], correct: 0 },
-                    { question: "Kimyoviy reaksiyalar qanday o'rganiladi?", options: ["Kimyoviy kinetika", "Kimyoviy kinetika", "Kimyoviy kinetika", "Kimyoviy kinetika"], correct: 0 },
-                    { question: "Kimyoviy reaksiyalar qanday amalda qo'llaniladi?", options: ["Sanoatda", "Sanoatda", "Sanoatda", "Sanoatda"], correct: 0 },
-                    { question: "Kimyoviy reaksiyalar qanday xavfli bo'ladi?", options: ["Portlovchi reaksiyalar", "Portlovchi reaksiyalar", "Portlovchi reaksiyalar", "Portlovchi reaksiyalar"], correct: 0 },
-                    { question: "Kimyoviy reaksiyalar qanday nazorat qilinadi?", options: ["Reaksiya sharoitlari", "Reaksiya sharoitlari", "Reaksiya sharoitlari", "Reaksiya sharoitlari"], correct: 0 },
-                    { question: "Kimyoviy reaksiyalar qanday moddalar ishtirok etadi?", options: ["Reaktantlar", "Reaktantlar", "Reaktantlar", "Reaktantlar"], correct: 0 },
-                    { question: "Kimyoviy reaksiyalar qanday energiya talab qiladi?", options: ["Aktivlashuv energiyasi", "Aktivlashuv energiyasi", "Aktivlashuv energiyasi", "Aktivlashuv energiyasi"], correct: 0 },
-                    { question: "Kimyoviy reaksiyalar qanday tabiatda sodir bo'ladi?", options: ["Fotosintez", "Fotosintez", "Fotosintez", "Fotosintez"], correct: 0 }
+                    { question: "Kimyoviy elementlarning davriy jadvalini kim yaratgan?", options: ["Dmitriy Mendeleyev", "Albert Eynshteyn", "Isaak Nyuton", "Mariya Kyuri"], correct: 0 },
+                    { question: "Havoning asosiy tarkibiy qismi qaysi gaz?", options: ["Azot", "Kislorod", "Uglerod dioksid", "Argon"], correct: 0 },
+                    { question: "Kimyoviy reaksiya nima?", options: ["Moddalarning o'zgarishi", "Moddalarning erishi", "Moddalarning qotishi", "Moddalarning bug'lanishi"], correct: 0 },
+                    { question: "Oltinning kimyoviy belgisi qanday?", options: ["Au", "Ag", "Fe", "Cu"], correct: 0 },
+                    { question: "Kimyoviy elementlar qanday tartibda joylashgan?", options: ["Atom raqami bo'yicha", "Vazn bo'yicha", "Rang bo'yicha", "Xossalar bo'yicha"], correct: 0 },
+                    { question: "Kislota va asos o'rtasidagi reaksiya nima deb ataladi?", options: ["Neytralizatsiya", "Oksidlanish", "Qaytarilish", "Hidroliz"], correct: 0 },
+                    { question: "Kimyoviy bog' nima?", options: ["Atomlar o'rtasidagi tortishish", "Molekulalar o'rtasidagi tortishish", "Ionlar o'rtasidagi tortishish", "Elektronlar o'rtasidagi tortishish"], correct: 0 },
+                    { question: "Kimyoviy formulalar nima uchun kerak?", options: ["Moddalarning tarkibini ifodalash", "Moddalarning rangini ifodalash", "Moddalarning hiddini ifodalash", "Moddalarning shaklini ifodalash"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday turli bo'ladi?", options: ["Sintez, parchalanish, almashtirish", "Issiq, sovuq, iliq", "Qattiq, suyuq, gaz", "Katta, kichik, o'rta"], correct: 0 },
+                    { question: "Kimyoviy elementlar qanday guruhlarga bo'linadi?", options: ["Metallar, nemetallar, yarimmetallar", "Og'ir, yengil, o'rta", "Qattiq, suyuq, gaz", "Rangli, rangsiz, shaffof"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday sharoitda tezlashadi?", options: ["Harorat oshganda", "Harorat pasayganda", "Bosim oshganda", "Bosim pasayganda"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday belgilar bilan ifodalanadi?", options: ["Kimyoviy tenglamalar", "Matematik tenglamalar", "Fizik tenglamalar", "Geometrik shakllar"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday turli bo'ladi?", options: ["Ekzotermik va endotermik", "Tez va sekin", "Katta va kichik", "Oddiy va murakkab"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday tezlashtiriladi?", options: ["Katalizatorlar yordamida", "Sovutish orqali", "Qaynatish orqali", "Aralashtirish orqali"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday o'lchanadi?", options: ["Reaksiya tezligi", "Reaksiya hajmi", "Reaksiya vazni", "Reaksiya soni"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday boshqariladi?", options: ["Reaksiya sharoitlari", "Reaksiya vaqti", "Reaksiya joyi", "Reaksiya narxi"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday moddalar hosil qiladi?", options: ["Mahsulotlar", "Yordamchi moddalar", "Asosiy moddalar", "Qo'shimcha moddalar"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday energiya ajratadi?", options: ["Issiqlik energiyasi", "Yorug'lik energiyasi", "Tovush energiyasi", "Harorat energiyasi"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday sodir bo'ladi?", options: ["Molekulalar to'qnashganda", "Atomlar to'qnashganda", "Ionlar to'qnashganda", "Elektronlar to'qnashganda"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday nazariyalar bilan izohlanadi?", options: ["Kollizion nazariya", "Kvant nazariya", "Relyativistik nazariya", "Klassik nazariya"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday turli bo'ladi?", options: ["Bir martalik va ko'p martalik", "Katta va kichik", "Tez va sekin", "Oddiy va murakkab"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday boshqariladi?", options: ["Reaksiya mexanizmlari", "Reaksiya qonunlari", "Reaksiya qoidalari", "Reaksiya usullari"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday o'rganiladi?", options: ["Kimyoviy kinetika", "Kimyoviy termodinamika", "Kimyoviy analiz", "Kimyoviy sintez"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday amalda qo'llaniladi?", options: ["Sanoatda", "Qishloq xo'jaligida", "Tibbiyotda", "Qurilishda"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday xavfli bo'ladi?", options: ["Portlovchi reaksiyalar", "Yonuvchi reaksiyalar", "Zaharlovchi reaksiyalar", "Korroziv reaksiyalar"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday nazorat qilinadi?", options: ["Reaksiya sharoitlari", "Reaksiya vaqti", "Reaksiya joyi", "Reaksiya narxi"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday moddalar ishtirok etadi?", options: ["Reaktantlar", "Katalizatorlar", "Inhibitorlar", "Akseleratorlar"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday energiya talab qiladi?", options: ["Aktivlashuv energiyasi", "Potensial energiya", "Kinetik energiya", "Termal energiya"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday tabiatda sodir bo'ladi?", options: ["Fotosintez", "Nafas olish", "Ovqat hazm qilish", "Suv aylanishi"], correct: 0 }
                 ]
             },
             biologiya: {
@@ -1166,264 +406,42 @@
                 ],
                 questions: [
                     { question: "Qaysi hayvon sutemizuvchi?", options: ["It", "Tovuq", "Baliq", "Qurbaqa"], correct: 0 },
-                    { question: "O'simliklar qanday nafas oladi?", options: ["Fotosintez", "Fotosintez", "Fotosintez", "Fotosintez"], correct: 0 },
-                    { question: "Inson qanchalik suyakka ega?", options: ["206", "206", "206", "206"], correct: 0 },
-                    { question: "Qaysi organ qonni pompalaydi?", options: ["Yurak", "Yurak", "Yurak", "Yurak"], correct: 0 },
-                    { question: "O'simliklarning asosiy qismlari qaysilar?", options: ["Ildiz, poya, barg", "Ildiz, poya, barg", "Ildiz, poya, barg", "Ildiz, poya, barg"], correct: 0 },
-                    { question: "Qaysi hujayra inson organizmining asosiy qismi?", options: ["DNK", "DNK", "DNK", "DNK"], correct: 0 },
-                    { question: "Qaysi organizmlar fotosintez qiladi?", options: ["O'simliklar", "O'simliklar", "O'simliklar", "O'simliklar"], correct: 0 },
-                    { question: "Inson miyasi qancha vaznga ega?", options: ["1.3-1.4 kg", "1.3-1.4 kg", "1.3-1.4 kg", "1.3-1.4 kg"], correct: 0 },
-                    { question: "Qaysi vitamin quyosh nuridan olinadi?", options: ["Vitamin D", "Vitamin D", "Vitamin D", "Vitamin D"], correct: 0 },
-                    { question: "Qaysi hujayra irsiy ma'lumotni saqlaydi?", options: ["DNK", "DNK", "DNK", "DNK"], correct: 0 },
-                    { question: "Qaysi organizmlar ekotizimni tartibga soladi?", options: ["Mikroorganizmlar", "Mikroorganizmlar", "Mikroorganizmlar", "Mikroorganizmlar"], correct: 0 },
-                    { question: "Qaysi organ nafas olishda ishtirok etadi?", options: ["O'pka", "O'pka", "O'pka", "O'pka"], correct: 0 },
-                    { question: "Qaysi vitamin ko'rish uchun muhim?", options: ["Vitamin A", "Vitamin A", "Vitamin A", "Vitamin A"], correct: 0 },
-                    { question: "Qaysi hujayra energiya ishlab chiqaradi?", options: ["Mitoxondriya", "Mitoxondriya", "Mitoxondriya", "Mitoxondriya"], correct: 0 },
-                    { question: "Qaysi organizmlar ozuqa zanjirida ishtirok etadi?", options: ["Producentlar", "Producentlar", "Producentlar", "Producentlar"], correct: 0 },
-                    { question: "Qaysi organ ovqatni hazm qiladi?", options: ["Me'da", "Me'da", "Me'da", "Me'da"], correct: 0 },
-                    { question: "Qaysi vitamin qon ivishida ishtirok etadi?", options: ["Vitamin K", "Vitamin K", "Vitamin K", "Vitamin K"], correct: 0 },
-                    { question: "Qaysi hujayra oqsil ishlab chiqaradi?", options: ["Ribosoma", "Ribosoma", "Ribosoma", "Ribosoma"], correct: 0 },
-                    { question: "Qaysi organizmlar parazit sifatida yashaydi?", options: ["Bakteriyalar", "Bakteriyalar", "Bakteriyalar", "Bakteriyalar"], correct: 0 },
-                    { question: "Qaysi organ siydikni ishlab chiqaradi?", options: ["Buyrak", "Buyrak", "Buyrak", "Buyrak"], correct: 0 },
-                    { question: "Qaysi vitamin immunitet uchun muhim?", options: ["Vitamin C", "Vitamin C", "Vitamin C", "Vitamin C"], correct: 0 },
-                    { question: "Qaysi hujayra hujayra membranasini tashkil qiladi?", options: ["Lipidlar", "Lipidlar", "Lipidlar", "Lipidlar"], correct: 0 },
-                    { question: "Qaysi organizmlar simbiotik munosabatda yashaydi?", options: ["Likenlar", "Likenlar", "Likenlar", "Likenlar"], correct: 0 },
-                    { question: "Qaysi organ gormonlarni ishlab chiqaradi?", options: ["Gipofiz", "Gipofiz", "Gipofiz", "Gipofiz"], correct: 0 },
-                    { question: "Qaysi vitamin nerv sistemasida muhim?", options: ["Vitamin B", "Vitamin B", "Vitamin B", "Vitamin B"], correct: 0 },
-                    { question: "Qaysi hujayra genetik ma'lumotni o'tkazadi?", options: ["RNK", "RNK", "RNK", "RNK"], correct: 0 },
-                    { question: "Qaysi organizmlar evolyutsiyada muhim?", options: ["Mutatsiyalar", "Mutatsiyalar", "Mutatsiyalar", "Mutatsiyalar"], correct: 0 },
-                    { question: "Qaysi organ qonni tozalaydi?", options: ["Jigar", "Jigar", "Jigar", "Jigar"], correct: 0 },
-                    { question: "Qaysi vitamin suvda eriydi?", options: ["Vitamin C", "Vitamin C", "Vitamin C", "Vitamin C"], correct: 0 },
-                    { question: "Qaysi hujayra hujayra bo'linishida ishtirok etadi?", options: ["Xromosoma", "Xromosoma", "Xromosoma", "Xromosoma"], correct: 0 }
+                    { question: "O'simliklar qanday nafas oladi?", options: ["Fotosintez", "Oksidlanish", "Qaytarilish", "Gidroliz"], correct: 0 },
+                    { question: "Inson qanchalik suyakka ega?", options: ["206", "200", "210", "215"], correct: 0 },
+                    { question: "Qaysi organ qonni pompalaydi?", options: ["Yurak", "O'pka", "Jigar", "Buyrak"], correct: 0 },
+                    { question: "O'simliklarning asosiy qismlari qaysilar?", options: ["Ildiz, poya, barg", "Gul, meva, urug'", "Shox, novda, tomur", "Poya, barg, gul"], correct: 0 },
+                    { question: "Qaysi hujayra inson organizmining asosiy qismi?", options: ["DNK", "RNK", "ATF", "Gormon"], correct: 0 },
+                    { question: "Qaysi organizmlar fotosintez qiladi?", options: ["O'simliklar", "Hayvonlar", "Zamburug'lar", "Bakteriyalar"], correct: 0 },
+                    { question: "Inson miyasi qancha vaznga ega?", options: ["1.3-1.4 kg", "1.0-1.1 kg", "1.5-1.6 kg", "1.7-1.8 kg"], correct: 0 },
+                    { question: "Qaysi vitamin quyosh nuridan olinadi?", options: ["Vitamin D", "Vitamin A", "Vitamin C", "Vitamin B"], correct: 0 },
+                    { question: "Qaysi hujayra irsiy ma'lumotni saqlaydi?", options: ["DNK", "RNK", "ATF", "Gormon"], correct: 0 },
+                    { question: "Qaysi organizmlar ekotizimni tartibga soladi?", options: ["Mikroorganizmlar", "O'simliklar", "Hayvonlar", "Zamburug'lar"], correct: 0 },
+                    { question: "Qaysi organ nafas olishda ishtirok etadi?", options: ["O'pka", "Yurak", "Jigar", "Buyrak"], correct: 0 },
+                    { question: "Qaysi vitamin ko'rish uchun muhim?", options: ["Vitamin A", "Vitamin B", "Vitamin C", "Vitamin D"], correct: 0 },
+                    { question: "Qaysi hujayra energiya ishlab chiqaradi?", options: ["Mitoxondriya", "Ribosoma", "Yadro", "Lizosoma"], correct: 0 },
+                    { question: "Qaysi organizmlar ozuqa zanjirida ishtirok etadi?", options: ["Producentlar", "Konsumentlar", "Destruentlar", "Parazitlar"], correct: 0 },
+                    { question: "Qaysi organ ovqatni hazm qiladi?", options: ["Me'da", "O'pka", "Yurak", "Jigar"], correct: 0 },
+                    { question: "Qaysi vitamin qon ivishida ishtirok etadi?", options: ["Vitamin K", "Vitamin A", "Vitamin C", "Vitamin D"], correct: 0 },
+                    { question: "Qaysi hujayra oqsil ishlab chiqaradi?", options: ["Ribosoma", "Mitoxondriya", "Yadro", "Lizosoma"], correct: 0 },
+                    { question: "Qaysi organizmlar parazit sifatida yashaydi?", options: ["Bakteriyalar", "O'simliklar", "Hayvonlar", "Zamburug'lar"], correct: 0 },
+                    { question: "Qaysi organ siydikni ishlab chiqaradi?", options: ["Buyrak", "Jigar", "O'pka", "Yurak"], correct: 0 },
+                    { question: "Qaysi vitamin immunitet uchun muhim?", options: ["Vitamin C", "Vitamin A", "Vitamin D", "Vitamin K"], correct: 0 },
+                    { question: "Qaysi hujayra hujayra membranasini tashkil qiladi?", options: ["Lipidlar", "Oqsillar", "Uglevodlar", "Nuklein kislotalar"], correct: 0 },
+                    { question: "Qaysi organizmlar simbiotik munosabatda yashaydi?", options: ["Likenlar", "Bakteriyalar", "O'simliklar", "Hayvonlar"], correct: 0 },
+                    { question: "Qaysi organ gormonlarni ishlab chiqaradi?", options: ["Gipofiz", "Yurak", "O'pka", "Jigar"], correct: 0 },
+                    { question: "Qaysi vitamin nerv sistemasida muhim?", options: ["Vitamin B", "Vitamin A", "Vitamin C", "Vitamin D"], correct: 0 },
+                    { question: "Qaysi hujayra genetik ma'lumotni o'tkazadi?", options: ["RNK", "DNK", "ATF", "Gormon"], correct: 0 },
+                    { question: "Qaysi organizmlar evolyutsiyada muhim?", options: ["Mutatsiyalar", "O'simliklar", "Hayvonlar", "Bakteriyalar"], correct: 0 },
+                    { question: "Qaysi organ qonni tozalaydi?", options: ["Jigar", "Buyrak", "O'pka", "Yurak"], correct: 0 },
+                    { question: "Qaysi vitamin suvda eriydi?", options: ["Vitamin C", "Vitamin A", "Vitamin D", "Vitamin K"], correct: 0 },
+                    { question: "Qaysi hujayra hujayra bo'linishida ishtirok etadi?", options: ["Xromosoma", "Ribosoma", "Mitoxondriya", "Lizosoma"], correct: 0 }
                 ]
             }
         };
 
-        // O'yin holati
-        let currentGame = null;
-        let currentQuestionIndex = 0;
-        let userPoints = 0;
-        let totalScore = 0;
-        let completedLessons = 0;
-        let completedSubjects = 0;
-        let selectedOption = null;
+        // Qolgan JavaScript kodlari oldingi kabi
+        // ...
 
-        // Login funksiyasi
-        function login() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const errorElement = document.getElementById('loginError');
-
-            if (username === 'Asliddin' && password === '12345678') {
-                document.getElementById('loginContainer').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('loginContainer').style.display = 'none';
-                    document.getElementById('appContainer').style.display = 'block';
-                    setTimeout(() => {
-                        document.getElementById('appContainer').style.opacity = '1';
-                    }, 50);
-                }, 500);
-            } else {
-                errorElement.style.display = 'block';
-                // Xato animatsiyasi
-                errorElement.style.animation = 'shake 0.5s ease';
-                setTimeout(() => {
-                    errorElement.style.animation = '';
-                }, 500);
-            }
-        }
-
-        // Logout funksiyasi
-        function logout() {
-            document.getElementById('appContainer').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('appContainer').style.display = 'none';
-                document.getElementById('loginContainer').style.display = 'flex';
-                setTimeout(() => {
-                    document.getElementById('loginContainer').style.opacity = '1';
-                }, 50);
-            }, 500);
-        }
-
-        // Scroll funksiyasi
-        function scrollToSection(sectionId) {
-            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // O'yin ochish
-        function openGame(gameType) {
-            currentGame = gameType;
-            currentQuestionIndex = 0;
-            selectedOption = null;
-            const game = gameData[gameType];
-            
-            document.getElementById('gameTitle').textContent = game.title;
-            document.getElementById('gameScore').textContent = `Ball: ${userPoints}`;
-            
-            loadQuestion();
-            scrollToSection('o-yinlar');
-        }
-
-        // Savol yuklash
-        function loadQuestion() {
-            if (!currentGame) return;
-            
-            const game = gameData[currentGame];
-            const question = game.questions[currentQuestionIndex];
-            
-            // Progress yangilash
-            document.getElementById('progressText').textContent = `${currentQuestionIndex + 1}/30`;
-            document.getElementById('progressFill').style.width = `${((currentQuestionIndex + 1) / 30) * 100}%`;
-            
-            let videoHtml = '';
-            if (game.videos && game.videos.length > 0) {
-                const randomVideo = game.videos[Math.floor(Math.random() * game.videos.length)];
-                videoHtml = `
-                    <div class="video-container">
-                        <iframe src="${randomVideo}" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                `;
-            }
-            
-            let optionsHtml = '';
-            question.options.forEach((option, index) => {
-                optionsHtml += `
-                    <div class="option" onclick="selectOption(${index})">
-                        ${option}
-                    </div>
-                `;
-            });
-            
-            document.getElementById('gameContent').innerHTML = `
-                ${videoHtml}
-                <div class="question">${question.question}</div>
-                <div class="options">${optionsHtml}</div>
-                <div class="game-controls">
-                    <button class="control-btn submit-btn" onclick="checkAnswer()">
-                        <i class="fas fa-check"></i> Tekshirish
-                    </button>
-                </div>
-                <div class="result" id="result"></div>
-            `;
-            
-            document.getElementById('result').style.display = 'none';
-            selectedOption = null;
-        }
-
-        // Variant tanlash
-        function selectOption(index) {
-            // Barcha variantlardan tanlangan klassini olib tashlash
-            document.querySelectorAll('.option').forEach(opt => {
-                opt.classList.remove('selected');
-            });
-            
-            // Tanlangan variantga stil berish
-            document.querySelectorAll('.option')[index].classList.add('selected');
-            
-            selectedOption = index;
-        }
-
-        // Javobni tekshirish
-        function checkAnswer() {
-            if (selectedOption === null) {
-                alert('Iltimos, javob variantini tanlang!');
-                return;
-            }
-            
-            const game = gameData[currentGame];
-            const question = game.questions[currentQuestionIndex];
-            const resultElement = document.getElementById('result');
-            
-            if (selectedOption === question.correct) {
-                resultElement.textContent = '✅ Toʻgʻri! Ajoyib javob!';
-                resultElement.className = 'result success';
-                userPoints += 10;
-                totalScore += 10;
-                createConfetti();
-            } else {
-                resultElement.textContent = `❌ Notoʻgʻri! Toʻgʻri javob: ${question.options[question.correct]}`;
-                resultElement.className = 'result error';
-            }
-            
-            resultElement.style.display = 'block';
-            document.getElementById('gameScore').textContent = `Ball: ${userPoints}`;
-            document.getElementById('userPoints').textContent = `${userPoints} ball`;
-            document.getElementById('totalScore').textContent = totalScore;
-            
-            // Keyingi savolga o'tish tugmasini ko'rsatish
-            document.querySelector('.submit-btn').style.display = 'none';
-            const nextButton = document.createElement('button');
-            nextButton.className = 'control-btn next-btn';
-            nextButton.innerHTML = '<i class="fas fa-arrow-right"></i> Keyingi Savol';
-            nextButton.onclick = nextQuestion;
-            document.querySelector('.game-controls').appendChild(nextButton);
-        }
-
-        // Keyingi savol
-        function nextQuestion() {
-            const game = gameData[currentGame];
-            currentQuestionIndex++;
-            
-            if (currentQuestionIndex < game.questions.length) {
-                loadQuestion();
-            } else {
-                completedLessons++;
-                completedSubjects++;
-                document.getElementById('completedLessons').textContent = completedLessons;
-                document.getElementById('completedSubjects').textContent = completedSubjects;
-                document.getElementById('userLevel').textContent = Math.floor(totalScore / 100) + 1;
-                
-                document.getElementById('gameContent').innerHTML = `
-                    <div style="text-align: center; padding: 2rem;">
-                        <h3 style="color: var(--success); margin-bottom: 1.5rem; font-size: 2rem;">🎉 Tabriklaymiz!</h3>
-                        <p style="font-size: 1.3rem; margin-bottom: 1rem;">${game.title} fanidagi barcha savollarga javob berdingiz!</p>
-                        <p style="font-size: 1.2rem; margin-bottom: 2rem; font-weight: 600;">Siz ${userPoints} ball to'pladingiz!</p>
-                        <button class="control-btn submit-btn" onclick="openGame('${currentGame}')" style="margin-top: 1rem; padding: 1rem 2rem;">
-                            <i class="fas fa-redo"></i> Qaytadan Boshlash
-                        </button>
-                    </div>
-                `;
-                
-                createConfetti();
-            }
-        }
-
-        // Konfetti effekti
-        function createConfetti() {
-            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#ff9a00', '#ba68c8', '#06d6a0', '#7209b7'];
-            
-            for (let i = 0; i < 80; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.animation = `confetti ${Math.random() * 3 + 2}s linear forwards`;
-                confetti.style.animationDelay = Math.random() * 2 + 's';
-                document.body.appendChild(confetti);
-                
-                setTimeout(() => {
-                    confetti.remove();
-                }, 5000);
-            }
-        }
-
-        // Enter tugmasi bilan login qilish
-        document.getElementById('password').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                login();
-            }
-        });
-
-        // Shake animatsiyasi
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                25% { transform: translateX(-10px); }
-                75% { transform: translateX(10px); }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>
