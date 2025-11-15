@@ -3,114 +3,683 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kichkintoylar O'quv Markazi</title>
+  <title>Kichkintoylar - Rangli O'quv Olami</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* CSS (To'liq – interfeys uchun) */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    :root { --primary-color: #4caf50; --secondary-color: #2196f3; --accent-color: #ff9800; --text-color: #333; --background-color: #f5f5f5; --card-color: #ffffff; --success-color: #4caf50; --error-color: #f44336; --warning-color: #ff9800; }
-    body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--text-color); background-color: var(--background-color); scroll-behavior: smooth; min-height: 200vh; overflow-x: hidden; overflow-y: auto; zoom: 1; }
-    .navbar { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
-    .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
-    .logo { font-size: 1.8rem; font-weight: bold; }
-    .nav-links { display: flex; gap: 2rem; }
-    .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; }
-    .nav-links a:hover { color: var(--accent-color); }
-    .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 6rem 2rem 4rem; text-align: center; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; } /* Tuzatish: Min-height qo'shildi */
-    .hero-content h2 { font-size: 3rem; margin-bottom: 1rem; animation: fadeInUp 1s ease; }
-    .hero-content p { font-size: 1.2rem; margin-bottom: 2rem; animation: fadeInUp 1s ease 0.2s both; }
-    .cta-button { background: var(--accent-color); color: white; border: none; padding: 1rem 2rem; font-size: 1.1rem; border-radius: 50px; cursor: pointer; transition: all 0.3s; animation: fadeInUp 1s ease 0.4s both; }
-    .cta-button:hover { background: #e68900; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); }
-    .hero-features { display: flex; justify-content: center; gap: 3rem; margin-top: 4rem; animation: fadeInUp 1s ease 0.6s both; flex-wrap: wrap; }
-    .feature { text-align: center; background: rgba(255, 255, 255, 0.1); padding: 2rem; border-radius: 15px; backdrop-filter: blur(10px); min-width: 200px; }
-    .feature span { font-size: 3rem; display: block; margin-bottom: 1rem; }
-    .subject-section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; min-height: 100vh; } /* Tuzatish: Har bo'lim uchun min-height */
-    .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: var(--primary-color); }
-    .games-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-top: 2rem; }
-    .game-card { background: var(--card-color); border-radius: 15px; padding: 2rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); border: 2px solid transparent; transition: all 0.3s; }
-    .game-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); border-color: var(--primary-color); }
-    .game-card h3 { color: var(--primary-color); margin-bottom: 1.5rem; text-align: center; font-size: 1.4rem; }
-    .game-area { display: flex; flex-direction: column; gap: 1.5rem; }
-    .numbers-comparison { display: flex; justify-content: center; align-items: center; gap: 1rem; font-size: 2rem; }
-    .number-box { background: var(--primary-color); color: white; padding: 1rem 2rem; border-radius: 10px; font-weight: bold; }
-    .comparison-symbol { font-size: 2.5rem; font-weight: bold; }
-    .comparison-controls { display: flex; justify-content: center; gap: 1rem; }
-    .comp-btn { background: var(--secondary-color); color: white; border: none; padding: 1rem 1.5rem; font-size: 1.5rem; border-radius: 10px; cursor: pointer; transition: all 0.3s; }
-    .comp-btn:hover { background: #1976d2; transform: scale(1.1); }
-    .math-problem { display: flex; justify-content: center; align-items: center; gap: 0.5rem; font-size: 1.8rem; font-weight: bold; }
-    .answer-input { width: 100%; padding: 1rem; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem; text-align: center; }
-    .answer-input:focus { border-color: var(--primary-color); outline: none; }
-    .check-btn { background: var(--primary-color); color: white; border: none; padding: 1rem 2rem; border-radius: 10px; cursor: pointer; font-size: 1rem; transition: all 0.3s; margin: 1rem 0; }
-    .check-btn:hover { background: #45a049; transform: translateY(-2px); }
-    .result-message { text-align: center; font-weight: bold; padding: 1rem; border-radius: 10px; margin: 1rem 0; }
-    .score-display { text-align: center; font-weight: bold; color: var(--primary-color); font-size: 1.1rem; }
-    .success { background-color: #d4edda; color: #155724; }
-    .error { background-color: #f8d7da; color: #721c24; }
-    .warning { background-color: #fff3cd; color: #856404; }
-    .shapes-container { display: flex; justify-content: center; gap: 2rem; margin: 1rem 0; }
-    .shape-option { text-align: center; cursor: pointer; transition: all 0.3s; }
-    .shape-option:hover { transform: scale(1.1); }
-    .shape-circle, .shape-square, .shape-triangle { font-size: 4rem; margin-bottom: 0.5rem; }
-    .shape-circle { color: #ff6b6b; }
-    .shape-square { color: #4ecdc4; }
-    .shape-triangle { color: #45b7d1; }
-    .letter-display { text-align: center; font-size: 4rem; font-weight: bold; color: var(--primary-color); margin: 1rem 0; }
-    .available-letters, .word-bank { display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; }
-    .letter-btn, .word-btn { background: var(--secondary-color); color: white; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; transition: all 0.3s; }
-    .letter-btn:hover, .word-btn:hover { background: #1976d2; transform: scale(1.1); }
-    .word-area, .sentence-area { min-height: 60px; border: 2px dashed #ddd; border-radius: 10px; padding: 1rem; text-align: center; font-size: 1.2rem; margin: 1rem 0; }
-    .word-controls, .sentence-controls { display: flex; gap: 1rem; justify-content: center; }
-    .clear-btn { background: var(--error-color); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; }
-    .reading-content { display: flex; flex-direction: column; gap: 3rem; }
-    .video-section { background: linear-gradient(135deg, #a8edea, #fed6e3); padding: 2rem; border-radius: 15px; }
-    .video-container { text-align: center; margin: 1rem 0; }
-    .video-container iframe { border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); max-width: 100%; }
-    .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
-    .progress-section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; min-height: 100vh; } /* Tuzatish */
-    .progress-container { display: flex; flex-direction: column; gap: 3rem; }
-    .overall-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
-    .stat-card { background: var(--card-color); padding: 2rem; border-radius: 15px; text-align: center; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); }
-    .stat-number { font-size: 3rem; font-weight: bold; color: var(--primary-color); margin-top: 1rem; }
-    .progress-bars { display: flex; flex-direction: column; gap: 1.5rem; }
-    .progress-item { display: flex; align-items: center; gap: 1rem; }
-    .progress-bar { flex: 1; height: 20px; background: #e0e0e0; border-radius: 10px; overflow: hidden; }
-    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); transition: width 0.5s ease; }
-    .achievements-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
-    .achievement-card { background: var(--card-color); padding: 2rem; border-radius: 15px; text-align: center; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); opacity: 0.5; transition: all 0.3s; }
-    .achievement-card:not(.locked) { opacity: 1; border: 3px solid var(--accent-color); }
-    .achievement-icon { font-size: 3rem; margin-bottom: 1rem; }
-    .teacher-panel { max-width: 800px; margin: 0 auto; background: var(--card-color); padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); }
-    .teacher-panel form { display: flex; flex-direction: column; gap: 1rem; }
-    .teacher-panel label { font-weight: bold; color: var(--primary-color); }
-    .teacher-panel input, .teacher-panel select, .teacher-panel textarea { padding: 0.8rem; border: 2px solid #ddd; border-radius: 5px; font-size: 1rem; }
-    .teacher-panel textarea { min-height: 100px; resize: vertical; }
-    .added-tasks-list { margin-top: 2rem; padding: 1rem; background: #f9f9f9; border-radius: 10px; }
-    .added-task-item { background: white; padding: 1rem; margin-bottom: 1rem; border-radius: 5px; border-left: 4px solid var(--primary-color); }
-    .footer { background: #333; color: white; text-align: center; padding: 2rem; margin-top: 4rem; }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-    .classes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
-    .class-card { background: linear-gradient(135deg, #ff9a9e, #fecfef); padding: 1.5rem; border-radius: 15px; text-align: center; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; animation: fadeInUp 0.5s ease; min-height: 150px; display: flex; flex-direction: column; justify-content: space-between; }
-    .class-card:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-    .class-details { background: #fff; padding: 2rem; border-radius: 15px; margin-top: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.1); min-height: 200px; }
-    .mini-btn { background: var(--accent-color); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; font-size: 0.9rem; margin-top: 0.5rem; }
-    .mini-btn:hover { background: #e68900; }
-    /* Windows responsivlik (oldingi kabi, lekin min-height qo'shildi) */
-    @media (min-width: 1366px) { .games-grid { grid-template-columns: repeat(3, 1fr); } .classes-grid { grid-template-columns: repeat(4, 1fr); } .hero { padding: 5rem 3rem 3rem; } .subject-section { padding: 5rem 3rem; } }
-    @media (min-width: 1920px) { .games-grid { grid-template-columns: repeat(4, 1fr); } .classes-grid { grid-template-columns: repeat(5, 1fr); } .hero { padding: 6rem 4rem 4rem; } .subject-section { padding: 6rem 4rem; } }
+    /* CSS - Rangli va bolalar uchun qiziqarli dizayn */
+    :root {
+      --primary-color: #4e54c8;
+      --secondary-color: #8f94fb;
+      --accent-color: #ff9a00;
+      --math-color: #ff6b6b;
+      --lang-color: #4ecdc4;
+      --reading-color: #45b7d1;
+      --chemistry-color: #96ceb4;
+      --biology-color: #feca57;
+      --success-color: #2ecc71;
+      --error-color: #e74c3c;
+      --warning-color: #f39c12;
+      --text-color: #2c3e50;
+      --background-color: #f9f9f9;
+      --card-color: #ffffff;
+    }
+    
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+    
+    body { 
+      font-family: 'Comic Neue', 'Segoe UI', cursive; 
+      line-height: 1.6; 
+      color: var(--text-color); 
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      scroll-behavior: smooth; 
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    /* Animatsiyalar */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    
+    @keyframes rainbow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    @keyframes confetti {
+      0% { transform: translateY(0) rotate(0); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+    
+    /* Navbar */
+    .navbar {
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 1rem 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 0 0 20px 20px;
+    }
+    
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+    }
+    
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .logo i {
+      animation: bounce 2s infinite;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+    }
+    
+    .nav-links a:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+    
+    /* Hero section */
+    .hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 8rem 2rem 4rem;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+      background-size: cover;
+    }
+    
+    .hero-content h2 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      animation: fadeInUp 1s ease;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .hero-content p {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      animation: fadeInUp 1s ease 0.2s both;
+    }
+    
+    .cta-button {
+      background: var(--accent-color);
+      color: white;
+      border: none;
+      padding: 1rem 2.5rem;
+      font-size: 1.2rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      animation: fadeInUp 1s ease 0.4s both;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(255, 154, 0, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .cta-button:hover {
+      background: #ff8c00;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 154, 0, 0.6);
+    }
+    
+    .hero-features {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 4rem;
+      animation: fadeInUp 1s ease 0.6s both;
+      flex-wrap: wrap;
+    }
+    
+    .feature {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 2rem;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      min-width: 200px;
+      transition: all 0.3s;
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+    
+    .feature:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.25);
+    }
+    
+    .feature span {
+      font-size: 3.5rem;
+      display: block;
+      margin-bottom: 1rem;
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    /* Umumiy bo'limlar */
+    .subject-section {
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section-title {
+      text-align: center;
+      font-size: 2.8rem;
+      margin-bottom: 3rem;
+      color: var(--primary-color);
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .section-title::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 10%;
+      width: 80%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      border-radius: 2px;
+    }
+    
+    /* O'yinlar gridi */
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .game-card {
+      background: var(--card-color);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border: 3px solid transparent;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .game-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--math-color), var(--lang-color), var(--reading-color));
+    }
+    
+    .game-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .game-card h3 {
+      color: var(--primary-color);
+      margin-bottom: 1.5rem;
+      text-align: center;
+      font-size: 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .game-area {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    /* Matematika o'yinlari */
+    .numbers-comparison {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      font-size: 2rem;
+    }
+    
+    .number-box {
+      background: var(--math-color);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 15px;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .comparison-symbol {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--text-color);
+    }
+    
+    .comparison-controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+    
+    .comp-btn {
+      background: var(--secondary-color);
+      color: white;
+      border: none;
+      padding: 1rem 1.5rem;
+      font-size: 1.5rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .comp-btn:hover {
+      background: var(--primary-color);
+      transform: scale(1.1);
+    }
+    
+    /* Ona tili o'yinlari */
+    .available-letters, .word-bank {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .letter-btn, .word-btn {
+      background: var(--lang-color);
+      color: white;
+      padding: 0.8rem 1.2rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: bold;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .letter-btn:hover, .word-btn:hover {
+      background: #3bb4ac;
+      transform: scale(1.1);
+    }
+    
+    .word-area, .sentence-area {
+      min-height: 60px;
+      border: 2px dashed #ddd;
+      border-radius: 15px;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+      margin: 1rem 0;
+      background: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    
+    .word-controls, .sentence-controls {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+    
+    .clear-btn {
+      background: var(--error-color);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    
+    /* Kimyo va biologiya o'yinlari */
+    .elements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    
+    .element-card {
+      background: var(--chemistry-color);
+      color: white;
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: bold;
+    }
+    
+    .element-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .biology-options {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+    }
+    
+    .biology-option {
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      padding: 1rem;
+      border-radius: 15px;
+      background: #f0f8ff;
+    }
+    
+    .biology-option:hover {
+      transform: scale(1.05);
+      background: #e0f0ff;
+    }
+    
+    .biology-icon {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    /* Progress bo'limi */
+    .progress-section {
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      border-radius: 30px;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .progress-container {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+    
+    .overall-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+    
+    .stat-card {
+      background: var(--card-color);
+      padding: 2rem;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s;
+      border-top: 5px solid var(--accent-color);
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    .stat-number {
+      font-size: 3rem;
+      font-weight: bold;
+      color: var(--primary-color);
+      margin-top: 1rem;
+    }
+    
+    .progress-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .progress-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .progress-bar {
+      flex: 1;
+      height: 20px;
+      background: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      transition: width 0.5s ease;
+      border-radius: 10px;
+    }
+    
+    /* Mukofotlar */
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .achievement-card {
+      background: var(--card-color);
+      padding: 2rem;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .achievement-card:not(.locked) {
+      border: 3px solid var(--accent-color);
+      transform: scale(1.02);
+    }
+    
+    .achievement-card.locked {
+      opacity: 0.7;
+      filter: grayscale(0.7);
+    }
+    
+    .achievement-card:not(.locked):hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .achievement-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .achievement-card:not(.locked) .achievement-icon {
+      animation: bounce 2s infinite;
+    }
+    
+    /* Bonuslar bo'limi */
+    .bonus-section {
+      background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+      padding: 4rem 2rem;
+      border-radius: 30px;
+      margin: 3rem auto;
+      max-width: 1200px;
+      text-align: center;
+    }
+    
+    .bonus-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .bonus-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      width: 250px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    
+    .bonus-card:hover {
+      transform: translateY(-10px) rotate(3deg);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+    
+    .bonus-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--accent-color);
+    }
+    
+    /* Konfetti animatsiyasi */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: var(--accent-color);
+      top: 0;
+      opacity: 0;
+      z-index: 9999;
+    }
+    
+    /* Footer */
+    .footer {
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      text-align: center;
+      padding: 3rem 2rem;
+      margin-top: 4rem;
+      border-radius: 30px 30px 0 0;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .social-links a {
+      color: white;
+      font-size: 1.5rem;
+      transition: all 0.3s;
+    }
+    
+    .social-links a:hover {
+      transform: translateY(-5px);
+      color: var(--accent-color);
+    }
+    
+    /* Responsivlik */
+    @media (max-width: 768px) {
+      .nav-links {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      .hero-content h2 {
+        font-size: 2.5rem;
+      }
+      
+      .section-title {
+        font-size: 2.2rem;
+      }
+      
+      .games-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
   <!-- NAVIGATSIYA -->
   <nav class="navbar">
     <div class="nav-container">
-      <h1 class="logo">🎒 Kichkintoylar</h1>
+      <h1 class="logo"><i class="fas fa-graduation-cap"></i> Kichkintoylar</h1>
       <div class="nav-links">
         <a href="#bosh-sahifa">Bosh Sahifa</a>
-        <a href="#sinflar">Sinflar</a>
         <a href="#matematika">Matematika</a>
         <a href="#ona-tili">Ona Tili</a>
-        <a href="#oqish">O'qish</a>
+        <a href="#kimyo">Kimyo</a>
+        <a href="#biologiya">Biologiya</a>
         <a href="#progress">Progress</a>
-        <a href="#oqituvchi">O'qituvchi</a>
+        <a href="#bonuslar">Bonuslar</a>
       </div>
     </div>
   </nav>
@@ -118,54 +687,43 @@
   <!-- BOSH SAHIFA -->
   <section id="bosh-sahifa" class="hero">
     <div class="hero-content">
-      <h2>Boshlang'ich Ta'lim Platformasi</h2>
-      <p>1-11 sinf uchun barcha fanlarni qiziqarli usulda o'rganing! Videolar, o'yinlar va interaktiv darslar.</p>
-      <button class="cta-button" onclick="startLearning()">O'rganishni Boshlash</button>
+      <h2>Rangli O'quv Olamiga Xush Kelibsiz!</h2>
+      <p>1-4 sinf uchun barcha fanlarni qiziqarli o'yinlar, videolar va topshiriqlar orqali o'rganing!</p>
+      <button class="cta-button" onclick="startLearning()">
+        <i class="fas fa-play"></i> O'rganishni Boshlash
+      </button>
     </div>
     <div class="hero-features">
       <div class="feature">
         <span>🔢</span>
         <h3>Matematika</h3>
-        <p>Sonlar, amallar, geometriya</p>
+        <p>Sonlar, masalalar, geometriya</p>
       </div>
       <div class="feature">
         <span>📚</span>
         <h3>Ona Tili</h3>
-        <p>Alifbo, so'z, gap, imlo</p>
+        <p>Alifbo, so'zlar, grammatika</p>
       </div>
       <div class="feature">
-        <span>📖</span>
-        <h3>O'qish</h3>
-        <p>Hikoyalar, she'rlar, tez o'qish + Videolar!</p>
+        <span>🧪</span>
+        <h3>Kimyo</h3>
+        <p>Elementlar, reaksiyalar</p>
+      </div>
+      <div class="feature">
+        <span>🌿</span>
+        <h3>Biologiya</h3>
+        <p>O'simliklar, hayvonlar, inson</p>
       </div>
     </div>
   </section>
 
-  <!-- SINFLAR BO'LIMI (Qisqa misol – to'liq qiling) -->
-  <section id="sinflar" class="subject-section">
-    <h2 class="section-title">📚 Sinflar va Fanlar</h2>
-    <div class="classes-grid">
-      <div class="class-card" onclick="selectClass(1)">
-        <h3>1-sinf</h3>
-        <p>Matematika: Sonlar va oddiy amallar<br>Ona tili: Alifbo<br>O'qish: Oddiy hikoyalar</p>
-      </div>
-      <div class="class-card" onclick="selectClass(2)">
-        <h3>2-sinf</h3>
-        <p>Matematika: Qo'shish/ayirish<br>Ona tili: So'zlar<br>O'qish: She'rlar</p>
-      </div>
-      <!-- Boshqa sinflar qo'shing -->
-    </div>
-    <div id="classDetails" class="class-details" style="display:none;">
-      <!-- Dinamik yuklanadi -->
-    </div>
-  </section>
-
-  <!-- MATEMATIKA BO'LIMI (Misol – 1 ta o'yin) -->
+  <!-- MATEMATIKA BO'LIMI -->
   <section id="matematika" class="subject-section">
-    <h2 class="section-title">🔢 Matematika</h2>
+    <h2 class="section-title"><i class="fas fa-calculator"></i> Matematika</h2>
     <div class="games-grid">
+      <!-- Sonlarni solishtirish o'yini -->
       <div class="game-card">
-        <h3>Sonlarni Solishtirish</h3>
+        <h3><i class="fas fa-balance-scale"></i> Sonlarni Solishtirish</h3>
         <div class="game-area">
           <div class="numbers-comparison">
             <span class="number-box" id="compNum1">5</span>
@@ -181,16 +739,35 @@
           <div class="score-display">Ball: <span id="mathScore1">0</span></div>
         </div>
       </div>
-      <!-- Boshqa o'yinlar qo'shing -->
+      
+      <!-- Arifmetik masala o'yini -->
+      <div class="game-card">
+        <h3><i class="fas fa-plus-circle"></i> Arifmetik Masala</h3>
+        <div class="game-area">
+          <div class="math-problem">
+            <span id="mathNum1">7</span>
+            <span id="mathOperator">+</span>
+            <span id="mathNum2">5</span>
+            <span>=</span>
+            <input type="number" class="answer-input" id="mathAnswer" placeholder="Javob">
+          </div>
+          <button class="check-btn" onclick="checkMathAnswer()">
+            <i class="fas fa-check"></i> Tekshirish
+          </button>
+          <div id="mathResult" class="result-message"></div>
+          <div class="score-display">Ball: <span id="mathScore2">0</span></div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ONA TILI BO'LIMI (Misol) -->
+  <!-- ONA TILI BO'LIMI -->
   <section id="ona-tili" class="subject-section">
-    <h2 class="section-title">📚 Ona Tili</h2>
+    <h2 class="section-title"><i class="fas fa-book-open"></i> Ona Tili</h2>
     <div class="games-grid">
+      <!-- So'z yasash o'yini -->
       <div class="game-card">
-        <h3>So'z Yasash</h3>
+        <h3><i class="fas fa-puzzle-piece"></i> So'z Yasash</h3>
         <div class="game-area">
           <div class="word-builder">
             <div class="available-letters">
@@ -204,30 +781,107 @@
               <span id="builtWord"></span>
             </div>
             <div class="word-controls">
-              <button class="clear-btn" onclick="clearWord()">Tozalash</button>
-              <button class="check-btn" onclick="checkWord()">Tekshirish</button>
+              <button class="clear-btn" onclick="clearWord()">
+                <i class="fas fa-trash"></i> Tozalash
+              </button>
+              <button class="check-btn" onclick="checkWord()">
+                <i class="fas fa-check"></i> Tekshirish
+              </button>
             </div>
           </div>
           <div id="wordResult" class="result-message"></div>
+          <div class="score-display">Ball: <span id="langScore1">0</span></div>
+        </div>
+      </div>
+      
+      <!-- Gap tuzish o'yini -->
+      <div class="game-card">
+        <h3><i class="fas fa-comment-dots"></i> Gap Tuzish</h3>
+        <div class="game-area">
+          <div class="word-bank">
+            <span class="word-btn" onclick="addToSentence('Men')">Men</span>
+            <span class="word-btn" onclick="addToSentence('maktabga')">maktabga</span>
+            <span class="word-btn" onclick="addToSentence('boraman')">boraman</span>
+            <span class="word-btn" onclick="addToSentence('do\'stim')">do'stim</span>
+            <span class="word-btn" onclick="addToSentence('bilan')">bilan</span>
+          </div>
+          <div class="sentence-area">
+            <span id="builtSentence"></span>
+          </div>
+          <div class="sentence-controls">
+            <button class="clear-btn" onclick="clearSentence()">
+              <i class="fas fa-trash"></i> Tozalash
+            </button>
+            <button class="check-btn" onclick="checkSentence()">
+              <i class="fas fa-check"></i> Tekshirish
+            </button>
+          </div>
+          <div id="sentenceResult" class="result-message"></div>
           <div class="score-display">Ball: <span id="langScore2">0</span></div>
         </div>
       </div>
-      <!-- Boshqa o'yinlar qo'shing -->
     </div>
   </section>
 
-  <!-- O'QISH BO'LIMI (Video bilan) -->
-  <section id="oqish" class="subject-section">
-    <h2 class="section-title">📖 O'qish</h2>
-    <div class="reading-content">
-      <div class="video-section">
-        <h3>🎥 Qiziqarli Videolar</h3>
-        <div class="video-grid">
-          <div class="video-container">
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/BAWT4crztIY" title="1-sinf Matematika" frameborder="0" allowfullscreen></iframe>
-            <p>1-sinf: Sonlar animatsiyasi</p>
+  <!-- KIMYO BO'LIMI -->
+  <section id="kimyo" class="subject-section">
+    <h2 class="section-title"><i class="fas fa-flask"></i> Kimyo</h2>
+    <div class="games-grid">
+      <!-- Kimyoviy elementlar -->
+      <div class="game-card">
+        <h3><i class="fas fa-atom"></i> Elementlarni Topish</h3>
+        <div class="game-area">
+          <p id="elementQuestion">Suv qaysi elementlardan tashkil topgan?</p>
+          <div class="elements-grid">
+            <div class="element-card" onclick="selectElement('H')">H</div>
+            <div class="element-card" onclick="selectElement('O')">O</div>
+            <div class="element-card" onclick="selectElement('C')">C</div>
+            <div class="element-card" onclick="selectElement('N')">N</div>
+            <div class="element-card" onclick="selectElement('Fe')">Fe</div>
+            <div class="element-card" onclick="selectElement('Na')">Na</div>
           </div>
-          <!-- Boshqa videolar qo'shing -->
+          <div class="selected-elements">
+            Tanlangan elementlar: <span id="selectedElements"></span>
+          </div>
+          <button class="check-btn" onclick="checkElements()">
+            <i class="fas fa-check"></i> Tekshirish
+          </button>
+          <div id="elementResult" class="result-message"></div>
+          <div class="score-display">Ball: <span id="chemScore1">0</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BIOLOGIYA BO'LIMI -->
+  <section id="biologiya" class="subject-section">
+    <h2 class="section-title"><i class="fas fa-leaf"></i> Biologiya</h2>
+    <div class="games-grid">
+      <!-- Hayvonlar va o'simliklar -->
+      <div class="game-card">
+        <h3><i class="fas fa-paw"></i> Hayvonlar va O'simliklar</h3>
+        <div class="game-area">
+          <p id="biologyQuestion">Qaysi biri sutemizuvchi hayvon?</p>
+          <div class="biology-options">
+            <div class="biology-option" onclick="checkBiologyAnswer('it')">
+              <div class="biology-icon">🐕</div>
+              <div>It</div>
+            </div>
+            <div class="biology-option" onclick="checkBiologyAnswer('tovuq')">
+              <div class="biology-icon">🐔</div>
+              <div>Tovuq</div>
+            </div>
+            <div class="biology-option" onclick="checkBiologyAnswer('baliq')">
+              <div class="biology-icon">🐟</div>
+              <div>Baliq</div>
+            </div>
+            <div class="biology-option" onclick="checkBiologyAnswer('qurbaqa')">
+              <div class="biology-icon">🐸</div>
+              <div>Qurbaqa</div>
+            </div>
+          </div>
+          <div id="biologyResult" class="result-message"></div>
+          <div class="score-display">Ball: <span id="bioScore1">0</span></div>
         </div>
       </div>
     </div>
@@ -235,7 +889,7 @@
 
   <!-- PROGRESS BO'LIMI -->
   <section id="progress" class="progress-section">
-    <h2 class="section-title">🏆 Sening Natijalaring</h2>
+    <h2 class="section-title"><i class="fas fa-chart-line"></i> Sening Natijalaring</h2>
     <div class="progress-container">
       <div class="overall-stats">
         <div class="stat-card">
@@ -250,7 +904,12 @@
           <h3>Olingan Mukofotlar</h3>
           <div class="stat-number" id="achievementsCount">0</div>
         </div>
+        <div class="stat-card">
+          <h3>Darajangiz</h3>
+          <div class="stat-number" id="userLevel">1</div>
+        </div>
       </div>
+      
       <div class="subject-progress">
         <h3>Fanlar bo'yicha progress</h3>
         <div class="progress-bars">
@@ -261,9 +920,30 @@
             </div>
             <span id="mathPercent">0%</span>
           </div>
-          <!-- Boshqa progress bar'lar -->
+          <div class="progress-item">
+            <span>Ona Tili</span>
+            <div class="progress-bar">
+              <div class="progress-fill" id="langProgress" style="width: 0%"></div>
+            </div>
+            <span id="langPercent">0%</span>
+          </div>
+          <div class="progress-item">
+            <span>Kimyo</span>
+            <div class="progress-bar">
+              <div class="progress-fill" id="chemProgress" style="width: 0%"></div>
+            </div>
+            <span id="chemPercent">0%</span>
+          </div>
+          <div class="progress-item">
+            <span>Biologiya</span>
+            <div class="progress-bar">
+              <div class="progress-fill" id="bioProgress" style="width: 0%"></div>
+            </div>
+            <span id="bioPercent">0%</span>
+          </div>
         </div>
       </div>
+      
       <div class="achievements-section">
         <h3>Mukofotlar</h3>
         <div class="achievements-grid">
@@ -272,61 +952,99 @@
             <h4>Matematika Ustasi</h4>
             <p>100 ball to'plang</p>
           </div>
-          <!-- Boshqa mukofotlar -->
+          <div class="achievement-card locked" id="wordMaster">
+            <div class="achievement-icon">📚</div>
+            <h4>So'z Ustasi</h4>
+            <p>50 ta so'z yasang</p>
+          </div>
+          <div class="achievement-card locked" id="scienceStar">
+            <div class="achievement-icon">🔬</div>
+            <h4>Fan Yulduzi</h4>
+            <p>Kimyo va biologiyada 150 ball</p>
+          </div>
+          <div class="achievement-card locked" id="speedDemon">
+            <div class="achievement-icon">⚡</div>
+            <h4>Tezkor O'quvchi</h4>
+            <p>10 ta darsni 5 daqiqada tugating</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- O'QITUVCHI BO'LIMI -->
-  <section id="oqituvchi" class="subject-section">
-    <h2 class="section-title">👩‍🏫 O'qituvchi Paneli</h2>
-    <div class="teacher-panel">
-      <h3>Yangi Topshiriq Qo'shish</h3>
-      <form id="teacherForm">
-        <label>Fan tanlang:</label>
-        <select id="subjectSelect">
-          <option value="matematika">Matematika</option>
-          <option value="onaTili">Ona Tili</option>
-          <option value="oqish">O'qish</option>
-        </select>
-        <label>Topshiriq Turi:</label>
-        <input type="text" id="taskType" placeholder="Masalan: Yangi son solishtirish">
-        <label>Savol/Matni kiriting:</label>
-        <textarea id="taskContent" placeholder="Savol matni yoki o'yin tavsifi"></textarea>
-        <label>To'g'ri Javob:</label>
-        <input type="text" id="correctAnswer" placeholder="To'g'ri javob">
-        <label>Ball miqdori:</label>
-        <input type="number" id="taskPoints" value="10" min="1">
-        <button type="submit" class="check-btn">Qo'shish va Saqlash</button>
-      </form>
-      <div id="teacherResult" class="result-message"></div>
-      <div id="addedTasks" class="added-tasks-list"></div>
+  <!-- BONUSLAR BO'LIMI -->
+  <section id="bonuslar" class="bonus-section">
+    <h2 class="section-title"><i class="fas fa-gift"></i> Bonuslar va Sovg'alar</h2>
+    <p>Ballaringizni to'plab, ajoyib sovg'alarni qo'lga kiriting!</p>
+    
+    <div class="bonus-container">
+      <div class="bonus-card" onclick="claimBonus('sticker')">
+        <div class="bonus-icon"><i class="fas fa-sticky-note"></i></div>
+        <h3>Stikerlar</h3>
+        <p>50 ball</p>
+        <p>Qiziqarli stikerlar to'plami</p>
+      </div>
+      
+      <div class="bonus-card" onclick="claimBonus('badge')">
+        <div class="bonus-icon"><i class="fas fa-medal"></i></div>
+        <h3>Maxsus Nisha</h3>
+        <p>100 ball</p>
+        <p>"A'lo o'quvchi" nishasi</p>
+      </div>
+      
+      <div class="bonus-card" onclick="claimBonus('certificate')">
+        <div class="bonus-icon"><i class="fas fa-award"></i></div>
+        <h3>Diplom</h3>
+        <p>200 ball</p>
+        <p>Shaxsiy diplom</p>
+      </div>
+      
+      <div class="bonus-card" onclick="claimBonus('game')">
+        <div class="bonus-icon"><i class="fas fa-gamepad"></i></div>
+        <h3>Maxsus O'yin</h3>
+        <p>300 ball</p>
+        <p>Eksklyuziv o'yin ochiladi</p>
+      </div>
+    </div>
+    
+    <div class="bonus-info">
+      <p>Sizda: <strong id="userPoints">0</strong> ball • Keyingi sovg'a: <strong id="nextBonus">50</strong> ball</p>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer class="footer">
-    <p>© 2025 Kichkintoylar O'quv Platformasi - Barcha huquqlar himoyalangan</p>
+    <div class="footer-content">
+      <h2><i class="fas fa-graduation-cap"></i> Kichkintoylar O'quv Platformasi</h2>
+      <p>Bolalar uchun qiziqarli va rangli o'quv sayti</p>
+      
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-telegram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+      
+      <p>© 2025 Kichkintoylar - Barcha huquqlar himoyalangan</p>
+    </div>
   </footer>
 
   <script>
-    // JS (To'liq – interfeys uchun)
+    // JavaScript - O'yinlar, ballar va bonuslar
     let totalScore = 0;
-    let userProgress = { matematika: { score: 0, completed: 0 }, onaTili: { score: 0, completed: 0 }, oqish: { score: 0, completed: 0 } };
-    let addedTasks = { matematika: [], onaTili: [], oqish: [] };
-    let currentClass = 1;
-
-    // Sinf tanlash
-    function selectClass(sinf) {
-      currentClass = sinf;
-      const details = document.getElementById('classDetails');
-      details.innerHTML = `<h3>${sinf}-sinf Fanlari</h3><p>Matematika, Ona tili va O'qish darslari yuklandi!</p>`;
-      details.style.display = 'block';
-      details.scrollIntoView({ behavior: 'smooth' });
-    }
-
+    let userPoints = 0;
+    let userLevel = 1;
+    let userProgress = { 
+      matematika: { score: 0, completed: 0 }, 
+      onaTili: { score: 0, completed: 0 },
+      kimyo: { score: 0, completed: 0 },
+      biologiya: { score: 0, completed: 0 }
+    };
+    
     // Matematika o'yinlari
     let currentComparison = { num1: 5, num2: 3 };
+    let currentMathProblem = { num1: 7, num2: 5, operator: '+' };
+    
     function generateComparison() {
       const num1 = Math.floor(Math.random() * 10) + 1;
       const num2 = Math.floor(Math.random() * 10) + 1;
@@ -334,104 +1052,362 @@
       document.getElementById("compNum2").textContent = num2;
       currentComparison = { num1, num2 };
     }
+    
     function checkComparison(operator) {
       const { num1, num2 } = currentComparison;
       const resultElement = document.getElementById("compResult");
       let correct = false;
+      
       if (operator === ">" && num1 > num2) correct = true;
       else if (operator === "<" && num1 < num2) correct = true;
       else if (operator === "=" && num1 === num2) correct = true;
+      
       if (correct) {
         resultElement.textContent = "✅ To'g'ri! Ajoyib!";
         resultElement.className = "result-message success";
         addScore("matematika", 10, "mathScore1");
+        createConfetti();
       } else {
         resultElement.textContent = "❌ Noto'g'ri, qayta urinib ko'ring!";
         resultElement.className = "result-message error";
       }
+      
       setTimeout(() => {
         generateComparison();
         resultElement.textContent = "";
         resultElement.className = "result-message";
       }, 2000);
     }
-
+    
+    function generateMathProblem() {
+      const num1 = Math.floor(Math.random() * 10) + 1;
+      const num2 = Math.floor(Math.random() * 10) + 1;
+      const operators = ['+', '-', '×'];
+      const operator = operators[Math.floor(Math.random() * operators.length)];
+      
+      document.getElementById("mathNum1").textContent = num1;
+      document.getElementById("mathOperator").textContent = operator;
+      document.getElementById("mathNum2").textContent = num2;
+      document.getElementById("mathAnswer").value = "";
+      
+      currentMathProblem = { num1, num2, operator };
+    }
+    
+    function checkMathAnswer() {
+      const answer = parseInt(document.getElementById("mathAnswer").value);
+      const { num1, num2, operator } = currentMathProblem;
+      let correctAnswer;
+      
+      if (operator === '+') correctAnswer = num1 + num2;
+      else if (operator === '-') correctAnswer = num1 - num2;
+      else if (operator === '×') correctAnswer = num1 * num2;
+      
+      const resultElement = document.getElementById("mathResult");
+      
+      if (answer === correctAnswer) {
+        resultElement.textContent = "✅ To'g'ri! Aqlingiz zo'r!";
+        resultElement.className = "result-message success";
+        addScore("matematika", 15, "mathScore2");
+        createConfetti();
+      } else {
+        resultElement.textContent = `❌ Noto'g'ri! To'g'ri javob: ${correctAnswer}`;
+        resultElement.className = "result-message error";
+      }
+      
+      setTimeout(() => {
+        generateMathProblem();
+        resultElement.textContent = "";
+        resultElement.className = "result-message";
+      }, 3000);
+    }
+    
     // Ona tili o'yinlari
     let currentWord = "";
+    let currentSentence = "";
+    
     function addLetter(letter) {
       currentWord += letter;
       document.getElementById("builtWord").textContent = currentWord;
     }
+    
     function clearWord() {
       currentWord = "";
       document.getElementById("builtWord").textContent = "";
       document.getElementById("wordResult").textContent = "";
     }
+    
     function checkWord() {
-      const validWords = ["ALI", "LOLA", "OLA", "MALI", "OLMA"];
+      const validWords = ["ALI", "LOLA", "OLA", "MALI", "OLMA", "ALO", "LOL"];
       const resultElement = document.getElementById("wordResult");
+      
       if (validWords.includes(currentWord.toUpperCase())) {
         resultElement.textContent = `✅ To'g'ri! "${currentWord}" - mavjud so'z`;
         resultElement.className = "result-message success";
-        addScore("onaTili", 15, "langScore2");
+        addScore("onaTili", 15, "langScore1");
+        createConfetti();
       } else {
         resultElement.textContent = "❌ Bunday so'z mavjud emas";
         resultElement.className = "result-message error";
       }
+      
       setTimeout(clearWord, 3000);
     }
-
+    
+    function addToSentence(word) {
+      currentSentence += word + " ";
+      document.getElementById("builtSentence").textContent = currentSentence;
+    }
+    
+    function clearSentence() {
+      currentSentence = "";
+      document.getElementById("builtSentence").textContent = "";
+      document.getElementById("sentenceResult").textContent = "";
+    }
+    
+    function checkSentence() {
+      const resultElement = document.getElementById("sentenceResult");
+      const sentence = currentSentence.trim();
+      
+      if (sentence.split(" ").length >= 2) {
+        resultElement.textContent = "✅ Ajoyib gap!";
+        resultElement.className = "result-message success";
+        addScore("onaTili", 20, "langScore2");
+        createConfetti();
+      } else {
+        resultElement.textContent = "❌ Gap qisqa, yana so'z qo'shing";
+        resultElement.className = "result-message error";
+      }
+      
+      setTimeout(clearSentence, 3000);
+    }
+    
+    // Kimyo o'yinlari
+    let selectedElements = [];
+    
+    function selectElement(element) {
+      if (!selectedElements.includes(element)) {
+        selectedElements.push(element);
+        document.getElementById("selectedElements").textContent = selectedElements.join(", ");
+      }
+    }
+    
+    function checkElements() {
+      const resultElement = document.getElementById("elementResult");
+      const correctElements = ["H", "O"];
+      
+      // To'g'ri javobni tekshirish
+      const isCorrect = selectedElements.length === 2 && 
+                       selectedElements.includes("H") && 
+                       selectedElements.includes("O");
+      
+      if (isCorrect) {
+        resultElement.textContent = "✅ To'g'ri! Suv H₂O dan tashkil topgan";
+        resultElement.className = "result-message success";
+        addScore("kimyo", 25, "chemScore1");
+        createConfetti();
+      } else {
+        resultElement.textContent = "❌ Noto'g'ri! Suv H₂O dan tashkil topgan";
+        resultElement.className = "result-message error";
+      }
+      
+      setTimeout(() => {
+        selectedElements = [];
+        document.getElementById("selectedElements").textContent = "";
+        resultElement.textContent = "";
+        resultElement.className = "result-message";
+      }, 3000);
+    }
+    
+    // Biologiya o'yinlari
+    function checkBiologyAnswer(answer) {
+      const resultElement = document.getElementById("biologyResult");
+      const correctAnswer = "it";
+      
+      if (answer === correctAnswer) {
+        resultElement.textContent = "✅ To'g'ri! It sutemizuvchi hayvon";
+        resultElement.className = "result-message success";
+        addScore("biologiya", 20, "bioScore1");
+        createConfetti();
+      } else {
+        resultElement.textContent = "❌ Noto'g'ri! It sutemizuvchi hayvon";
+        resultElement.className = "result-message error";
+      }
+      
+      setTimeout(() => {
+        resultElement.textContent = "";
+        resultElement.className = "result-message";
+        // Yangi savol yuklash
+        document.getElementById("biologyQuestion").textContent = "Qaysi biri qush?";
+      }, 3000);
+    }
+    
     // Ball tizimi
     function addScore(subject, points, elementId) {
       userProgress[subject].score += points;
       userProgress[subject].completed++;
       totalScore += points;
+      userPoints += points;
+      
       if (elementId) {
         const element = document.getElementById(elementId);
         if (element) element.textContent = parseInt(element.textContent) + points;
       }
-      document.getElementById("totalScore").textContent = totalScore;
-      document.getElementById("completedLessons").textContent = Object.values(userProgress).reduce((sum, sub) => sum + sub.completed, 0);
-      // Progress bar'lar yangilash
-      const progress = (userProgress[subject].score / 200) * 100;
-      const bar = document.getElementById(subject === "matematika" ? "mathProgress" : "langProgress");
-      if (bar) bar.style.width = `${Math.min(progress, 100)}%`;
+      
+      // Progress yangilash
+      updateProgress();
+      
+      // Mukofotlarni tekshirish
+      checkAchievements();
+      
+      // Ma'lumotlarni saqlash
       localStorage.setItem("userProgress", JSON.stringify(userProgress));
+      localStorage.setItem("totalScore", totalScore);
+      localStorage.setItem("userPoints", userPoints);
     }
-
-    // O'qituvchi paneli
-    document.getElementById("teacherForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const subject = document.getElementById("subjectSelect").value;
-      const type = document.getElementById("taskType").value.trim();
-      const content = document.getElementById("taskContent").value.trim();
-      if (!type || !content) return;
-      const newTask = { type, content, date: new Date().toLocaleDateString("uz-UZ") };
-      addedTasks[subject].push(newTask);
-      localStorage.setItem("addedTasks", JSON.stringify(addedTasks));
-      const list = document.getElementById("addedTasks");
-      list.innerHTML += `<div class="added-task-item"><strong>${type}</strong>: ${content} (${newTask.date})</div>`;
-      document.getElementById("teacherResult").textContent = "✅ Topshiriq qo'shildi!";
-      document.getElementById("teacherResult").className = "result-message success";
-      this.reset();
-    });
-
+    
+    function updateProgress() {
+      // Umumiy ball
+      document.getElementById("totalScore").textContent = totalScore;
+      document.getElementById("userPoints").textContent = userPoints;
+      
+      // O'tgan darslar
+      const completedLessons = Object.values(userProgress).reduce((sum, sub) => sum + sub.completed, 0);
+      document.getElementById("completedLessons").textContent = completedLessons;
+      
+      // Daraja
+      userLevel = Math.floor(totalScore / 100) + 1;
+      document.getElementById("userLevel").textContent = userLevel;
+      
+      // Progress bar'lar
+      const mathProgress = (userProgress.matematika.score / 200) * 100;
+      const langProgress = (userProgress.onaTili.score / 200) * 100;
+      const chemProgress = (userProgress.kimyo.score / 200) * 100;
+      const bioProgress = (userProgress.biologiya.score / 200) * 100;
+      
+      document.getElementById("mathProgress").style.width = `${Math.min(mathProgress, 100)}%`;
+      document.getElementById("langProgress").style.width = `${Math.min(langProgress, 100)}%`;
+      document.getElementById("chemProgress").style.width = `${Math.min(chemProgress, 100)}%`;
+      document.getElementById("bioProgress").style.width = `${Math.min(bioProgress, 100)}%`;
+      
+      document.getElementById("mathPercent").textContent = `${Math.round(mathProgress)}%`;
+      document.getElementById("langPercent").textContent = `${Math.round(langProgress)}%`;
+      document.getElementById("chemPercent").textContent = `${Math.round(chemProgress)}%`;
+      document.getElementById("bioPercent").textContent = `${Math.round(bioProgress)}%`;
+    }
+    
+    // Mukofotlar
+    function checkAchievements() {
+      const achievements = document.querySelectorAll('.achievement-card');
+      let achievedCount = 0;
+      
+      // Matematika ustasi
+      if (userProgress.matematika.score >= 100) {
+        document.getElementById('mathMaster').classList.remove('locked');
+        achievedCount++;
+      }
+      
+      // So'z ustasi
+      if (userProgress.onaTili.completed >= 10) {
+        document.getElementById('wordMaster').classList.remove('locked');
+        achievedCount++;
+      }
+      
+      // Fan yulduzi
+      if (userProgress.kimyo.score + userProgress.biologiya.score >= 150) {
+        document.getElementById('scienceStar').classList.remove('locked');
+        achievedCount++;
+      }
+      
+      // Tezkor o'quvchi
+      if (userProgress.matematika.completed + userProgress.onaTili.completed >= 10) {
+        document.getElementById('speedDemon').classList.remove('locked');
+        achievedCount++;
+      }
+      
+      document.getElementById("achievementsCount").textContent = achievedCount;
+    }
+    
+    // Bonuslar
+    function claimBonus(type) {
+      let cost = 0;
+      let message = "";
+      
+      switch(type) {
+        case 'sticker':
+          cost = 50;
+          message = "Tabriklaymiz! Siz stikerlar to'plamini qo'lga kiritdingiz!";
+          break;
+        case 'badge':
+          cost = 100;
+          message = "Tabriklaymiz! Siz 'A'lo o'quvchi' nishasini qo'lga kiritdingiz!";
+          break;
+        case 'certificate':
+          cost = 200;
+          message = "Tabriklaymiz! Siz shaxsiy diplomni qo'lga kiritdingiz!";
+          break;
+        case 'game':
+          cost = 300;
+          message = "Tabriklaymiz! Siz maxsus o'yinni ochdingiz!";
+          break;
+      }
+      
+      if (userPoints >= cost) {
+        userPoints -= cost;
+        document.getElementById("userPoints").textContent = userPoints;
+        alert(message);
+        createConfetti();
+      } else {
+        alert(`Sizda yetarli ball yo'q! Sizda ${userPoints} ball, kerak ${cost} ball`);
+      }
+    }
+    
+    // Konfetti effekti
+    function createConfetti() {
+      const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#ff9a00', '#ba68c8'];
+      
+      for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animation = `confetti ${Math.random() * 3 + 2}s linear forwards`;
+        document.body.appendChild(confetti);
+        
+        setTimeout(() => {
+          confetti.remove();
+        }, 5000);
+      }
+    }
+    
     // Boshlash tugmasi
     function startLearning() {
-      document.getElementById("sinflar").scrollIntoView({ behavior: "smooth" });
+      document.getElementById("matematika").scrollIntoView({ behavior: "smooth" });
     }
-
+    
     // Yuklanish
     window.onload = function() {
       generateComparison();
-      // Boshqa initialize'lar
+      generateMathProblem();
+      
+      // Saqlangan ma'lumotlarni yuklash
       const savedProgress = localStorage.getItem("userProgress");
+      const savedTotalScore = localStorage.getItem("totalScore");
+      const savedUserPoints = localStorage.getItem("userPoints");
+      
       if (savedProgress) {
         userProgress = JSON.parse(savedProgress);
-        totalScore = Object.values(userProgress).reduce((sum, sub) => sum + sub.score, 0);
-        document.getElementById("totalScore").textContent = totalScore;
       }
-      selectClass(1);
+      
+      if (savedTotalScore) {
+        totalScore = parseInt(savedTotalScore);
+      }
+      
+      if (savedUserPoints) {
+        userPoints = parseInt(savedUserPoints);
+      }
+      
+      updateProgress();
+      checkAchievements();
     };
   </script>
 </body>
