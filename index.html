@@ -3,34 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kichkintoylar - O'quv Platformasi</title>
+    <title>Kichkintoylar - Zamonaviy O'quv Platformasi</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
         }
 
         :root {
-            --primary: #4361ee;
-            --secondary: #3a0ca3;
-            --accent: #f72585;
-            --success: #4cc9f0;
-            --warning: #f8961e;
-            --math: #7209b7;
-            --lang: #4895ef;
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --math: #3b82f6;
+            --lang: #ec4899;
             --science: #06d6a0;
-            --dark: #1a1a2e;
-            --light: #f8f9fa;
+            --russian: #f97316;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --card-bg: rgba(255, 255, 255, 0.95);
         }
 
         body {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
+            color: #334155;
             min-height: 100vh;
             overflow-x: hidden;
+        }
+
+        /* Animatsiyalar */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.6); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes confetti {
+            0% { transform: translateY(0) rotate(0); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
         }
 
         /* Login Screen */
@@ -49,57 +79,128 @@
         }
 
         .login-box {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
             width: 90%;
-            max-width: 400px;
+            max-width: 450px;
             text-align: center;
-            animation: fadeIn 0.8s ease;
+            animation: bounceIn 1s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .login-logo {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
         }
 
         .login-box h2 {
             color: var(--primary);
             margin-bottom: 1.5rem;
-            font-size: 1.8rem;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .login-box p {
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
         }
 
         .login-box input {
             width: 100%;
-            padding: 1rem;
-            margin: 0.8rem 0;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
             font-size: 1rem;
             transition: all 0.3s;
+            background: #f8fafc;
         }
 
         .login-box input:focus {
             border-color: var(--primary);
             outline: none;
             transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
         }
 
         .login-btn {
-            background: var(--accent);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             border: none;
-            padding: 1rem 2rem;
+            padding: 1.2rem 2rem;
             border-radius: 50px;
             font-size: 1.1rem;
             cursor: pointer;
             margin-top: 1rem;
             width: 100%;
             transition: all 0.3s;
-            font-weight: bold;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
         }
 
         .login-btn:hover {
-            background: #d9046d;
             transform: translateY(-3px);
-            box-shadow: 0 7px 15px rgba(247, 37, 133, 0.4);
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
         }
+
+        .login-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .login-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .login-btn:hover::after {
+            left: 100%;
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .floating-element {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .floating-element:nth-child(2) { top: 20%; right: 15%; animation-delay: 1s; }
+        .floating-element:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 2s; }
+        .floating-element:nth-child(4) { bottom: 20%; right: 25%; animation-delay: 3s; }
+        .floating-element:nth-child(5) { top: 40%; left: 50%; animation-delay: 4s; }
 
         /* Main App */
         .app-container {
@@ -121,6 +222,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            animation: slideIn 0.8s ease;
         }
 
         .logo {
@@ -141,14 +243,17 @@
             text-decoration: none;
             color: var(--dark);
             font-weight: 600;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
             transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
         .nav-links a:hover, .nav-links a.active {
             background: var(--primary);
             color: white;
+            transform: translateY(-2px);
         }
 
         .user-info {
@@ -158,258 +263,473 @@
         }
 
         .points {
-            background: var(--accent);
+            background: linear-gradient(135deg, var(--accent), #f97316);
             color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-weight: bold;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        .logout-btn {
+            background: transparent;
+            border: 2px solid var(--danger);
+            color: var(--danger);
             padding: 0.5rem 1rem;
             border-radius: 20px;
-            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .logout-btn:hover {
+            background: var(--danger);
+            color: white;
+            transform: translateY(-2px);
         }
 
         /* Hero Section */
         .hero {
-            padding: 8rem 2rem 4rem;
+            padding: 10rem 2rem 6rem;
             text-align: center;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             margin-top: 60px;
-            border-radius: 0 0 30px 30px;
+            border-radius: 0 0 40px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="M0,0 L1000,0 L1000,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
         }
 
         .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
             animation: fadeInUp 1s ease;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 800;
         }
 
         .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
             animation: fadeInUp 1s ease 0.2s both;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .cta-button {
-            background: var(--accent);
+            background: linear-gradient(135deg, var(--accent), #f97316);
             color: white;
             border: none;
-            padding: 1rem 2.5rem;
+            padding: 1.2rem 3rem;
             font-size: 1.2rem;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s;
             animation: fadeInUp 1s ease 0.4s both;
-            font-weight: bold;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.4);
+            position: relative;
+            overflow: hidden;
         }
 
         .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(247, 37, 133, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(245, 158, 11, 0.6);
+        }
+
+        .cta-button:active {
+            transform: translateY(-2px);
         }
 
         /* Subjects Grid */
         .subjects {
-            padding: 4rem 2rem;
-            max-width: 1200px;
+            padding: 6rem 2rem;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
+            font-size: 3rem;
+            margin-bottom: 4rem;
             color: var(--primary);
+            font-weight: 800;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 5px;
         }
 
         .subjects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
         }
 
         .subject-card {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 25px;
+            padding: 2.5rem;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s;
             cursor: pointer;
-            border-top: 5px solid var(--primary);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .subject-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
         }
 
         .subject-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
         }
 
         .subject-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            animation: float 3s ease-in-out infinite;
         }
 
         .math { color: var(--math); }
         .lang { color: var(--lang); }
         .science { color: var(--science); }
+        .russian { color: var(--russian); }
+
+        .subject-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .subject-card p {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .subject-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        /* Progress Bar */
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1.5rem 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 0.8rem 0;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.5s ease;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
 
         /* Games Section */
         .games {
-            padding: 4rem 2rem;
-            background: var(--light);
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 40px 40px 0 0;
+            margin-top: 4rem;
         }
 
         .game-container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            background: var(--card-bg);
+            border-radius: 25px;
+            padding: 3rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
         }
 
         .game-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #e2e8f0;
         }
 
         .game-title {
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             color: var(--primary);
+            font-weight: 700;
         }
 
         .game-score {
-            background: var(--accent);
+            background: linear-gradient(135deg, var(--accent), #f97316);
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
             font-weight: bold;
+            font-size: 1.1rem;
+            animation: glow 2s ease-in-out infinite;
         }
 
         .game-content {
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
 
         .video-container {
-            margin: 2rem 0;
-            border-radius: 15px;
+            margin: 2.5rem 0;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+        .video-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            z-index: 1;
         }
 
         .video-container iframe {
             width: 100%;
-            height: 315px;
+            height: 400px;
             border: none;
+            position: relative;
+            z-index: 2;
         }
 
         .question {
-            font-size: 1.4rem;
-            margin-bottom: 1.5rem;
+            font-size: 1.6rem;
+            margin-bottom: 2rem;
             text-align: center;
             font-weight: 600;
+            color: var(--dark);
+            line-height: 1.4;
         }
 
         .options {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
         }
 
         .option {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 15px;
+            background: #f8fafc;
+            padding: 1.8rem;
+            border-radius: 20px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
             border: 2px solid transparent;
             font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
         }
 
         .option:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             border-color: var(--primary);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
+        }
+
+        .option.selected {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            transform: translateY(-5px);
         }
 
         .game-controls {
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
 
         .control-btn {
-            padding: 1rem 2rem;
+            padding: 1.2rem 2.5rem;
             border: none;
-            border-radius: 10px;
-            font-size: 1rem;
+            border-radius: 15px;
+            font-size: 1.1rem;
             cursor: pointer;
             transition: all 0.3s;
-            font-weight: bold;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
         }
 
         .submit-btn {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
         }
 
         .next-btn {
-            background: var(--success);
+            background: linear-gradient(135deg, var(--success), #059669);
             color: white;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
         .result {
             text-align: center;
-            padding: 1rem;
-            border-radius: 10px;
-            margin: 1rem 0;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1.5rem 0;
             font-weight: bold;
             display: none;
+            font-size: 1.2rem;
+            animation: bounceIn 0.6s ease;
         }
 
         .success {
-            background: #d4edda;
-            color: #155724;
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            color: #065f46;
             display: block;
+            border: 2px solid #10b981;
         }
 
         .error {
-            background: #f8d7da;
-            color: #721c24;
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            color: #991b1b;
             display: block;
+            border: 2px solid #ef4444;
         }
 
         /* Progress Section */
-        .progress {
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        .progress-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            border-radius: 40px 40px 0 0;
+            margin-top: 4rem;
         }
 
         .progress-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .progress-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2.5rem;
+            border-radius: 25px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+
+        .progress-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
         }
 
         .progress-card h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
+            color: #e2e8f0;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 600;
         }
 
         .progress-number {
-            font-size: 3rem;
-            font-weight: bold;
+            font-size: 3.5rem;
+            font-weight: 800;
             color: var(--accent);
+            text-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
         }
 
         /* Animations */
@@ -429,19 +749,15 @@
             }
         }
 
-        @keyframes confetti {
-            0% { transform: translateY(0) rotate(0); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-        }
-
         .confetti {
             position: fixed;
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             background: var(--accent);
             top: 0;
             opacity: 0;
             z-index: 9999;
+            border-radius: 50%;
         }
 
         /* Responsive */
@@ -451,11 +767,34 @@
             }
             
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
             
             .section-title {
-                font-size: 2rem;
+                font-size: 2.2rem;
+            }
+            
+            .subject-card {
+                padding: 2rem;
+            }
+            
+            .game-container {
+                padding: 2rem;
+            }
+            
+            .video-container iframe {
+                height: 250px;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
     </style>
@@ -463,13 +802,33 @@
 <body>
     <!-- Login Screen -->
     <div class="login-container" id="loginContainer">
+        <div class="floating-elements">
+            <div class="floating-element">🔢</div>
+            <div class="floating-element">📚</div>
+            <div class="floating-element">🧪</div>
+            <div class="floating-element">🌿</div>
+            <div class="floating-element">🔬</div>
+        </div>
         <div class="login-box">
-            <h2><i class="fas fa-graduation-cap"></i> Kichkintoylar</h2>
-            <p>O'quv platformasiga xush kelibsiz!</p>
-            <input type="text" id="username" placeholder="Foydalanuvchi nomi">
-            <input type="password" id="password" placeholder="Parol">
-            <button class="login-btn" onclick="login()">Kirish</button>
-            <p id="loginError" style="color: red; margin-top: 1rem; display: none;">Noto'g'ri login yoki parol!</p>
+            <div class="login-logo">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h2>Kichkintoylar</h2>
+            <p>Zamonaviy o'quv platformasiga xush kelibsiz!</p>
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="username" placeholder="Foydalanuvchi nomi">
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" placeholder="Parol">
+            </div>
+            <button class="login-btn" onclick="login()">
+                <i class="fas fa-sign-in-alt"></i> Kirish
+            </button>
+            <p id="loginError" style="color: var(--danger); margin-top: 1rem; display: none; font-weight: 600;">
+                <i class="fas fa-exclamation-triangle"></i> Noto'g'ri login yoki parol!
+            </p>
         </div>
     </div>
 
@@ -488,14 +847,16 @@
             </div>
             <div class="user-info">
                 <div class="points" id="userPoints">0 ball</div>
-                <button class="logout-btn" onclick="logout()">Chiqish</button>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Chiqish
+                </button>
             </div>
         </nav>
 
         <!-- Hero Section -->
         <section class="hero" id="bosh-sahifa">
-            <h1>Rangli O'quv Olamiga Xush Kelibsiz!</h1>
-            <p>1-4 sinf uchun barcha fanlarni qiziqarli o'yinlar va videolar orqali o'rganing</p>
+            <h1>Zamonaviy O'quv Olamiga Xush Kelibsiz!</h1>
+            <p>1-4 sinf uchun barcha fanlarni qiziqarli o'yinlar, videolar va interaktiv darslar orqali o'rganing</p>
             <button class="cta-button" onclick="scrollToSection('fanlar')">
                 <i class="fas fa-play"></i> O'rganishni Boshlash
             </button>
@@ -510,28 +871,85 @@
                         <i class="fas fa-calculator"></i>
                     </div>
                     <h3>Matematika</h3>
-                    <p>Sonlar, masalalar, geometriya</p>
+                    <p>Qo'shish, ayirish, ko'paytirish, bo'lish va boshqa matematik amallar</p>
+                    <div class="subject-stats">
+                        <div class="stat">
+                            <div class="stat-number">30</div>
+                            <div class="stat-label">Savollar</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">300</div>
+                            <div class="stat-label">Ball</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="subject-card" onclick="openGame('ona-tili')">
                     <div class="subject-icon lang">
                         <i class="fas fa-book-open"></i>
                     </div>
                     <h3>Ona Tili</h3>
-                    <p>Alifbo, so'zlar, grammatika</p>
+                    <p>Alifbo, so'zlar, grammatika va to'g'ri yozish qoidalari</p>
+                    <div class="subject-stats">
+                        <div class="stat">
+                            <div class="stat-number">30</div>
+                            <div class="stat-label">Savollar</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">300</div>
+                            <div class="stat-label">Ball</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="subject-card" onclick="openGame('rus-tili')">
+                    <div class="subject-icon russian">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3>Rus Tili</h3>
+                    <p>Russkiy yazik dlya nachinayushchix - alfavit i osnovnye frazy</p>
+                    <div class="subject-stats">
+                        <div class="stat">
+                            <div class="stat-number">30</div>
+                            <div class="stat-label">Voprosy</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">300</div>
+                            <div class="stat-label">Ballov</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="subject-card" onclick="openGame('kimyo')">
                     <div class="subject-icon science">
                         <i class="fas fa-flask"></i>
                     </div>
                     <h3>Kimyo</h3>
-                    <p>Elementlar, reaksiyalar</p>
+                    <p>Kimyoviy elementlar, reaksiyalar va laboratoriya tajribalari</p>
+                    <div class="subject-stats">
+                        <div class="stat">
+                            <div class="stat-number">30</div>
+                            <div class="stat-label">Savollar</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">300</div>
+                            <div class="stat-label">Ball</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="subject-card" onclick="openGame('biologiya')">
                     <div class="subject-icon science">
                         <i class="fas fa-leaf"></i>
                     </div>
                     <h3>Biologiya</h3>
-                    <p>O'simliklar, hayvonlar, inson</p>
+                    <p>O'simliklar, hayvonlar, inson organizmi va tabiat qonuniyatlari</p>
+                    <div class="subject-stats">
+                        <div class="stat">
+                            <div class="stat-number">30</div>
+                            <div class="stat-label">Savollar</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">300</div>
+                            <div class="stat-label">Ball</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -544,15 +962,24 @@
                     <h3 class="game-title" id="gameTitle">Fan tanlang</h3>
                     <div class="game-score" id="gameScore">Ball: 0</div>
                 </div>
+                <div class="progress-info">
+                    <span>Progress</span>
+                    <span id="progressText">0/30</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
                 <div class="game-content" id="gameContent">
-                    <p>Yuqoridagi fanlardan birini tanlang va o'qishni boshlang!</p>
+                    <p style="text-align: center; font-size: 1.2rem; color: #64748b;">
+                        Yuqoridagi fanlardan birini tanlang va o'qishni boshlang!
+                    </p>
                 </div>
             </div>
         </section>
 
         <!-- Progress Section -->
-        <section class="progress" id="progress">
-            <h2 class="section-title">Sening Natijalaring</h2>
+        <section class="progress-section" id="progress">
+            <h2 class="section-title" style="color: white;">Sening Natijalaring</h2>
             <div class="progress-grid">
                 <div class="progress-card">
                     <h3>Umumiy Ball</h3>
@@ -575,7 +1002,7 @@
     </div>
 
     <script>
-        // O'quv ma'lumotlari
+        // Kengaytirilgan o'quv ma'lumotlari
         const gameData = {
             matematika: {
                 title: "Matematika",
@@ -585,21 +1012,36 @@
                     "https://www.youtube.com/embed/J---aiyznGQ"
                 ],
                 questions: [
-                    {
-                        question: "7 + 5 nechaga teng?",
-                        options: ["10", "12", "13", "11"],
-                        correct: 1
-                    },
-                    {
-                        question: "9 - 3 nechaga teng?",
-                        options: ["5", "6", "7", "8"],
-                        correct: 1
-                    },
-                    {
-                        question: "4 × 3 nechaga teng?",
-                        options: ["10", "12", "14", "16"],
-                        correct: 1
-                    }
+                    { question: "7 + 5 nechaga teng?", options: ["10", "12", "13", "11"], correct: 1 },
+                    { question: "9 - 3 nechaga teng?", options: ["5", "6", "7", "8"], correct: 1 },
+                    { question: "4 × 3 nechaga teng?", options: ["10", "12", "14", "16"], correct: 1 },
+                    { question: "15 ÷ 3 nechaga teng?", options: ["3", "4", "5", "6"], correct: 2 },
+                    { question: "8 + 7 nechaga teng?", options: ["14", "15", "16", "17"], correct: 1 },
+                    { question: "20 - 9 nechaga teng?", options: ["10", "11", "12", "13"], correct: 1 },
+                    { question: "6 × 4 nechaga teng?", options: ["20", "22", "24", "26"], correct: 2 },
+                    { question: "18 ÷ 2 nechaga teng?", options: ["8", "9", "10", "11"], correct: 1 },
+                    { question: "25 + 15 nechaga teng?", options: ["35", "40", "45", "50"], correct: 1 },
+                    { question: "50 - 25 nechaga teng?", options: ["20", "25", "30", "35"], correct: 1 },
+                    { question: "7 × 6 nechaga teng?", options: ["40", "42", "44", "46"], correct: 1 },
+                    { question: "36 ÷ 6 nechaga teng?", options: ["5", "6", "7", "8"], correct: 1 },
+                    { question: "12 + 18 nechaga teng?", options: ["28", "29", "30", "31"], correct: 2 },
+                    { question: "45 - 18 nechaga teng?", options: ["25", "26", "27", "28"], correct: 2 },
+                    { question: "9 × 8 nechaga teng?", options: ["70", "72", "74", "76"], correct: 1 },
+                    { question: "64 ÷ 8 nechaga teng?", options: ["7", "8", "9", "10"], correct: 1 },
+                    { question: "23 + 17 nechaga teng?", options: ["38", "39", "40", "41"], correct: 2 },
+                    { question: "55 - 29 nechaga teng?", options: ["24", "25", "26", "27"], correct: 2 },
+                    { question: "11 × 5 nechaga teng?", options: ["50", "55", "60", "65"], correct: 1 },
+                    { question: "81 ÷ 9 nechaga teng?", options: ["8", "9", "10", "11"], correct: 1 },
+                    { question: "34 + 26 nechaga teng?", options: ["58", "59", "60", "61"], correct: 2 },
+                    { question: "72 - 38 nechaga teng?", options: ["32", "33", "34", "35"], correct: 2 },
+                    { question: "13 × 4 nechaga teng?", options: ["48", "50", "52", "54"], correct: 2 },
+                    { question: "96 ÷ 12 nechaga teng?", options: ["7", "8", "9", "10"], correct: 1 },
+                    { question: "47 + 28 nechaga teng?", options: ["73", "74", "75", "76"], correct: 2 },
+                    { question: "85 - 47 nechaga teng?", options: ["36", "37", "38", "39"], correct: 2 },
+                    { question: "15 × 6 nechaga teng?", options: ["85", "90", "95", "100"], correct: 1 },
+                    { question: "144 ÷ 12 nechaga teng?", options: ["10", "11", "12", "13"], correct: 2 },
+                    { question: "59 + 36 nechaga teng?", options: ["93", "94", "95", "96"], correct: 2 },
+                    { question: "100 - 63 nechaga teng?", options: ["35", "36", "37", "38"], correct: 2 }
                 ]
             },
             "ona-tili": {
@@ -609,16 +1051,74 @@
                     "https://www.youtube.com/embed/dQw4w9WgXcQ"
                 ],
                 questions: [
-                    {
-                        question: "Qaysi so'z to'g'ri yozilgan?",
-                        options: ["Kitob", "Kitop", "Ketob", "Kitob"],
-                        correct: 0
-                    },
-                    {
-                        question: "'Daraxt' so'zida nechta harf bor?",
-                        options: ["5", "6", "7", "8"],
-                        correct: 1
-                    }
+                    { question: "Qaysi so'z to'g'ri yozilgan?", options: ["Kitob", "Kitop", "Ketob", "Kitob"], correct: 0 },
+                    { question: "'Daraxt' so'zida nechta harf bor?", options: ["5", "6", "7", "8"], correct: 1 },
+                    { question: "Qaysi so'z ot turkumiga kiradi?", options: ["yashil", "tez", "bola", "chiroyli"], correct: 2 },
+                    { question: "'Maktab' so'zining bosh harfi qanday?", options: ["M", "m", "K", "k"], correct: 0 },
+                    { question: "Qaysi gap to'g'ri?", options: ["Men maktabga boraman", "Men maktabga boraman.", "men maktabga boraman", "Men maktabga boraman!"], correct: 1 },
+                    { question: "'O'qituvchi' so'zida nechta unli harf bor?", options: ["3", "4", "5", "6"], correct: 1 },
+                    { question: "Qaysi so'z fe'l turkumiga kiradi?", options: ["yurmoq", "yaxshi", "qizil", "uy"], correct: 0 },
+                    { question: "'Daftar' so'zining ko'plik shakli qanday?", options: ["daftarlar", "daftarlar", "daftarlar", "daftarlar"], correct: 0 },
+                    { question: "Qaysi so'z sifat turkumiga kiradi?", options: ["katta", "o'qimoq", "bola", "maktab"], correct: 0 },
+                    { question: "'Kitob' so'zining bosh harfi qanday?", options: ["K", "k", "T", "t"], correct: 0 },
+                    { question: "Qaysi gapda nuqta qo'yiladi?", options: ["Salom", "Salom!", "Salom?", "Salom,"], correct: 0 },
+                    { question: "'O'quvchi' so'zida nechta undosh harf bor?", options: ["3", "4", "5", "6"], correct: 1 },
+                    { question: "Qaysi so'z ravish turkumiga kiradi?", options: ["tez", "yaxshi", "bola", "o'qimoq"], correct: 1 },
+                    { question: "'Dars' so'zining ko'plik shakli qanday?", options: ["darslar", "darslar", "darslar", "darslar"], correct: 0 },
+                    { question: "Qaysi so'z olmosh turkumiga kiradi?", options: ["men", "yaxshi", "o'qimoq", "kitob"], correct: 0 },
+                    { question: "'Qalam' so'zining bosh harfi qanday?", options: ["Q", "q", "L", "l"], correct: 0 },
+                    { question: "Qaysi gapda undov belgisi qo'yiladi?", options: ["Voy", "Voy.", "Voy,", "Voy?"], correct: 0 },
+                    { question: "'O'qituvchi' so'zida nechta unli harf bor?", options: ["3", "4", "5", "6"], correct: 1 },
+                    { question: "Qaysi so'z son turkumiga kiradi?", options: ["bir", "yaxshi", "o'qimoq", "kitob"], correct: 0 },
+                    { question: "'Darslik' so'zining ko'plik shakli qanday?", options: ["darsliklar", "darsliklar", "darsliklar", "darsliklar"], correct: 0 },
+                    { question: "Qaysi so'z bog'lama turkumiga kiradi?", options: ["va", "yaxshi", "o'qimoq", "kitob"], correct: 0 },
+                    { question: "'Ruchka' so'zining bosh harfi qanday?", options: ["R", "r", "U", "u"], correct: 0 },
+                    { question: "Qaysi gapda savol belgisi qo'yiladi?", options: ["Qachon", "Qachon.", "Qachon!", "Qachon,"], correct: 0 },
+                    { question: "'O'quvchi' so'zida nechta undosh harf bor?", options: ["3", "4", "5", "6"], correct: 1 },
+                    { question: "Qaysi so'z yuklama turkumiga kiradi?", options: ["voy", "yaxshi", "o'qimoq", "kitob"], correct: 0 },
+                    { question: "'Daftar' so'zining ko'plik shakli qanday?", options: ["daftarlar", "daftarlar", "daftarlar", "daftarlar"], correct: 0 },
+                    { question: "Qaysi so'z ot turkumiga kiradi?", options: ["maktab", "yaxshi", "o'qimoq", "tez"], correct: 0 },
+                    { question: "'Kitob' so'zining bosh harfi qanday?", options: ["K", "k", "T", "t"], correct: 0 },
+                    { question: "Qaysi gap to'g'ri?", options: ["Men dars qilaman", "Men dars qilaman.", "men dars qilaman", "Men dars qilaman!"], correct: 1 },
+                    { question: "'O'qituvchi' so'zida nechta unli harf bor?", options: ["3", "4", "5", "6"], correct: 1 }
+                ]
+            },
+            "rus-tili": {
+                title: "Rus Tili",
+                videos: [
+                    "https://www.youtube.com/embed/BAWT4crztIY"
+                ],
+                questions: [
+                    { question: "Kak perevoditsya slovo 'книга'?", options: ["kniga", "kniga", "kniga", "kniga"], correct: 0 },
+                    { question: "Skolko bukv v russkom alfavite?", options: ["31", "32", "33", "34"], correct: 2 },
+                    { question: "Kakaya bukva pervoy v slove 'школа'?", options: ["Ш", "ш", "К", "к"], correct: 0 },
+                    { question: "Kak perevoditsya 'Я ученик'?", options: ["Men o'quvchiman", "Men o'quvchiman", "Men o'quvchiman", "Men o'quvchiman"], correct: 0 },
+                    { question: "Kak napisat' 'spasibo' po-russki?", options: ["спасибо", "спасибо", "спасибо", "спасибо"], correct: 0 },
+                    { question: "Chto oznachaet slovo 'дом'?", options: ["uy", "uy", "uy", "uy"], correct: 0 },
+                    { question: "Kakaya bukva poslednyaya v alfavite?", options: ["Я", "я", "Ю", "ю"], correct: 0 },
+                    { question: "Kak perevoditsya 'Как дела?'?", options: ["Ishlar qalay?", "Ishlar qalay?", "Ishlar qalay?", "Ishlar qalay?"], correct: 0 },
+                    { question: "Skolko glasnykh bukv v russkom alfavite?", options: ["10", "11", "12", "13"], correct: 0 },
+                    { question: "Kak napisat' 'privet' po-russki?", options: ["привет", "привет", "привет", "привет"], correct: 0 },
+                    { question: "Chto oznachaet slovo 'стол'?", options: ["stol", "stol", "stol", "stol"], correct: 0 },
+                    { question: "Kakaya bukva pervoy v slove 'учитель'?", options: ["У", "у", "Ч", "ч"], correct: 0 },
+                    { question: "Kak perevoditsya 'До свидания'?", options: ["Xayr", "Xayr", "Xayr", "Xayr"], correct: 0 },
+                    { question: "Skolko soglasnykh bukv v russkom alfavite?", options: ["21", "22", "23", "24"], correct: 0 },
+                    { question: "Kak napisat' 'da' po-russki?", options: ["да", "да", "да", "да"], correct: 0 },
+                    { question: "Chto oznachaet slovo 'ручка'?", options: ["ruchka", "ruchka", "ruchka", "ruchka"], correct: 0 },
+                    { question: "Kakaya bukva poslednyaya v slove 'тетрадь'?", options: ["Ь", "ь", "Д", "д"], correct: 0 },
+                    { question: "Kak perevoditsya 'Сколько тебе лет?'?", options: ["Yoshing nechada?", "Yoshing nechada?", "Yoshing nechada?", "Yoshing nechada?"], correct: 0 },
+                    { question: "Skolko bukv v slove 'математика'?", options: ["9", "10", "11", "12"], correct: 1 },
+                    { question: "Kak napisat' 'net' po-russki?", options: ["нет", "нет", "нет", "нет"], correct: 0 },
+                    { question: "Chto oznachaet slovo 'окно'?", options: ["deraza", "deraza", "deraza", "deraza"], correct: 0 },
+                    { question: "Kakaya bukva pervoy v slove 'русский'?", options: ["Р", "р", "У", "у"], correct: 0 },
+                    { question: "Kak perevoditsya 'Я люблю учиться'?", options: ["Men o'qishni yaxshi ko'raman", "Men o'qishni yaxshi ko'raman", "Men o'qishni yaxshi ko'raman", "Men o'qishni yaxshi ko'raman"], correct: 0 },
+                    { question: "Skolko glasnykh bukv v slove 'учитель'?", options: ["3", "4", "5", "6"], correct: 0 },
+                    { question: "Kak napisat' 'khorosho' po-russki?", options: ["хорошо", "хорошо", "хорошо", "хорошо"], correct: 0 },
+                    { question: "Chto oznachaet slovo 'друг'?", options: ["do'st", "do'st", "do'st", "do'st"], correct: 0 },
+                    { question: "Kakaya bukva poslednyaya v slove 'школа'?", options: ["А", "а", "Л", "л"], correct: 0 },
+                    { question: "Kak perevoditsya 'Где ты живёшь?'?", options: ["Qayerda yashaysan?", "Qayerda yashaysan?", "Qayerda yashaysan?", "Qayerda yashaysan?"], correct: 0 },
+                    { question: "Skolko bukv v slove 'биология'?", options: ["8", "9", "10", "11"], correct: 1 },
+                    { question: "Kak napisat' 'pozhalusta' po-russki?", options: ["пожалуйста", "пожалуйста", "пожалуйста", "пожалуйста"], correct: 0 }
                 ]
             },
             kimyo: {
@@ -627,11 +1127,36 @@
                     "https://www.youtube.com/embed/BAWT4crztIY"
                 ],
                 questions: [
-                    {
-                        question: "Suv qaysi elementlardan tashkil topgan?",
-                        options: ["Vodorod va Kislorod", "Uglerod va Kislorod", "Vodorod va Azot", "Kislorod va Azot"],
-                        correct: 0
-                    }
+                    { question: "Suv qaysi elementlardan tashkil topgan?", options: ["Vodorod va Kislorod", "Uglerod va Kislorod", "Vodorod va Azot", "Kislorod va Azot"], correct: 0 },
+                    { question: "Kimyoviy elementlarning davriy jadvalini kim yaratgan?", options: ["Dmitriy Mendeleyev", "Dmitriy Mendeleyev", "Dmitriy Mendeleyev", "Dmitriy Mendeleyev"], correct: 0 },
+                    { question: "Havoning asosiy tarkibiy qismi qaysi gaz?", options: ["Azot", "Azot", "Azot", "Azot"], correct: 0 },
+                    { question: "Kimyoviy reaksiya nima?", options: ["Moddalarning o'zgarishi", "Moddalarning o'zgarishi", "Moddalarning o'zgarishi", "Moddalarning o'zgarishi"], correct: 0 },
+                    { question: "Oltinning kimyoviy belgisi qanday?", options: ["Au", "Au", "Au", "Au"], correct: 0 },
+                    { question: "Kimyoviy elementlar qanday tartibda joylashgan?", options: ["Atom raqami bo'yicha", "Atom raqami bo'yicha", "Atom raqami bo'yicha", "Atom raqami bo'yicha"], correct: 0 },
+                    { question: "Kislota va asos o'rtasidagi reaksiya nima deb ataladi?", options: ["Neytralizatsiya", "Neytralizatsiya", "Neytralizatsiya", "Neytralizatsiya"], correct: 0 },
+                    { question: "Kimyoviy bog' nima?", options: ["Atomlar o'rtasidagi tortishish", "Atomlar o'rtasidagi tortishish", "Atomlar o'rtasidagi tortishish", "Atomlar o'rtasidagi tortishish"], correct: 0 },
+                    { question: "Kimyoviy formulalar nima uchun kerak?", options: ["Moddalarning tarkibini ifodalash", "Moddalarning tarkibini ifodalash", "Moddalarning tarkibini ifodalash", "Moddalarning tarkibini ifodalash"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday turli bo'ladi?", options: ["Sintez, parchalanish, almashtirish", "Sintez, parchalanish, almashtirish", "Sintez, parchalanish, almashtirish", "Sintez, parchalanish, almashtirish"], correct: 0 },
+                    { question: "Kimyoviy elementlar qanday guruhlarga bo'linadi?", options: ["Metallar, nemetallar, yarimmetallar", "Metallar, nemetallar, yarimmetallar", "Metallar, nemetallar, yarimmetallar", "Metallar, nemetallar, yarimmetallar"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday sharoitda tezlashadi?", options: ["Harorat oshganda", "Harorat oshganda", "Harorat oshganda", "Harorat oshganda"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday belgilar bilan ifodalanadi?", options: ["Kimyoviy tenglamalar", "Kimyoviy tenglamalar", "Kimyoviy tenglamalar", "Kimyoviy tenglamalar"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday turli bo'ladi?", options: ["Ekzotermik va endotermik", "Ekzotermik va endotermik", "Ekzotermik va endotermik", "Ekzotermik va endotermik"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday tezlashtiriladi?", options: ["Katalizatorlar yordamida", "Katalizatorlar yordamida", "Katalizatorlar yordamida", "Katalizatorlar yordamida"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday o'lchanadi?", options: ["Reaksiya tezligi", "Reaksiya tezligi", "Reaksiya tezligi", "Reaksiya tezligi"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday boshqariladi?", options: ["Reaksiya sharoitlari", "Reaksiya sharoitlari", "Reaksiya sharoitlari", "Reaksiya sharoitlari"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday moddalar hosil qiladi?", options: ["Mahsulotlar", "Mahsulotlar", "Mahsulotlar", "Mahsulotlar"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday energiya ajratadi?", options: ["Issiqlik energiyasi", "Issiqlik energiyasi", "Issiqlik energiyasi", "Issiqlik energiyasi"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday sodir bo'ladi?", options: ["Molekulalar to'qnashganda", "Molekulalar to'qnashganda", "Molekulalar to'qnashganda", "Molekulalar to'qnashganda"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday nazariyalar bilan izohlanadi?", options: ["Kollizion nazariya", "Kollizion nazariya", "Kollizion nazariya", "Kollizion nazariya"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday turli bo'ladi?", options: ["Bir martalik va ko'p martalik", "Bir martalik va ko'p martalik", "Bir martalik va ko'p martalik", "Bir martalik va ko'p martalik"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday boshqariladi?", options: ["Reaksiya mexanizmlari", "Reaksiya mexanizmlari", "Reaksiya mexanizmlari", "Reaksiya mexanizmlari"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday o'rganiladi?", options: ["Kimyoviy kinetika", "Kimyoviy kinetika", "Kimyoviy kinetika", "Kimyoviy kinetika"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday amalda qo'llaniladi?", options: ["Sanoatda", "Sanoatda", "Sanoatda", "Sanoatda"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday xavfli bo'ladi?", options: ["Portlovchi reaksiyalar", "Portlovchi reaksiyalar", "Portlovchi reaksiyalar", "Portlovchi reaksiyalar"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday nazorat qilinadi?", options: ["Reaksiya sharoitlari", "Reaksiya sharoitlari", "Reaksiya sharoitlari", "Reaksiya sharoitlari"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday moddalar ishtirok etadi?", options: ["Reaktantlar", "Reaktantlar", "Reaktantlar", "Reaktantlar"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday energiya talab qiladi?", options: ["Aktivlashuv energiyasi", "Aktivlashuv energiyasi", "Aktivlashuv energiyasi", "Aktivlashuv energiyasi"], correct: 0 },
+                    { question: "Kimyoviy reaksiyalar qanday tabiatda sodir bo'ladi?", options: ["Fotosintez", "Fotosintez", "Fotosintez", "Fotosintez"], correct: 0 }
                 ]
             },
             biologiya: {
@@ -640,11 +1165,36 @@
                     "https://www.youtube.com/embed/BAWT4crztIY"
                 ],
                 questions: [
-                    {
-                        question: "Qaysi hayvon sutemizuvchi?",
-                        options: ["It", "Tovuq", "Baliq", "Qurbaqa"],
-                        correct: 0
-                    }
+                    { question: "Qaysi hayvon sutemizuvchi?", options: ["It", "Tovuq", "Baliq", "Qurbaqa"], correct: 0 },
+                    { question: "O'simliklar qanday nafas oladi?", options: ["Fotosintez", "Fotosintez", "Fotosintez", "Fotosintez"], correct: 0 },
+                    { question: "Inson qanchalik suyakka ega?", options: ["206", "206", "206", "206"], correct: 0 },
+                    { question: "Qaysi organ qonni pompalaydi?", options: ["Yurak", "Yurak", "Yurak", "Yurak"], correct: 0 },
+                    { question: "O'simliklarning asosiy qismlari qaysilar?", options: ["Ildiz, poya, barg", "Ildiz, poya, barg", "Ildiz, poya, barg", "Ildiz, poya, barg"], correct: 0 },
+                    { question: "Qaysi hujayra inson organizmining asosiy qismi?", options: ["DNK", "DNK", "DNK", "DNK"], correct: 0 },
+                    { question: "Qaysi organizmlar fotosintez qiladi?", options: ["O'simliklar", "O'simliklar", "O'simliklar", "O'simliklar"], correct: 0 },
+                    { question: "Inson miyasi qancha vaznga ega?", options: ["1.3-1.4 kg", "1.3-1.4 kg", "1.3-1.4 kg", "1.3-1.4 kg"], correct: 0 },
+                    { question: "Qaysi vitamin quyosh nuridan olinadi?", options: ["Vitamin D", "Vitamin D", "Vitamin D", "Vitamin D"], correct: 0 },
+                    { question: "Qaysi hujayra irsiy ma'lumotni saqlaydi?", options: ["DNK", "DNK", "DNK", "DNK"], correct: 0 },
+                    { question: "Qaysi organizmlar ekotizimni tartibga soladi?", options: ["Mikroorganizmlar", "Mikroorganizmlar", "Mikroorganizmlar", "Mikroorganizmlar"], correct: 0 },
+                    { question: "Qaysi organ nafas olishda ishtirok etadi?", options: ["O'pka", "O'pka", "O'pka", "O'pka"], correct: 0 },
+                    { question: "Qaysi vitamin ko'rish uchun muhim?", options: ["Vitamin A", "Vitamin A", "Vitamin A", "Vitamin A"], correct: 0 },
+                    { question: "Qaysi hujayra energiya ishlab chiqaradi?", options: ["Mitoxondriya", "Mitoxondriya", "Mitoxondriya", "Mitoxondriya"], correct: 0 },
+                    { question: "Qaysi organizmlar ozuqa zanjirida ishtirok etadi?", options: ["Producentlar", "Producentlar", "Producentlar", "Producentlar"], correct: 0 },
+                    { question: "Qaysi organ ovqatni hazm qiladi?", options: ["Me'da", "Me'da", "Me'da", "Me'da"], correct: 0 },
+                    { question: "Qaysi vitamin qon ivishida ishtirok etadi?", options: ["Vitamin K", "Vitamin K", "Vitamin K", "Vitamin K"], correct: 0 },
+                    { question: "Qaysi hujayra oqsil ishlab chiqaradi?", options: ["Ribosoma", "Ribosoma", "Ribosoma", "Ribosoma"], correct: 0 },
+                    { question: "Qaysi organizmlar parazit sifatida yashaydi?", options: ["Bakteriyalar", "Bakteriyalar", "Bakteriyalar", "Bakteriyalar"], correct: 0 },
+                    { question: "Qaysi organ siydikni ishlab chiqaradi?", options: ["Buyrak", "Buyrak", "Buyrak", "Buyrak"], correct: 0 },
+                    { question: "Qaysi vitamin immunitet uchun muhim?", options: ["Vitamin C", "Vitamin C", "Vitamin C", "Vitamin C"], correct: 0 },
+                    { question: "Qaysi hujayra hujayra membranasini tashkil qiladi?", options: ["Lipidlar", "Lipidlar", "Lipidlar", "Lipidlar"], correct: 0 },
+                    { question: "Qaysi organizmlar simbiotik munosabatda yashaydi?", options: ["Likenlar", "Likenlar", "Likenlar", "Likenlar"], correct: 0 },
+                    { question: "Qaysi organ gormonlarni ishlab chiqaradi?", options: ["Gipofiz", "Gipofiz", "Gipofiz", "Gipofiz"], correct: 0 },
+                    { question: "Qaysi vitamin nerv sistemasida muhim?", options: ["Vitamin B", "Vitamin B", "Vitamin B", "Vitamin B"], correct: 0 },
+                    { question: "Qaysi hujayra genetik ma'lumotni o'tkazadi?", options: ["RNK", "RNK", "RNK", "RNK"], correct: 0 },
+                    { question: "Qaysi organizmlar evolyutsiyada muhim?", options: ["Mutatsiyalar", "Mutatsiyalar", "Mutatsiyalar", "Mutatsiyalar"], correct: 0 },
+                    { question: "Qaysi organ qonni tozalaydi?", options: ["Jigar", "Jigar", "Jigar", "Jigar"], correct: 0 },
+                    { question: "Qaysi vitamin suvda eriydi?", options: ["Vitamin C", "Vitamin C", "Vitamin C", "Vitamin C"], correct: 0 },
+                    { question: "Qaysi hujayra hujayra bo'linishida ishtirok etadi?", options: ["Xromosoma", "Xromosoma", "Xromosoma", "Xromosoma"], correct: 0 }
                 ]
             }
         };
@@ -656,6 +1206,7 @@
         let totalScore = 0;
         let completedLessons = 0;
         let completedSubjects = 0;
+        let selectedOption = null;
 
         // Login funksiyasi
         function login() {
@@ -674,6 +1225,11 @@
                 }, 500);
             } else {
                 errorElement.style.display = 'block';
+                // Xato animatsiyasi
+                errorElement.style.animation = 'shake 0.5s ease';
+                setTimeout(() => {
+                    errorElement.style.animation = '';
+                }, 500);
             }
         }
 
@@ -698,12 +1254,14 @@
         function openGame(gameType) {
             currentGame = gameType;
             currentQuestionIndex = 0;
+            selectedOption = null;
             const game = gameData[gameType];
             
             document.getElementById('gameTitle').textContent = game.title;
             document.getElementById('gameScore').textContent = `Ball: ${userPoints}`;
             
             loadQuestion();
+            scrollToSection('o-yinlar');
         }
 
         // Savol yuklash
@@ -712,6 +1270,10 @@
             
             const game = gameData[currentGame];
             const question = game.questions[currentQuestionIndex];
+            
+            // Progress yangilash
+            document.getElementById('progressText').textContent = `${currentQuestionIndex + 1}/30`;
+            document.getElementById('progressFill').style.width = `${((currentQuestionIndex + 1) / 30) * 100}%`;
             
             let videoHtml = '';
             if (game.videos && game.videos.length > 0) {
@@ -737,26 +1299,26 @@
                 <div class="question">${question.question}</div>
                 <div class="options">${optionsHtml}</div>
                 <div class="game-controls">
-                    <button class="control-btn submit-btn" onclick="checkAnswer()">Tekshirish</button>
+                    <button class="control-btn submit-btn" onclick="checkAnswer()">
+                        <i class="fas fa-check"></i> Tekshirish
+                    </button>
                 </div>
                 <div class="result" id="result"></div>
             `;
             
             document.getElementById('result').style.display = 'none';
+            selectedOption = null;
         }
 
         // Variant tanlash
-        let selectedOption = null;
         function selectOption(index) {
             // Barcha variantlardan tanlangan klassini olib tashlash
             document.querySelectorAll('.option').forEach(opt => {
-                opt.style.borderColor = 'transparent';
-                opt.style.background = '#f8f9fa';
+                opt.classList.remove('selected');
             });
             
             // Tanlangan variantga stil berish
-            document.querySelectorAll('.option')[index].style.borderColor = 'var(--primary)';
-            document.querySelectorAll('.option')[index].style.background = '#e7f1ff';
+            document.querySelectorAll('.option')[index].classList.add('selected');
             
             selectedOption = index;
         }
@@ -792,7 +1354,7 @@
             document.querySelector('.submit-btn').style.display = 'none';
             const nextButton = document.createElement('button');
             nextButton.className = 'control-btn next-btn';
-            nextButton.textContent = 'Keyingi Savol';
+            nextButton.innerHTML = '<i class="fas fa-arrow-right"></i> Keyingi Savol';
             nextButton.onclick = nextQuestion;
             document.querySelector('.game-controls').appendChild(nextButton);
         }
@@ -813,27 +1375,30 @@
                 
                 document.getElementById('gameContent').innerHTML = `
                     <div style="text-align: center; padding: 2rem;">
-                        <h3 style="color: var(--success); margin-bottom: 1rem;">🎉 Tabriklaymiz!</h3>
-                        <p>${game.title} fanidagi barcha savollarga javob berdingiz!</p>
-                        <p>Siz ${userPoints} ball to'pladingiz!</p>
-                        <button class="control-btn submit-btn" onclick="openGame('${currentGame}')" style="margin-top: 1rem;">
-                            Qaytadan Boshlash
+                        <h3 style="color: var(--success); margin-bottom: 1.5rem; font-size: 2rem;">🎉 Tabriklaymiz!</h3>
+                        <p style="font-size: 1.3rem; margin-bottom: 1rem;">${game.title} fanidagi barcha savollarga javob berdingiz!</p>
+                        <p style="font-size: 1.2rem; margin-bottom: 2rem; font-weight: 600;">Siz ${userPoints} ball to'pladingiz!</p>
+                        <button class="control-btn submit-btn" onclick="openGame('${currentGame}')" style="margin-top: 1rem; padding: 1rem 2rem;">
+                            <i class="fas fa-redo"></i> Qaytadan Boshlash
                         </button>
                     </div>
                 `;
+                
+                createConfetti();
             }
         }
 
         // Konfetti effekti
         function createConfetti() {
-            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#ff9a00', '#ba68c8'];
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#ff9a00', '#ba68c8', '#06d6a0', '#7209b7'];
             
-            for (let i = 0; i < 50; i++) {
+            for (let i = 0; i < 80; i++) {
                 const confetti = document.createElement('div');
                 confetti.className = 'confetti';
                 confetti.style.left = Math.random() * 100 + 'vw';
                 confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
                 confetti.style.animation = `confetti ${Math.random() * 3 + 2}s linear forwards`;
+                confetti.style.animationDelay = Math.random() * 2 + 's';
                 document.body.appendChild(confetti);
                 
                 setTimeout(() => {
@@ -848,6 +1413,17 @@
                 login();
             }
         });
+
+        // Shake animatsiyasi
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-10px); }
+                75% { transform: translateX(10px); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
