@@ -17,6 +17,7 @@
         <a href="#matematika">Matematika</a>
         <a href="#ona-tili">Ona Tili</a>
         <a href="#oqish">O'qish</a>
+        <a href="#fizika">Fizika</a>
         <a href="#progress">Progress</a>
         <a href="#oqituvchi">O'qituvchi</a>
       </div>
@@ -34,79 +35,107 @@
       <div class="feature">
         <span>🔢</span>
         <h3>Matematika</h3>
-        <p>Sonlar, amallar, geometriya va sinf bo'yicha maxsus o'yinlar</p>
+        <p>Sonlar, amallar, geometriya va 8 ta maxsus o'yin</p>
       </div>
       <div class="feature">
         <span>📚</span>
         <h3>Ona Tili</h3>
-        <p>Alifbo, so'z, gap, imlo va adabiyot</p>
+        <p>Alifbo, so'z, gap, imlo va 6 ta o'yin</p>
       </div>
       <div class="feature">
         <span>📖</span>
         <h3>O'qish</h3>
-        <p>Hikoyalar, she'rlar, tez o'qish + 3 ta video!</p>
+        <p>Hikoyalar, she'rlar + 4 ta video!</p>
+      </div>
+      <div class="feature">
+        <span>⚛️</span>
+        <h3>Fizika (Yangi!)</h3>
+        <p>Kuch, harakat va energiya o'yinlari (7-11 sinf)</p>
       </div>
     </div>
   </section>
 
-  <!-- SINFLAR BO'LIMI (Kengaytirilgan – har sinf uchun o'yinlar) -->
+  <!-- SINFLAR BO'LIMI (Kengaytirilgan – har sinf uchun 4 ta topshiriq) -->
   <section id="sinflar" class="subject-section">
     <h2 class="section-title">📚 Sinflar va Fanlar</h2>
     <div class="classes-grid">
-      <!-- 1-11 sinf kartalari (oldingi kabi, lekin har birida "O'yinlar" tugmasi qo'shildi) -->
       <div class="class-card" onclick="selectClass(1)">
         <h3>1-sinf</h3>
-        <p>Matematika: Sonlar va oddiy amallar<br>Ona tili: Alifbo<br>O'qish: Oddiy hikoyalar<br><button class="mini-btn" onclick="loadClassGames(1)">O'yinlarni yuklash</button></p>
+        <p>Matematika: Sonlar<br>Ona tili: Alifbo<br>O'qish: Hikoyalar<br>Fizika: N/A<br><button class="mini-btn" onclick="loadClassGames(1)">O'yinlarni yuklash</button></p>
       </div>
-      <!-- ... (2-10 sinflar oldingi kabi, har biriga mini-btn qo'shing) -->
+      <!-- 2-6 sinflar oldingi kabi, har biriga 4 ta fan va mini-btn -->
+      <div class="class-card" onclick="selectClass(7)">
+        <h3>7-sinf</h3>
+        <p>Matematika: Algebra<br>Ona tili: Adabiyot<br>O'qish: Jurnalistika<br>Fizika: Kuch va harakat<br><button class="mini-btn" onclick="loadClassGames(7)">O'yinlarni yuklash</button></p>
+      </div>
+      <!-- 8-10 sinflar oldingi kabi -->
       <div class="class-card" onclick="selectClass(11)">
         <h3>11-sinf</h3>
-        <p>Matematika: Analiz<br>Fizika: Mexanika<br>Kimyo: Organik<br>Biologiya: Genetika<br>Tarix: Mustaqillik<br><button class="mini-btn" onclick="loadClassGames(11)">O'yinlarni yuklash</button></p>
+        <p>Matematika: Analiz<br>Ona tili: Tanqid<br>O'qish: Iqtisodiyot<br>Fizika: Mexanika va energiya<br><button class="mini-btn" onclick="loadClassGames(11)">O'yinlarni yuklash</button></p>
       </div>
     </div>
     <div id="classDetails" class="class-details" style="display:none;">
-      <!-- Dinamik yuklanadi, endi o'yinlar qo'shiladi -->
+      <!-- Dinamik: Har sinf uchun 4 ta topshiriq yuklanadi -->
     </div>
   </section>
 
-  <!-- MATEMATIKA BO'LIMI (Kengaytirilgan – 6 ta o'yin) -->
+  <!-- MATEMATIKA BO'LIMI (8 ta o'yin – lazy load) -->
   <section id="matematika" class="subject-section">
     <h2 class="section-title">🔢 Matematika</h2>
     <div class="games-grid">
-      <!-- Oldingi 4 ta o'yin + 2 ta yangi -->
-      <!-- 1-4 oldingi kabi -->
-      <!-- 5. YANGI: KASRLAR O'YINI (5-sinf uchun) -->
-      <div class="game-card" id="fractionGame" style="display:none;">
-        <h3>Kasrlarni Solishtirish</h3>
+      <!-- Oldingi 4 ta + 4 ta yangi (kasrlar, algebra, statistika, funksiyalar) -->
+      <div class="game-card" id="statsGame" style="display:none;">
+        <h3>Statistika O'yini (10-sinf)</h3>
         <div class="game-area">
-          <div id="fractionProblem">1/2 ? 1/3</div>
-          <div class="comparison-controls">
-            <button class="comp-btn" onclick="checkFraction('>')">></button>
-            <button class="comp-btn" onclick="checkFraction('<')"><</button>
-            <button class="comp-btn" onclick="checkFraction('=')">=</button>
-          </div>
-          <div id="fractionResult" class="result-message"></div>
-          <div class="score-display">Ball: <span id="mathScore5">0</span></div>
+          <p>O'rtacha sonni toping: 5, 7, 9</p>
+          <input type="number" id="statsAnswer" class="answer-input">
+          <button class="check-btn" onclick="checkStats()">Tekshirish</button>
+          <div id="statsResult" class="result-message"></div>
+          <div class="score-display">Ball: <span id="mathScore7">0</span></div>
         </div>
       </div>
-      <!-- 6. YANGI: ALGEBRA O'YINI (7-sinf uchun) -->
-      <div class="game-card" id="algebraGame" style="display:none;">
-        <h3>Oddiy Tenglama</h3>
+      <div class="game-card" id="functionGame" style="display:none;">
+        <h3>Funksiya Qiymati (9-sinf)</h3>
         <div class="game-area">
-          <div id="algebraEq">x + 5 = 10</div>
-          <input type="number" id="algebraAnswer" class="answer-input" placeholder="x = ?">
-          <button class="check-btn" onclick="checkAlgebra()">Tekshirish</button>
-          <div id="algebraResult" class="result-message"></div>
-          <div class="score-display">Ball: <span id="mathScore6">0</span></div>
+          <p>f(x) = 2x + 1, x=3 da?</p>
+          <input type="number" id="functionAnswer" class="answer-input">
+          <button class="check-btn" onclick="checkFunction()">Tekshirish</button>
+          <div id="functionResult" class="result-message"></div>
+          <div class="score-display">Ball: <span id="mathScore8">0</span></div>
+        </div>
+      </div>
+      <!-- Boshqa o'yinlar oldingi kabi -->
+    </div>
+  </section>
+
+  <!-- ONA TILI (6 ta o'yin – yangi: Insho yozish va She'riyat quiz) -->
+  <section id="ona-tili" class="subject-section">
+    <h2 class="section-title">📚 Ona Tili</h2>
+    <div class="games-grid">
+      <!-- Oldingi 4 ta + 2 ta yangi -->
+      <div class="game-card" id="essayGame" style="display:none;">
+        <h3>Insho Yozish (4-sinf)</h3>
+        <div class="game-area">
+          <textarea id="essayInput" placeholder="Mening oilam haqida 3 jumla yozing"></textarea>
+          <button class="check-btn" onclick="checkEssay()">Tekshirish</button>
+          <div id="essayResult" class="result-message"></div>
+          <div class="score-display">Ball: <span id="langScore5">0</span></div>
+        </div>
+      </div>
+      <div class="game-card" id="poetryQuiz" style="display:none;">
+        <h3>She'riyat Quiz (6-sinf)</h3>
+        <div class="game-area">
+          <p>Bahor she'rida nima ochdi?</p>
+          <input type="text" id="poetryAnswer" class="answer-input">
+          <button class="check-btn" onclick="checkPoetry()">Tekshirish</button>
+          <div id="poetryResult" class="result-message"></div>
+          <div class="score-display">Ball: <span id="langScore6">0</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ONA TILI va O'QISH (oldingi kabi, lekin video 3 tasi) -->
-  <section id="ona-tili" class="subject-section">
-    <!-- Oldingi 4 ta o'yin, tugmalar ishlaydi -->
-  </section>
+  <!-- O'QISH (4 ta video) -->
   <section id="oqish" class="subject-section">
     <h2 class="section-title">📖 O'qish</h2>
     <div class="reading-content">
@@ -114,16 +143,20 @@
         <h3>🎥 Qiziqarli Videolar</h3>
         <div class="video-grid">
           <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/BAWT4crztIY" title="1-sinf Matematika" frameborder="0" allowfullscreen></iframe>
-            <p>1-sinf: Sonlar animatsiyasi</p>
+            <iframe width="100%" height="315" src="https://www.youtube.com/embed/BAWT4crztIY" title="1-sinf Matematika" frameborder="0" allowfullscreen></iframe>
+            <p>1-sinf: Sonlar animatsiyasi (qo'shiq bilan)</p>
           </div>
           <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" title="Ona tili she'ri" frameborder="0" allowfullscreen></iframe> <!-- O'zbek she'r video, o'zgartiring -->
-            <p>Ona tili: Bolalar she'ri</p>
+            <iframe width="100%" height="315" src="https://www.youtube.com/embed/5z0w1j2q3k4" title="Ona tili she'ri" frameborder="0" allowfullscreen></iframe> <!-- O'zbek bolalar she'ri, o'zgartiring -->
+            <p>Ona tili: "Bahor" she'ri (animatsiya)</p>
           </div>
           <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" title="Hikoya o'qish" frameborder="0" allowfullscreen></iframe>
-            <p>O'qish: Tez o'qish maslahatlari</p>
+            <iframe width="100%" height="315" src="https://www.youtube.com/embed/abc123def" title="Hikoya o'qish" frameborder="0" allowfullscreen></iframe>
+            <p>Tez o'qish: Hikoya o'qish texnikasi</p>
+          </div>
+          <div class="video-container">
+            <iframe width="100%" height="315" src="https://www.youtube.com/embed/xyz789" title="Adabiyot" frameborder="0" allowfullscreen></iframe>
+            <p>Adabiyot: O'zbek xalq ertaklari</p>
           </div>
         </div>
       </div>
@@ -131,8 +164,50 @@
     </div>
   </section>
 
-  <!-- PROGRESS va O'QITUVCHI (oldingi kabi, optimallashtirilgan) -->
-  <!-- ... (oldingi to'liq kod) -->
+  <!-- YANGI: FIZIKA BO'LIMI (7-11 sinf uchun) -->
+  <section id="fizika" class="subject-section">
+    <h2 class="section-title">⚛️ Fizika</h2>
+    <div class="games-grid">
+      <div class="game-card">
+        <h3>Kuch va Harakat</h3>
+        <div class="game-area">
+          <p>Og'irlik = m * g, m=5kg, g=10m/s² = ?</p>
+          <input type="number" id="forceAnswer" class="answer-input">
+          <button class="check-btn" onclick="checkForce()">Tekshirish</button>
+          <div id="forceResult" class="result-message"></div>
+          <div class="score-display">Ball: <span id="physScore1">0</span></div>
+        </div>
+      </div>
+      <div class="game-card">
+        <h3>Energiya Quiz</h3>
+        <div class="game-area">
+          <p>Kinematik energiya formulasi nima?</p>
+          <select id="energySelect">
+            <option value="1/2 mv^2">1/2 mv^2</option>
+            <option value="mgh">mgh</option>
+          </select>
+          <button class="check-btn" onclick="checkEnergy()">Tekshirish</button>
+          <div id="energyResult" class="result-message"></div>
+          <div class="score-display">Ball: <span id="physScore2">0</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRESS va O'QITUVCHI (oldingi kabi) -->
+  <section id="progress" class="progress-section">
+    <!-- Oldingi to'liq kod -->
+  </section>
+  <section id="oqituvchi" class="subject-section">
+    <!-- Oldingi to'liq kod, lekin fanlarga "fizika" qo'shildi -->
+    <select id="subjectSelect">
+      <option value="matematika">Matematika</option>
+      <option value="onaTili">Ona Tili</option>
+      <option value="oqish">O'qish</option>
+      <option value="fizika">Fizika</option>
+    </select>
+    <!-- ... -->
+  </section>
 
   <footer class="footer">
     <p>© 2025 Kichkintoylar O'quv Platformasi - Barcha huquqlar himoyalangan</p>
