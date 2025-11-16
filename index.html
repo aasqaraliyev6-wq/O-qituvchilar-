@@ -681,6 +681,64 @@
             border: none;
         }
 
+        /* Yangi qo'shimchalar */
+        .difficulty-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 1rem;
+        }
+        
+        .difficulty-easy {
+            background: var(--success);
+            color: white;
+        }
+        
+        .difficulty-medium {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .difficulty-hard {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .difficulty-expert {
+            background: var(--dark);
+            color: white;
+        }
+        
+        .chemical-formula {
+            font-family: 'Courier New', monospace;
+            background: #f1f5f9;
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+        
+        .hint-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .hint-text {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            border-left: 4px solid var(--primary);
+            display: none;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .navbar {
@@ -899,6 +957,23 @@
                         </div>
                         <div class="stat">
                             <div class="stat-number">300</div>
+                            <div class="stat-label">Ball</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="subject-card science" onclick="openGame('kimyo-yuqori')">
+                    <div class="subject-icon science">
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <h3>Kimyo (Yuqori Daraja) <span class="difficulty-badge difficulty-expert">Ekspert</span></h3>
+                    <p>Murakkab kimyoviy hisoblar, reaksiyalar va nazariyalar</p>
+                    <div class="subject-stats">
+                        <div class="stat">
+                            <div class="stat-number">25</div>
+                            <div class="stat-label">Murakkab Masala</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">500</div>
                             <div class="stat-label">Ball</div>
                         </div>
                     </div>
@@ -1171,6 +1246,189 @@
                     { question: "Qaysi vitamin suvda eriydi?", options: ["Vitamin C", "Vitamin A", "Vitamin D", "Vitamin K"], correct: 0 },
                     { question: "Qaysi hujayra hujayra bo'linishida ishtirok etadi?", options: ["Xromosoma", "Ribosoma", "Mitoxondriya", "Lizosoma"], correct: 0 }
                 ]
+            },
+            "kimyo-yuqori": {
+                title: "Kimyo - Yuqori Daraja",
+                videos: [
+                    "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                ],
+                questions: [
+                    {
+                        question: "2 mol vodorod (H₂) va 1 mol kislorod (O₂) reaksiyaga kirishganda necha mol suv (H₂O) hosil bo'ladi?",
+                        options: ["1 mol", "2 mol", "3 mol", "4 mol"],
+                        correct: 1,
+                        difficulty: "medium",
+                        hint: "2H₂ + O₂ → 2H₂O tenglamasini yozing va stexiometriyani hisoblang"
+                    },
+                    {
+                        question: "0.1 M HCl eritmasining pH qiymatini hisoblang",
+                        options: ["0.1", "1", "7", "13"],
+                        correct: 1,
+                        difficulty: "medium",
+                        hint: "Kuchli kislota eritmasida pH = -log[H⁺]"
+                    },
+                    {
+                        question: "25°C da 0.01 M CH₃COOH eritmasining pH sini hisoblang (Ka = 1.8×10⁻⁵)",
+                        options: ["2.37", "3.37", "4.37", "5.37"],
+                        correct: 1,
+                        difficulty: "hard",
+                        hint: "Zaif kislota uchun [H⁺] = √(Ka × C)"
+                    },
+                    {
+                        question: "100 mL 0.1 M NaOH eritmasini neytralizatsiya qilish uchun 0.2 M HCl eritmasidan qancha miqdor kerak?",
+                        options: ["25 mL", "50 mL", "100 mL", "200 mL"],
+                        correct: 1,
+                        difficulty: "medium",
+                        hint: "M₁V₁ = M₂V₂ formuladan foydalaning"
+                    },
+                    {
+                        question: "Quyidagi reaksiyada qaysi modda oksidlovchi vazifasini bajaradi? Cr₂O₇²⁻ + 6Fe²⁺ + 14H⁺ → 2Cr³⁺ + 6Fe³⁺ + 7H₂O",
+                        options: ["Cr₂O₇²⁻", "Fe²⁺", "H⁺", "H₂O"],
+                        correct: 0,
+                        difficulty: "hard",
+                        hint: "Oksidlanish darajasi kamayadigan modda oksidlovchi hisoblanadi"
+                    },
+                    {
+                        question: "0.5 L 2.0 M NaCl eritmasida qancha gramm NaCl mavjud? (NaCl = 58.5 g/mol)",
+                        options: ["29.25 g", "58.5 g", "117 g", "234 g"],
+                        correct: 1,
+                        difficulty: "medium",
+                        hint: "n = M × V, keyin m = n × M"
+                    },
+                    {
+                        question: "Quyidagi qaysi birikma eng kuchli kislota hisoblanadi?",
+                        options: ["HClO", "HClO₂", "HClO₃", "HClO₄"],
+                        correct: 3,
+                        difficulty: "expert",
+                        hint: "Kislorod atomlari soni ortgan sari kislotalik kuchi oshadi"
+                    },
+                    {
+                        question: "1.00 g mis namunasini kumush nitrat eritmasiga solinganda 3.40 g kumush ajralib chiqdi. Misning atom massasini hisoblang",
+                        options: ["31.8 g/mol", "63.5 g/mol", "95.3 g/mol", "127 g/mol"],
+                        correct: 1,
+                        difficulty: "expert",
+                        hint: "Cu + 2Ag⁺ → Cu²⁺ + 2Ag reaksiyasi bo'yicha hisoblang"
+                    },
+                    {
+                        question: "0.1 M NH₃ eritmasining pH sini hisoblang (Kb = 1.8×10⁻⁵)",
+                        options: ["8.87", "9.87", "10.87", "11.87"],
+                        correct: 3,
+                        difficulty: "hard",
+                        hint: "Zaif asos uchun [OH⁻] = √(Kb × C), keyin pH = 14 + log[OH⁻]"
+                    },
+                    {
+                        question: "Quyidagi qaysi birikma optik faol izomerlarga ega bo'lishi mumkin?",
+                        options: ["CH₃CH₂OH", "CH₃CHClCOOH", "CH₃COOH", "CH₃CH₂CH₃"],
+                        correct: 1,
+                        difficulty: "expert",
+                        hint: "Xiral karbon atomi bo'lishi kerak"
+                    },
+                    {
+                        question: "1.00 atm bosim va 273 K haroratda 22.4 L hajmli ideal gazning massasi 64.0 g. Bu gaz qaysi birikma bo'lishi mumkin?",
+                        options: ["SO₂", "CO₂", "O₂", "N₂"],
+                        correct: 0,
+                        difficulty: "hard",
+                        hint: "PV = nRT va M = m/n formulalardan foydalaning"
+                    },
+                    {
+                        question: "Quyidagi qaysi element eng yuqori birinchi ionlanish energiyasiga ega?",
+                        options: ["Na", "Mg", "Al", "Si"],
+                        correct: 3,
+                        difficulty: "medium",
+                        hint: "Periodik jadvalda o'ng tomonga va yuqoriga siljigan sari ionlanish energiyasi oshadi"
+                    },
+                    {
+                        question: "0.1 M H₂SO₄ eritmasining pH sini hisoblang (H₂SO₄ ikki bosqichli dissotsiatsiyaga ega)",
+                        options: ["0.70", "1.00", "1.30", "1.70"],
+                        correct: 2,
+                        difficulty: "expert",
+                        hint: "H₂SO₄ kuchli kislota, lekin ikkinchi bosqichda zaif (Ka₂ = 1.2×10⁻²)"
+                    },
+                    {
+                        question: "Quyidagi qaysi birikma eng katta molekulyar dipol momentga ega?",
+                        options: ["CO₂", "BF₃", "CH₄", "NH₃"],
+                        correct: 3,
+                        difficulty: "hard",
+                        hint: "Simmetriya buzilgan va katta elektronegativlik farqiga ega molekulalar"
+                    },
+                    {
+                        question: "0.01 M CaCl₂ va 0.01 M Na₂SO₄ eritmalari aralashtirilganda cho'kma hosil bo'ladimi? (Ksp(CaSO₄) = 2.4×10⁻⁵)",
+                        options: ["Ha", "Yo'q", "Faqat qizdirilganda", "Faqat sovutilganda"],
+                        correct: 1,
+                        difficulty: "expert",
+                        hint: "IP = [Ca²⁺][SO₄²⁻] = (0.005)(0.005) = 2.5×10⁻⁵, Ksp = 2.4×10⁻⁵"
+                    },
+                    {
+                        question: "Quyidagi qaysi birikma eng kuchli asos hisoblanadi?",
+                        options: ["NH₃", "CH₃NH₂", "(CH₃)₂NH", "(CH₃)₃N"],
+                        correct: 2,
+                        difficulty: "expert",
+                        hint: "Alifatik aminlarda asoslik induktiv ta'sir bilan oshadi"
+                    },
+                    {
+                        question: "1.00 g magniy 0.50 L 1.0 M HCl eritmasida eritilganda hosil bo'ladigan gazning hajmini (STP da) hisoblang",
+                        options: ["0.46 L", "0.92 L", "1.84 L", "3.68 L"],
+                        correct: 1,
+                        difficulty: "hard",
+                        hint: "Mg + 2HCl → MgCl₂ + H₂, reaktant cheklovchisini aniqlang"
+                    },
+                    {
+                        question: "Quyidagi qaysi birikma eng kichik lattice energiyasiga ega?",
+                        options: ["NaF", "NaCl", "NaBr", "NaI"],
+                        correct: 3,
+                        difficulty: "medium",
+                        hint: "Ion radiusi ortgan sari lattice energiya kamayadi"
+                    },
+                    {
+                        question: "0.10 M HCN eritmasining pH sini hisoblang (Ka = 4.9×10⁻¹⁰)",
+                        options: ["5.15", "6.15", "7.15", "8.15"],
+                        correct: 0,
+                        difficulty: "expert",
+                        hint: "Juda zaif kislota, [H⁺] = √(Ka × C)"
+                    },
+                    {
+                        question: "Quyidagi qaysi birikma eng yuqori qaynash haroratiga ega?",
+                        options: ["CH₄", "SiH₄", "GeH₄", "SnH₄"],
+                        correct: 3,
+                        difficulty: "medium",
+                        hint: "Molekulyar massa va London kuchlari ortgan sari qaynash harorati oshadi"
+                    },
+                    {
+                        question: "2.00 g organik birikma yondirilganda 4.40 g CO₂ va 1.80 g H₂O hosil bo'ldi. Birikmaning eng sodd formulasini toping",
+                        options: ["CH₂O", "C₂H₄O", "C₃H₆O", "C₄H₈O"],
+                        correct: 0,
+                        difficulty: "expert",
+                        hint: "C va H massalarini hisoblang, qolgan kislorod"
+                    },
+                    {
+                        question: "Quyidagi qaysi birikma eng katta molar entropiyaga ega?",
+                        options: ["H₂O(s)", "H₂O(l)", "H₂O(g)", "D₂O(g)"],
+                        correct: 2,
+                        difficulty: "medium",
+                        hint: "Gaz holatidagi moddalar eng katta tartibsizlikka ega"
+                    },
+                    {
+                        question: "0.050 M NH₄Cl eritmasining pH sini hisoblang (Kb(NH₃) = 1.8×10⁻⁵)",
+                        options: ["4.78", "5.28", "6.78", "7.28"],
+                        correct: 1,
+                        difficulty: "expert",
+                        hint: "Ka = Kw/Kb = 5.56×10⁻¹⁰, [H⁺] = √(Ka × C)"
+                    },
+                    {
+                        question: "Quyidagi qaysi birikma eng kuchli kovalent bog'ga ega?",
+                        options: ["F₂", "Cl₂", "Br₂", "I₂"],
+                        correct: 0,
+                        difficulty: "hard",
+                        hint: "Kichikroq atomlar orasidagi bog'lar kuchliroq bo'ladi"
+                    },
+                    {
+                        question: "1.00 L 0.100 M CH₃COOH va 0.100 M CH₃COONa bufer eritmasining pH sini hisoblang (Ka = 1.8×10⁻⁵)",
+                        options: ["4.74", "5.74", "6.74", "7.74"],
+                        correct: 0,
+                        difficulty: "hard",
+                        hint: "Henderson-Hasselbalch tenglamasi: pH = pKa + log([A⁻]/[HA])"
+                    }
+                ]
             }
         };
 
@@ -1267,7 +1525,7 @@
             showQuestion();
         }
 
-        // Show question
+        // Show question with difficulty badge and hint
         function showQuestion() {
             const game = gameData[currentGame];
             const question = game.questions[currentQuestion];
@@ -1278,12 +1536,28 @@
                 </button>
             `).join('');
             
+            let difficultyBadge = '';
+            if (question.difficulty) {
+                difficultyBadge = `<span class="difficulty-badge difficulty-${question.difficulty}">${question.difficulty.toUpperCase()}</span>`;
+            }
+            
+            let hintButton = '';
+            if (question.hint) {
+                hintButton = `
+                    <button class="hint-btn" onclick="showHint()">
+                        <i class="fas fa-lightbulb"></i> Maslahat ko'rsatish
+                    </button>
+                    <div class="hint-text" id="hintText">${question.hint}</div>
+                `;
+            }
+            
             document.getElementById('gameContent').innerHTML = `
                 <div class="question-container">
-                    <div class="question-text">${question.question}</div>
+                    <div class="question-text">${question.question} ${difficultyBadge}</div>
                     <div class="options-grid">
                         ${optionsHTML}
                     </div>
+                    ${hintButton}
                 </div>
             `;
             
@@ -1293,7 +1567,17 @@
             document.getElementById('progressText').textContent = `${currentQuestion}/${game.questions.length}`;
         }
 
-        // Check answer
+        // Show hint function
+        function showHint() {
+            const hintText = document.getElementById('hintText');
+            hintText.style.display = 'block';
+            
+            // Hint ko'rsatilganda ball kamayadi
+            userScore = Math.max(0, userScore - 2);
+            document.getElementById('gameScore').textContent = `Ball: ${userScore}`;
+        }
+
+        // Check answer with difficulty-based scoring
         function checkAnswer(selectedIndex) {
             const game = gameData[currentGame];
             const question = game.questions[currentQuestion];
@@ -1313,9 +1597,14 @@
                 }
             });
             
-            // Update score if correct
+            // Update score based on difficulty
             if (selectedIndex === question.correct) {
-                userScore += 10;
+                let points = 10;
+                if (question.difficulty === "medium") points = 15;
+                if (question.difficulty === "hard") points = 20;
+                if (question.difficulty === "expert") points = 25;
+                
+                userScore += points;
                 document.getElementById('gameScore').textContent = `Ball: ${userScore}`;
             }
             
